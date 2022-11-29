@@ -18,13 +18,6 @@ const gameboardFactory = (name) => {
   const submarine = shipFactory('submarine', 3);
   const patrolBoat = shipFactory('patrolBoat', 2);
 
-
-  // placedShips.push({
-  //   'ship': carrier,
-  //   'location': [[1,2], [1,3], [1,4], [1,5], [1,6]]
-  // })
-
-  // array of placed ships
   let placedShips = [
     {
       ship: carrier,
@@ -52,14 +45,15 @@ const gameboardFactory = (name) => {
 
     for (let i = 0; i < placedShips.length; i++) {
       let currentLocArray = placedShips[i].location;
+      let currentShip = placedShips[i].ship;
       let match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
       if (match != undefined) {
-        return 'hit!';
+        currentShip.hit();
+        return currentShip.getHits();
       } else {
         continue
       }
     }
-    
   }
  
 
