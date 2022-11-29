@@ -56,7 +56,9 @@ const gameboardFactory = (name) => {
         if (currentShip.isSunk() == true) {
           sunk += 1;
         }
-        // check if ships are all sunk.
+        if (areAllSunk() == true) {
+          return 'lost!';
+        }
         return;
       } 
     }
@@ -67,16 +69,17 @@ const gameboardFactory = (name) => {
     }
   }
   
-  // const areAllSunk = () => {
-    // if all ships are sunk return true
-    // else return false
-  // }
+  const areAllSunk = () => {
+    if (sunk >= 5) {
+      return true;
+    }
+  }
 
   const getCells = () => cells;
   const getMissed = () => missed;
   const getSunk = () => sunk;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk}
+  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk}
 }
 
 export { gameboardFactory};
