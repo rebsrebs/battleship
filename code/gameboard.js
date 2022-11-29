@@ -13,6 +13,7 @@ const gameboardFactory = (name) => {
 
   // create array for missed shots
   let missed = [];
+  let sunk = 0;
 
   // create ships
   const carrier = shipFactory('carrier', 5);
@@ -52,6 +53,9 @@ const gameboardFactory = (name) => {
       var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
       if (match != undefined) {
         currentShip.hit();
+        if (currentShip.isSunk() == true) {
+          sunk += 1;
+        }
         // check if ships are all sunk.
         return;
       } 
@@ -63,7 +67,6 @@ const gameboardFactory = (name) => {
     }
   }
   
- 
   // const areAllSunk = () => {
     // if all ships are sunk return true
     // else return false
@@ -71,8 +74,9 @@ const gameboardFactory = (name) => {
 
   const getCells = () => cells;
   const getMissed = () => missed;
+  const getSunk = () => sunk;
 
-  return { name, getCells, getMissed, receiveAttack}
+  return { name, getCells, getMissed, receiveAttack, getSunk}
 }
 
 export { gameboardFactory};
