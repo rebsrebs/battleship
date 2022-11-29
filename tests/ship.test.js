@@ -1,4 +1,4 @@
-import { shipFactory } from "../code/script";
+import { shipFactory } from "../code/ship";
 
 test('is new ship sunk?', () => {
   const battleship = shipFactory(battleship, 4);
