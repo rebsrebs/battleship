@@ -16,10 +16,9 @@ import { gameboardFactory } from "../code/gameboard";
 //   expect(gameboardOne.carrier.length).toBe(5);
 // });
 
-test('Can receiveAttack successfully hit a ship?', () => {
+test('Can receiveAttack record a miss?', () => {
   const gameboardOne = gameboardFactory(gameboardOne);
-  gameboardOne.receiveAttack(1,3);
-  expect(gameboardOne.receiveAttack(1,2)).toBe(2);
+  expect(gameboardOne.receiveAttack(9,2)).toBe('miss!');
 });
 
 

@@ -11,6 +11,9 @@ const gameboardFactory = (name) => {
      }
    }
 
+  // create array for missed shots
+  let missed = [];
+
   // create ships
   const carrier = shipFactory('carrier', 5);
   const battleship = shipFactory('battleship', 4);
@@ -42,54 +45,25 @@ const gameboardFactory = (name) => {
   ]
 
   const receiveAttack = (x, y) => {
-
+    // for every object in the placedShips array
     for (let i = 0; i < placedShips.length; i++) {
       let currentLocArray = placedShips[i].location;
       let currentShip = placedShips[i].ship;
-      let match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
+      var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
       if (match != undefined) {
         currentShip.hit();
-        return currentShip.getHits();
-      } else {
-        continue
-      }
+        // check if ships are all sunk.
+        return;
+      } 
+    }
+    if (match === undefined) {
+    const missedShot = [x,y];
+    missed.push(missedShot);
+    return 'miss!';
     }
   }
+  
  
-
-
-  
-  
-
-  
-
-  
-
-  // let shipsArray = [battleshipArray,destroyerArray, submarineArray, patrolBoatArray];
-
-  // const receiveAttack = (x, y) => {
-  //   if (patrolBoatArray.some(element => {
-  //     element[0] === x})) {
-  //       return 'hit!'
-  //     } else {
-  //       return 'miss!'
-  //     }
-  //   }
-    
-
-    // shipsArray.forEach(array => {
-    //   array.forEach(location => {
-    //     if (location[0] === x && location[1] === y) {
-    //       hit = true;
-    //       return 'hit!'
-    //     }
-    //   })
-    // })
-    // if (hit = false) {
-    //   return 'miss!';
-    // }
-  
-
   // const areAllSunk = () => {
     // if all ships are sunk return true
     // else return false
