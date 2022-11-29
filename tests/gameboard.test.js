@@ -16,9 +16,14 @@ import { gameboardFactory } from "../code/gameboard";
 //   expect(gameboardOne.carrier.length).toBe(5);
 // });
 
-test('Can I access placedShip location array', () => {
+test('Can I see if coordinates match a cell in a placedShips location array?', () => {
   const gameboardOne = gameboardFactory(gameboardOne);
-  expect(gameboardOne.receiveAttack(1,2)).toBe(5);
+  expect(gameboardOne.receiveAttack(1,2)).toBe('hit!');
+});
+
+test('Can I see if coordinates do not match a cell in a placedShips location array?', () => {
+  const gameboardOne = gameboardFactory(gameboardOne);
+  expect(gameboardOne.receiveAttack(2,2)).toBe(undefined);
 });
 
 
