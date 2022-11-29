@@ -19,7 +19,7 @@ test('Can receiveAttack check if ship is sunk?', () => {
   expect(gameboardOne.getSunk()).toBe(1);
 });
 
-test('Can receiveAttack check if all ships are sunk?', () => {
+test('Does areAllSunk work?', () => {
   const gameboardOne = gameboardFactory(gameboardOne);
   // sink carrier
   gameboardOne.receiveAttack(1,2);
@@ -40,10 +40,11 @@ test('Can receiveAttack check if all ships are sunk?', () => {
   gameboardOne.receiveAttack(4,2);
   gameboardOne.receiveAttack(4,3);
   gameboardOne.receiveAttack(4,4);
-  // hit patrol boat
+  // sink patrol boat
   gameboardOne.receiveAttack(5,2);
+  gameboardOne.receiveAttack(5,3)
   // sink last boat
-  expect(gameboardOne.receiveAttack(5,3)).toBe('lost!');
+  expect(gameboardOne.areAllSunk()).toBe(true);
 });
 
 

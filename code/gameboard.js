@@ -1,4 +1,3 @@
-import { emit } from "process";
 import { shipFactory } from "./ship";
 
 const gameboardFactory = (name) => {
@@ -55,9 +54,6 @@ const gameboardFactory = (name) => {
         currentShip.hit();
         if (currentShip.isSunk() == true) {
           sunk += 1;
-        }
-        if (areAllSunk() == true) {
-          return 'lost!';
         }
         return;
       } 
