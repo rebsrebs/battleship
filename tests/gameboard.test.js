@@ -11,7 +11,14 @@ import { gameboardFactory } from "../code/gameboard";
 //   expect(gameboardOne.receiveAttack(7,1)).toBeFalsy;
 //   });
 
-test('Create ships', () => {
+// test('Create ships', () => {
+//   const gameboardOne = gameboardFactory(gameboardOne);
+//   expect(gameboardOne.carrier.length).toBe(5);
+// });
+
+test('Can I access placedShip', () => {
   const gameboardOne = gameboardFactory(gameboardOne);
-  expect(gameboardOne.carrier.length).toBe(5);
+  expect(gameboardOne.receiveAttack(1,2)).toBe('hit!');
 });
+
+

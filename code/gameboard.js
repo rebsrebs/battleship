@@ -1,3 +1,4 @@
+import { emit } from "process";
 import { shipFactory } from "./ship";
 
 const gameboardFactory = (name) => {
@@ -16,17 +17,55 @@ const gameboardFactory = (name) => {
   const destroyer = shipFactory('destroyer', 3);
   const submarine = shipFactory('submarine', 3);
   const patrolBoat = shipFactory('patrolBoat', 2);
- 
- 
 
-  //const placeShip = (ship) => {
-    // get as many coordinates as length of ship
-  //}
-  
-  // const placedShips = {
+
+  // placedShips.push({
   //   'ship': carrier,
   //   'location': [[1,2], [1,3], [1,4], [1,5], [1,6]]
-  // }
+  // })
+
+  // array of placed ships
+  let placedShips = [
+    {
+      ship: carrier,
+      location: [[1,2], [1,3], [1,4], [1,5], [1,6]]
+    },
+    {
+      ship: battleship,
+      location: [[2,2], [2,3], [2,4], [2,5]]
+    },
+    {
+      ship: destroyer,
+      location: [[3,2], [3,3], [3,4]]
+    },
+    {
+      ship: submarine,
+      location: [[4,2], [4,3], [4,4]]
+    },
+    {
+      ship: patrolBoat,
+      location: [[5,2], [5,3]]
+    }
+  ]
+
+  const receiveAttack = (x, y) => {
+    // first just see if you can access one ship
+    if (placedShips[0].ship === carrier) {
+      return 'hit!'
+    } else {
+      return 'miss!'
+    }
+
+    // for every placed ship object in placedShips array
+    
+    // if that ship location array contains the coordinates
+    // hit that ship
+  }
+ 
+
+
+  
+  
 
   
 
@@ -65,7 +104,7 @@ const gameboardFactory = (name) => {
   const getCells = () => cells;
   const getMissed = () => missed;
 
-  return { name, getCells, getMissed, carrier}
+  return { name, getCells, getMissed, receiveAttack}
 }
 
 export { gameboardFactory};
