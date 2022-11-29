@@ -16,9 +16,15 @@ import { gameboardFactory } from "../code/gameboard";
 //   expect(gameboardOne.carrier.length).toBe(5);
 // });
 
-test('Can receiveAttack record a miss?', () => {
+// test('Can receiveAttack record a miss?', () => {
+//   const gameboardOne = gameboardFactory(gameboardOne);
+//   expect(gameboardOne.receiveAttack(9,2)).toBe('miss!');
+// });
+
+test('Can receiveAttack add to missed array??', () => {
   const gameboardOne = gameboardFactory(gameboardOne);
-  expect(gameboardOne.receiveAttack(9,2)).toBe('miss!');
+  gameboardOne.receiveAttack(9,2);
+  expect(gameboardOne.getMissed().length).toBe(1);
 });
 
 
