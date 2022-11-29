@@ -16,9 +16,9 @@ import { gameboardFactory } from "../code/gameboard";
 //   expect(gameboardOne.carrier.length).toBe(5);
 // });
 
-test('Can I access placedShip', () => {
+test('Can I access placedShip location array', () => {
   const gameboardOne = gameboardFactory(gameboardOne);
-  expect(gameboardOne.receiveAttack(1,2)).toBe('hit!');
+  expect(gameboardOne.receiveAttack(1,2)).toBe(5);
 });
 
 

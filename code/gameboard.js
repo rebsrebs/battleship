@@ -49,17 +49,9 @@ const gameboardFactory = (name) => {
   ]
 
   const receiveAttack = (x, y) => {
-    // first just see if you can access one ship
-    if (placedShips[0].ship === carrier) {
-      return 'hit!'
-    } else {
-      return 'miss!'
-    }
-
-    // for every placed ship object in placedShips array
-    
-    // if that ship location array contains the coordinates
-    // hit that ship
+    let currentLocation = placedShips[0].location;
+    let arrayLength = currentLocation.length;
+    return arrayLength;
   }
  
 
