@@ -49,13 +49,17 @@ const gameboardFactory = (name) => {
   ]
 
   const receiveAttack = (x, y) => {
-    let currentLoc = placedShips[0].location;
-    let match = currentLoc.find(arr => arr[0] === x && arr[1] === y);
-    if (match === undefined) {
-      return undefined
-    } else {
-      return 'hit!'
+
+    for (let i = 0; i < placedShips.length; i++) {
+      let currentLocArray = placedShips[i].location;
+      let match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
+      if (match != undefined) {
+        return 'hit!';
+      } else {
+        continue
+      }
     }
+    
   }
  
 

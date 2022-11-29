@@ -23,7 +23,7 @@ test('Can I see if coordinates match a cell in a placedShips location array?', (
 
 test('Can I see if coordinates do not match a cell in a placedShips location array?', () => {
   const gameboardOne = gameboardFactory(gameboardOne);
-  expect(gameboardOne.receiveAttack(2,2)).toBe(undefined);
+  expect(gameboardOne.receiveAttack(9,2)).toBe(undefined);
 });
 
 
