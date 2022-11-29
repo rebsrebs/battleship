@@ -1,54 +1,47 @@
 import { shipFactory } from "./ship";
 
 const gameboardFactory = (name) => {
-  // create array of 100 cells
-  let cells = [];
-  for (let x = 1; x < 11; x++) {
-    for (let y = 1; y< 11; y++) {
-      cells.push([x,y]);
-    }
-  }
 
-  // check if location is on board
+   // create array of 100 cells
+   let cells = [];
+   for (let x = 1; x < 11; x++) {
+     for (let y = 1; y< 11; y++) {
+       cells.push([x,y]);
+     }
+   }
+
+  // create ships
+  const carrier = shipFactory('carrier', 5);
+  const battleship = shipFactory('battleship', 4);
+  const destroyer = shipFactory('destroyer', 3);
+  const submarine = shipFactory('submarine', 3);
+  const patrolBoat = shipFactory('patrolBoat', 2);
+ 
+ 
+
+  //const placeShip = (ship) => {
+    // get as many coordinates as length of ship
+  //}
+  
+  // const placedShips = {
+  //   'ship': carrier,
+  //   'location': [[1,2], [1,3], [1,4], [1,5], [1,6]]
+  // }
 
   
 
-  // create array of missed shots
-  let missed = [];
+  
 
-  // create carrier - 5 long
-  const carrier = shipFactory(carrier, 5);
-  let placedCarrier = {
-    ship: carrier,
-    location: [[1,1], [1,2],[1,3],[1,4],[1,5]],
-  }
+  // let shipsArray = [battleshipArray,destroyerArray, submarineArray, patrolBoatArray];
 
-  // create battleship - 4 long
-  const battleship = shipFactory(battleship, 4);
-  let battleshipArray = [[2,1],[2,2],[2,3],[2,4]];
-
-  // create destroyer - 3 long
-  const destroyer = shipFactory(destroyer, 3);
-  let destroyerArray = [[3,1],[3,2],[3,3]];
-
-  // create submarine - 3 long
-  const submarine = shipFactory(submarine, 3);
-  let submarineArray = [[4,1],[4,2],[4,3]];
-
-  // create patrol boat - 2 long
-  const patrolBoat = shipFactory(patrolBoat, 2);
-  let patrolBoatArray = [[5,1],[5,2]];
-
-  let shipsArray = [battleshipArray,destroyerArray, submarineArray, patrolBoatArray];
-
-  const receiveAttack = (x, y) => {
-    if (patrolBoatArray.some(element => {
-      element[0] === x})) {
-        return 'hit!'
-      } else {
-        return 'miss!'
-      }
-    }
+  // const receiveAttack = (x, y) => {
+  //   if (patrolBoatArray.some(element => {
+  //     element[0] === x})) {
+  //       return 'hit!'
+  //     } else {
+  //       return 'miss!'
+  //     }
+  //   }
     
 
     // shipsArray.forEach(array => {
@@ -64,22 +57,15 @@ const gameboardFactory = (name) => {
     // }
   
 
-  const areAllSunk = () => {
+  // const areAllSunk = () => {
     // if all ships are sunk return true
     // else return false
-  }
+  // }
 
   const getCells = () => cells;
   const getMissed = () => missed;
 
-  return { name, getCells, getMissed, receiveAttack }
+  return { name, getCells, getMissed, carrier}
 }
 
-export { gameboardFactory };
-
-
-
-  
-
-
-// does a cell need to know if it has a battleship on it? i think not... the locations are stored in the battleship.
+export { gameboardFactory};
