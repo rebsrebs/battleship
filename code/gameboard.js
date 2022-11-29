@@ -68,6 +68,8 @@ const gameboardFactory = (name) => {
   const areAllSunk = () => {
     if (sunk >= 5) {
       return true;
+    } else {
+      return false;
     }
   }
 
