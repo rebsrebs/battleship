@@ -10,7 +10,7 @@ const gameboardFactory = (name) => {
      }
    }
 
-  // create array for missed shots
+  let possible = [...cells];
   let missed = [];
   let sunk = 0;
 
@@ -45,24 +45,43 @@ const gameboardFactory = (name) => {
   ]
 
   const receiveAttack = (x, y) => {
-    // for every object in the placedShips array
-    for (let i = 0; i < placedShips.length; i++) {
-      let currentLocArray = placedShips[i].location;
-      let currentShip = placedShips[i].ship;
-      var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
-      if (match != undefined) {
-        currentShip.hit();
-        if (currentShip.isSunk() == true) {
-          sunk += 1;
-        }
-        return;
-      } 
-    }
-    if (match === undefined) {
-    const missedShot = [x,y];
-    missed.push(missedShot);
-    return 'miss!';
-    }
+
+    // find index of [x,y] in possible moves array
+    let idx = possible.findIndex(arr => (arr[0] === x && arr[1] === y));
+
+    // if move is not in possible array
+    if (idx === -1) {
+      return 'impossible!'
+
+    // if move is possible
+    } else if (idx != undefined) {
+
+      // remove [x,y] from possible moves array
+      possible.splice(idx,1);
+
+      // for every object in the placedShips array
+      for (let i = 0; i < placedShips.length; i++) {
+        let currentLocArray = placedShips[i].location;
+        let currentShip = placedShips[i].ship;
+        var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
+        if (match != undefined) {
+          currentShip.hit();
+          if (currentShip.isSunk() == true) {
+            sunk += 1;
+          }
+          // why is this return getting reached if guess is not part of possible array?
+          return 'hit!';
+        } 
+      }
+
+      if (match === undefined) {
+      const missedShot = [x,y];
+      missed.push(missedShot);
+      return 'miss!';
+      }
+
+    } // end if move is possible loop
+    return;
   }
   
   const areAllSunk = () => {
@@ -76,8 +95,9 @@ const gameboardFactory = (name) => {
   const getCells = () => cells;
   const getMissed = () => missed;
   const getSunk = () => sunk;
+  const getPossible = () => possible;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk, carrier}
+  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk, carrier, getPossible}
 }
 
 export { gameboardFactory};

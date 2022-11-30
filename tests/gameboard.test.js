@@ -47,5 +47,18 @@ test('Does areAllSunk work?', () => {
   expect(gameboardOne.areAllSunk()).toBe(true);
 });
 
+test('Can receiveAttack update possible array?', () => {
+  const gameboardOne = gameboardFactory(gameboardOne);
+  gameboardOne.receiveAttack(5,2);
+  gameboardOne.receiveAttack(5,1);
+  expect(gameboardOne.getPossible().length).toBe(98);
+});
+
+test('Can receiveAttack check if guess is in possible array?', () => {
+  const gameboardOne = gameboardFactory(gameboardOne);
+  gameboardOne.receiveAttack(8,2);
+  expect(gameboardOne.receiveAttack(8,2)).toBe('impossible!');
+});
+
 
 
