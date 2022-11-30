@@ -10,12 +10,26 @@ class HumanPlayer {
     this.gameboard = gameboardFactory(`${name}GB`);
    }
   attack(a, b, board) { 
-    // if (0 < a < 11 && b < 0 < 11) {
+    // check that (0 < a < 11 && b < 0 < 11)
       board.receiveAttack(a,b);
       return 'attacked'
-    // }
-    // does this just call gameBoardOne.receiveAttack(a,b)?
   }
 }
 
-export { HumanPlayer }
+class AIPlayer {
+  // class methods
+  constructor(name) { 
+    this.name = name;
+    this.gameboard = gameboardFactory(`${name}GB`);
+   }
+  attack(board) { 
+    // if there is a ship that is not sunk but
+    // has hits above 0
+    // guess adjacent to it
+    let a = Math.floor(Math.random() * 10) + 1;
+    let b = Math.floor(Math.random() * 10) + 1;
+    board.receiveAttack(a,b);
+  }
+}
+
+export { HumanPlayer, AIPlayer }
