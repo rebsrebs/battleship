@@ -1,5 +1,3 @@
-
-// Create conditions so that the game ends once one players ships have all been sunk. This function is appropriate for the Game module.
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 

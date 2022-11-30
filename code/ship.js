@@ -7,5 +7,3 @@ const shipFactory = (name, length) => {
 };
 
 export { shipFactory };
-
-
