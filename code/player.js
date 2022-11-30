@@ -7,6 +7,7 @@ class HumanPlayer {
   // class methods
   constructor(name) { 
     this.name = name;
+    this.category = 'human';
     // this.gameboard = gameboardFactory(`${name}GB`);
    }
   attack(a, b, board) { 
@@ -20,6 +21,7 @@ class AIPlayer {
   // class methods
   constructor(name) { 
     this.name = name;
+    this.category = 'robot';
     // this.gameboard = gameboardFactory(`${name}GB`);
    }
   attack(board) { 
