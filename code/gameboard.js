@@ -10,8 +10,11 @@ const gameboardFactory = (name) => {
      }
    }
 
+  // create array of possible moves
   let possible = [...cells];
+  // create array of misses
   let missed = [];
+  // how many ships are sunk on board
   let sunk = 0;
 
   // create ships
@@ -21,6 +24,7 @@ const gameboardFactory = (name) => {
   const submarine = shipFactory('submarine', 3);
   const patrolBoat = shipFactory('patrolBoat', 2);
 
+  // place ships
   let placedShips = [
     {
       ship: carrier,
@@ -88,6 +92,7 @@ const gameboardFactory = (name) => {
     if (sunk >= 5) {
       return true;
     } else {
+      console.log(`There are ${possible.length} moves left on ${name} gameboard`)
       return false;
     }
   }
