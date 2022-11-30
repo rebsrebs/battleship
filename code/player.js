@@ -26,10 +26,21 @@ class AIPlayer {
     // if there is a ship that is not sunk but
     // has hits above 0
     // guess adjacent to it
-    let a = Math.floor(Math.random() * 10) + 1;
-    let b = Math.floor(Math.random() * 10) + 1;
+
+    //pick random location from enemy board possible array
+    // do i have to expand this?
+    let possibleMoves = board.getPossible();
+    let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+    let a = shot[0];
+    let b = shot[1];
+
+    // let a = Math.floor(Math.random() * 10) + 1;
+    // let b = Math.floor(Math.random() * 10) + 1;
     board.receiveAttack(a,b);
+    return 'attacked';
   }
+
+
 }
 
 export { HumanPlayer, AIPlayer }
