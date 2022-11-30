@@ -7,7 +7,7 @@ class HumanPlayer {
   // class methods
   constructor(name) { 
     this.name = name;
-    this.gameboard = gameboardFactory(`${name}GB`);
+    // this.gameboard = gameboardFactory(`${name}GB`);
    }
   attack(a, b, board) { 
     // check that (0 < a < 11 && b < 0 < 11)
@@ -20,7 +20,7 @@ class AIPlayer {
   // class methods
   constructor(name) { 
     this.name = name;
-    this.gameboard = gameboardFactory(`${name}GB`);
+    // this.gameboard = gameboardFactory(`${name}GB`);
    }
   attack(board) { 
     // if there is a ship that is not sunk but
