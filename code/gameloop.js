@@ -5,20 +5,51 @@
 import { HumanPlayer, AIPlayer } from "./player";
 import { gameboardFactory } from "./gameboard";
 
-const playGame = () => {
+const setUpGame = () => {
 
   const playerOne = new HumanPlayer('Rebecca');
   const playerTwo = new AIPlayer('Computer');
-  // should player's create their own gameboards? I'm going to say no for now.
+  
   const gameboardOne = gameboardFactory('gameboardOne');
   const gameboardTwo = gameboardFactory('gameboardTwo');
 
-  if (gameboardOne.areAllSunk() == true) {
-    return 'player 2 wins!'
-  } else if (gameboardTwo.areAllSunk() == true) {
-    return 'player 1 wins!'
+  return {
+    playerOne, playerTwo, gameboardOne, gameboardTwo
   }
 
 }
 
-export { playGame }
+const playGame = (currentPlayer = playerOne, enemyGameboard = gameboardTwo) => {
+
+  // base cases
+  if (gameboardOne.areAllSunk() == true) {
+    return 'player 2 wins!'
+  } else if (gameboardTwo.areAllSunk() == true) {
+    return 'player 1 wins!'
+  } else {
+
+    // attack
+    if (currentPlayer.category === 'human') {
+      currentPlayer.attack(1,2,enemyGameboard);
+    }
+
+    if (currentPlayer.category === 'robit') {
+      currentPlayer.attack(enemyGameboard);
+    }
+
+    // switch players
+    if (currentPlayer === playerOne) {
+      currentPlayer = playerTwo;
+      enemyGameboard = gameboardOne;
+    } else {
+      currentPlayer = playerOne;
+      enemyGameboard = gameboardTwo;
+    }
+
+    //recurse
+    playGame(currentPlayer, enemyGameboard);
+  }
+
+}
+
+export { setUpGame, playGame }
