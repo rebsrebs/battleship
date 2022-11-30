@@ -1,7 +1,5 @@
-import { setUpGame, playGame } from "../code/gameloop";
-
+import { gameLoop } from "../code/gameloop";
 
 test('Does gameloop work', () => {
-  setUpGame();
-  playGame();
+  expect(gameLoop()).toBe('end!');
   });
