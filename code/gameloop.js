@@ -1,14 +1,19 @@
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
+import { createBoard } from "./UI";
 
 const gameLoop = () => {
 
-  // set up players and gameboards
+  // set up players and gameboard objects
   let playerOne = humanPlayerFactory('Rebecca');
   let playerTwo = AIPlayerFactory('Computer');
   let gameboardOne = gameboardFactory('gameboardOne');
   let gameboardTwo = gameboardFactory('gameboardTwo');
   var winner = '';
+
+  // set up gameboard in DOM
+  createBoard();
+
 
   // define gameplaying function
   const playGame = (currentPlayer = playerOne, enemyGameboard = gameboardTwo) => {
@@ -21,6 +26,9 @@ const gameLoop = () => {
       winner = 'Player 1 wins!';
       return;
     } else {
+
+      // show enemy gameboard
+
   
       // attack
       if (currentPlayer.category === 'human') {

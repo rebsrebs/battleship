@@ -73,7 +73,6 @@ const gameboardFactory = (name) => {
           if (currentShip.isSunk() == true) {
             sunk += 1;
           }
-          // why is this return getting reached if guess is not part of possible array?
           return 'hit!';
         } 
       }
@@ -92,7 +91,7 @@ const gameboardFactory = (name) => {
     if (sunk >= 5) {
       return true;
     } else {
-      console.log(`There are ${possible.length} moves left on ${name} gameboard`)
+      // console.log(`There are ${possible.length} moves left on ${name} gameboard`)
       return false;
     }
   }
