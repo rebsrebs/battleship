@@ -1,18 +1,19 @@
 import { gameboardFactory } from "./gameboard";
 import { gameLoop } from "./gameloop";
 
-const createBoard =(array, gbNum) => {
-  for (let i = 0; i < array.length; i++) {
-    // var cell = document.createElement('div');
-    // cell.className = (`cell ${playerNum}`)
-    var cellID = (`${gbNum}-cell-${i}`);
-    console.log(cellID);
-    // cell.id = (`cell-${playerNum}-${i}`);
+export const createBoard =() => {
+  const gameboardcontainer = document.getElementById('gameboardcontainer');
+
+  for (let i = 0; i < 100; i++) {
+    var cell = document.createElement('div');
+    cell.className = (`cell ${playerNum}`)
+    cell.id = (`cell-${playerNum}-${i}`);
+    gameboardcontainer.appendChild(cell);
     // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
   }
 }
 
-export {createBoard};
+// export {createBoard};
 
 
 // Create the main game loop and a module for DOM interaction.

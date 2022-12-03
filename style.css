@@ -1,0 +1,29 @@
+:root {
+  --main-bg-color: yellow;
+  --cell-bg-color: pink;
+  --gb-bg-color:lightgray;
+  --gbOne-bg-color: green;
+  --gbTwo-bg-color:blue;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-bg-color);
+}
+
+#gameboardcontainer {
+  background-color: var(--gb-bg-color);
+  width: 500px;
+  height: 500px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-gap: 1em;
+}
+
+.cell {
+  background-color: var(--cell-bg-color);
+}
