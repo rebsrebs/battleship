@@ -1,23 +1,34 @@
 import { gameboardFactory } from "./gameboard";
 import { gameLoop } from "./gameloop";
 
-export const createBoard =() => {
-  const gameboardcontainer = document.getElementById('gameboardcontainer');
+export const createBoards = () => {
+  const gameboardcontainer1 = document.getElementById('gameboardcontainer1');
 
+  // create 100 cells and put them in gameboardcontainer
+  for (let i = 0; i < 100; i++) {
+    var cell = document.createElement('div');
+    cell.className = (`cell`);
+    cell.id = (`cell-${1}-${i}`);
+    gameboardcontainer1.appendChild(cell);
+    // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
+  }
+
+  const gameboardcontainer2 = document.getElementById('gameboardcontainer2');
+
+  // create 100 cells and put them in gameboardcontainer
   for (let i = 0; i < 100; i++) {
     var cell = document.createElement('div');
     cell.className = (`cell`)
-    cell.id = (`cell-${i}`);
-    gameboardcontainer.appendChild(cell);
+    cell.id = (`cell-${2}-${i}`);
+    gameboardcontainer2.appendChild(cell);
     // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
   }
 }
 
-// export {createBoard};
 
 
-// Create the main game loop and a module for DOM interaction.
-// At this point it is appropriate to begin crafting your User Interface.
+
+
 // The game loop should set up a new game by creating Players and Gameboards. For now just populate each Gameboard with predetermined coordinates. You can implement a system for allowing players to place their ships later.
 // We’ll leave the HTML implementation up to you for now, but you should display both the player’s boards and render them using information from the Gameboard class.
 // You need methods to render the gameboards and to take user input for attacking. For attacks, let the user click on a coordinate in the enemy Gameboard.
