@@ -3,12 +3,24 @@ import { gameboardFactory } from "./gameboard";
 
 const gameLoop = () => {
 
-  // set up players and gameboard objects
+  // set up players
   let playerOne = humanPlayerFactory('Rebecca');
   let playerTwo = AIPlayerFactory('Computer');
+  var winner = '';
+
+  // ask player to place ships
+  let playerOneShips = [];
+  let playerTwoShips = [];
+  
+
+
+
+
+  // set up gameboards
+  // change to accept placedShips object as a parameter
   let gameboardOne = gameboardFactory('gameboardOne');
   let gameboardTwo = gameboardFactory('gameboardTwo');
-  var winner = '';
+  
 
   // define gameplaying function
   const playGame = (currentPlayer = playerOne, enemyGameboard = gameboardTwo) => {

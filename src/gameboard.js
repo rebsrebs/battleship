@@ -100,8 +100,9 @@ const gameboardFactory = (name) => {
   const getMissed = () => missed;
   const getSunk = () => sunk;
   const getPossible = () => possible;
+  const getPlacedShips = () => placedShips;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk, carrier, getPossible}
+  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk, carrier, getPossible, getPlacedShips}
 }
 
 export { gameboardFactory };
