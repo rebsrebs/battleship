@@ -21,9 +21,9 @@ body {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  grid-gap: 1em;
 }
 
 .cell {
   background-color: var(--cell-bg-color);
+  border: 1px solid black;
 }

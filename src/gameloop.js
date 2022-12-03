@@ -1,6 +1,5 @@
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
-import { createBoard } from "./UI";
 
 const gameLoop = () => {
 
@@ -10,10 +9,6 @@ const gameLoop = () => {
   let gameboardOne = gameboardFactory('gameboardOne');
   let gameboardTwo = gameboardFactory('gameboardTwo');
   var winner = '';
-
-  // set up gameboard in DOM
-  createBoard();
-
 
   // define gameplaying function
   const playGame = (currentPlayer = playerOne, enemyGameboard = gameboardTwo) => {
@@ -29,7 +24,6 @@ const gameLoop = () => {
 
       // show enemy gameboard
 
-  
       // attack
       if (currentPlayer.category === 'human') {
         currentPlayer.attack(1,2,enemyGameboard);

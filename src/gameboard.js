@@ -104,4 +104,4 @@ const gameboardFactory = (name) => {
   return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk, carrier, getPossible}
 }
 
-export { gameboardFactory};
+export { gameboardFactory };

@@ -6,8 +6,8 @@ export const createBoard =() => {
 
   for (let i = 0; i < 100; i++) {
     var cell = document.createElement('div');
-    cell.className = (`cell ${playerNum}`)
-    cell.id = (`cell-${playerNum}-${i}`);
+    cell.className = (`cell`)
+    cell.id = (`cell-${i}`);
     gameboardcontainer.appendChild(cell);
     // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
   }
