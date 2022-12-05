@@ -1,6 +1,7 @@
 :root {
   --main-bg-color: yellow;
-  --cell-bg-color: pink;
+  --cell-plain-bg-color: pink;
+  --cell-ship-bg-color: red;
   --gb-bg-color:lightgray;
   --gbOne-bg-color: green;
   --gbTwo-bg-color:blue;
@@ -44,6 +45,13 @@ body {
 }
 
 .cell {
-  background-color: var(--cell-bg-color);
   border: 1px solid black;
+}
+
+.cell-plain {
+  background-color: var(--cell-plain-bg-color);
+}
+
+.cell-ship {
+  background-color: var(--cell-ship-bg-color);
 }

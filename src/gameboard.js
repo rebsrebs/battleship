@@ -17,14 +17,13 @@ const gameboardFactory = (name) => {
   // how many ships are sunk on board
   let sunk = 0;
 
-  // create ships
-  const carrier = shipFactory('carrier', 5);
-  const battleship = shipFactory('battleship', 4);
-  const destroyer = shipFactory('destroyer', 3);
-  const submarine = shipFactory('submarine', 3);
-  const patrolBoat = shipFactory('patrolBoat', 2);
+   // create ships
+   const carrier = shipFactory('carrier', 5);
+   const battleship = shipFactory('battleship', 4);
+   const destroyer = shipFactory('destroyer', 3);
+   const submarine = shipFactory('submarine', 3);
+   const patrolBoat = shipFactory('patrolBoat', 2);
 
-  // place ships
   let placedShips = [
     {
       ship: carrier,
@@ -52,8 +51,6 @@ const gameboardFactory = (name) => {
   // const receiveLocation = (ship, array) => {
     // find 
   // }
-
-
 
 
   const receiveAttack = (x, y) => {
@@ -110,7 +107,7 @@ const gameboardFactory = (name) => {
   const getPossible = () => possible;
   const getPlacedShips = () => placedShips;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk, carrier, getPossible, getPlacedShips}
+  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips}
 }
 
 export { gameboardFactory };

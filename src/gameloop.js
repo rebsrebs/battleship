@@ -12,10 +12,6 @@ const gameLoop = () => {
   let playerOneShips = [];
   let playerTwoShips = [];
   
-
-
-
-
   // set up gameboards
   // change to accept placedShips object as a parameter
   let gameboardOne = gameboardFactory('gameboardOne');
