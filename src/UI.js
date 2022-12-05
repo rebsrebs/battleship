@@ -5,10 +5,20 @@ const messagecontainer = document.getElementById('messagecontainer');
 const gameboardcontainer1 = document.getElementById('gameboardcontainer1');
 const gameboardcontainer2 = document.getElementById('gameboardcontainer2');
 
-const askForShipPlacement = () => {
+const getShipPlacement = (gameboard) => {
 
+  const shipLocation = document.getElementById('shipLocation');
+  const shipLocationSubmit = document.getElementById('shipLocationSubmit');
+
+  shipLocationSubmit.addEventListener('click', () => {
+    gameboard.placedShips.carrier.location = shipLocation.value;
+  })
+
+
+
+  
   let shipsToPlace = [
-    { ship: carrier, location: undefined },
+    { ship: gameboard.carrier, location: undefined },
     { ship: battleship, location: undefined },
     { ship: destroyer, location: undefined },
     { ship: submarine, location: undefined },
@@ -53,7 +63,7 @@ const createBoards = () => {
 }
 
 
-export { createBoards, askForShipPlacement }
+export { createBoards, getShipPlacement }
 
 
 // The game loop should set up a new game by creating Players and Gameboards. For now just populate each Gameboard with predetermined coordinates. You can implement a system for allowing players to place their ships later.

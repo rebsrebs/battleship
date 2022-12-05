@@ -28,25 +28,33 @@ const gameboardFactory = (name) => {
   let placedShips = [
     {
       ship: carrier,
-      location: [[1,2], [1,3], [1,4], [1,5], [1,6]]
+      location: undefined
     },
     {
       ship: battleship,
-      location: [[2,2], [2,3], [2,4], [2,5]]
+      location: undefined
     },
     {
       ship: destroyer,
-      location: [[3,2], [3,3], [3,4]]
+      location: undefined
     },
     {
       ship: submarine,
-      location: [[4,2], [4,3], [4,4]]
+      location: undefined
     },
     {
       ship: patrolBoat,
-      location: [[5,2], [5,3]]
+      location: undefined
     }
   ]
+
+  // get locations
+  // const receiveLocation = (ship, array) => {
+    // find 
+  // }
+
+
+
 
   const receiveAttack = (x, y) => {
 
