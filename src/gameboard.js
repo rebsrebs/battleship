@@ -4,8 +4,8 @@ const gameboardFactory = (name) => {
 
    // create array of 100 cells
    let cells = [];
-   for (let x = 1; x < 11; x++) {
-     for (let y = 1; y< 11; y++) {
+   for (let y = 1; y < 11; y++) {
+     for (let x = 1; x< 11; x++) {
        cells.push([x,y]);
      }
    }

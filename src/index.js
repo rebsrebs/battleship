@@ -7,6 +7,7 @@ let gameboardOne = gameboardFactory('gameboardOne');
 let gameboardTwo = gameboardFactory('gameboardTwo');
 
 createBoards();
+console.log(gameboardOne.getCells());
 testPlacement(gameboardOne);
 
 // gameLoop();

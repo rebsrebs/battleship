@@ -36,16 +36,30 @@ const testPlacement = (gameboard) => {
     // if a cell was clicked
     if (target.classList.contains('cell')) {
       // change the cell classlist
-      target.classList = (`cell cell-ship`);
+      target.classList = (`cell cell-hover`);
       // log the cell id
       var cellID = target.id;
       console.log(cellID);
-
+      // get the locator number from cell id
       var locatorIdx = cellID.slice(4);
       console.log(locatorIdx);
-
+      // use locator to get coords from cameboard cells array
       var coords = gameboard.getCells()[locatorIdx];
       console.log(coords);
+      // get ship length of ship being placed
+      let shipLength = gameboard.getPlacedShips()[0].ship.length;
+      console.log(`shipLength is ${shipLength}`);
+
+      // check if location can fit carrier
+      if (coords[0] + shipLength <= 11) {
+        console.log(`coords[0] is ${coords[0]}`);
+        for (let i=0; i < shipLength; i++) {
+          let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
+          currentCell.classList = `cell cell-ship`
+        }
+      }
+
+
     }
   });
 }
