@@ -1,5 +1,5 @@
 // import { globsToMatcher } from "jest-util";
-// import { gameboardFactory } from "./gameboard";
+import { gameboardFactory } from "./gameboard";
 // import { gameLoop } from "./gameloop";
 // import { shipFactory } from "./ship";
 
@@ -29,6 +29,18 @@ const createBoards = () => {
 
 
 const testPlacement = (gameboard) => {
+
+  // for every ship in the gameboard's ship array
+  // for (let i = 0; i < gameboard.getPlacedShips().length; i++) {
+  //   let currentShip = gameboard.getPlacedShips().ship;
+  //   msgcontainer.textContent = `Please place your ${currentShip.ship.name}.`;
+  //   // event listener for hover
+  //   // event listener for click
+  //   // push coords to 
+  //   // wait for click before going to the next one
+  // }
+
+
   // put event listener on gameboard container
   gbcontainer1.addEventListener('click', function(event) {
     // find out which cell was clicked
@@ -46,6 +58,10 @@ const testPlacement = (gameboard) => {
       // use locator to get coords from cameboard cells array
       var coords = gameboard.getCells()[locatorIdx];
       console.log(coords);
+      // push coords to ship's location array
+      gameboard.getPlacedShips()[0].location.push([coords]);      // gameboard.setShipLocation(0,coords);
+      console.log(`gameboard.getPlacedShips()[0].location is:`)
+      console.log(`${gameboard.getPlacedShips()[0].location}`)
       // get ship length of ship being placed
       let shipLength = gameboard.getPlacedShips()[0].ship.length;
       console.log(`shipLength is ${shipLength}`);

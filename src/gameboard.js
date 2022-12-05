@@ -27,7 +27,7 @@ const gameboardFactory = (name) => {
   let placedShips = [
     {
       ship: carrier,
-      location: undefined
+      location: []
     },
     {
       ship: battleship,
@@ -100,6 +100,10 @@ const gameboardFactory = (name) => {
       return false;
     }
   }
+
+  // const setShipLocation = (index, array) => {
+  //   placedShips[index].location = array;
+  // }
 
   const getCells = () => cells;
   const getMissed = () => missed;
