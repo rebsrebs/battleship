@@ -28,81 +28,72 @@ const createBoards = () => {
 
 
 
-const testPlacement = (gameboard) => {
+const testPlacement =  async (gameboard) => {
+
+  //is this where the await goes?
 
   // for every ship in the gameboard's ship array
-  // for (let i = 0; i < gameboard.getPlacedShips().length; i++) {
-  //   let currentShip = gameboard.getPlacedShips().ship;
-  //   msgcontainer.textContent = `Please place your ${currentShip.ship.name}.`;
-  //   // event listener for hover
-  //   // event listener for click
-  //   // push coords to 
-  //   // wait for click before going to the next one
-  // }
+  for (let i = 0; i < gameboard.getPlacedShips().length; i++) {
+    let currentShip = gameboard.getPlacedShips()[i];
+    msgcontainer.textContent = `Please place your ${currentShip.ship.name}.`;
 
+    // event listener for hover
 
-  // put event listener on gameboard container
-  gbcontainer1.addEventListener('click', function(event) {
-    // find out which cell was clicked
-    let target = event.target;
-    // if a cell was clicked
-    if (target.classList.contains('cell')) {
-      // change the cell classlist
-      target.classList = (`cell cell-hover`);
-      // log the cell id
-      var cellID = target.id;
-      console.log(cellID);
-      // get the locator number from cell id
-      var locatorIdx = cellID.slice(4);
-      console.log(locatorIdx);
-      // use locator to get coords from cameboard cells array
-      var coords = gameboard.getCells()[locatorIdx];
-      console.log(coords);
-      // push coords to ship's location array
-      gameboard.getPlacedShips()[0].location.push([coords]);      // gameboard.setShipLocation(0,coords);
-      console.log(`gameboard.getPlacedShips()[0].location is:`)
-      console.log(`${gameboard.getPlacedShips()[0].location}`)
-      // get ship length of ship being placed
-      let shipLength = gameboard.getPlacedShips()[0].ship.length;
-      console.log(`shipLength is ${shipLength}`);
+    // put event listener on gameboard container
+    // how to wait for the click before cycling through this outer for loop?
 
-      // check if location can fit carrier
-      if (coords[0] + shipLength <= 11) {
+    gbcontainer1.addEventListener('click', function(event) {
+      // find out which cell was clicked
+      let target = event.target;
+      // if a cell was clicked
+      if (target.classList.contains('cell')) {
+        // change the cell classlist
+        target.classList = (`cell cell-hover`);
+        // log the cell id
+        var cellID = target.id;
+        console.log(cellID);
+        // get the locator number from cell id
+        var locatorIdx = cellID.slice(4);
+        console.log(locatorIdx);
+        // use locator to get coords from cameboard cells array
+        var coords = gameboard.getCells()[locatorIdx];
+        console.log(coords);
         console.log(`coords[0] is ${coords[0]}`);
-        for (let i=0; i < shipLength; i++) {
-          let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
-          currentCell.classList = `cell cell-ship`
+        // get ship length of ship being placed
+        let shipLength = currentShip.ship.length;
+        console.log(`shipLength is ${shipLength}`);
+
+        // check if location can fit carrier
+        // if X + length fits...
+        if (coords[0] + shipLength <= 11) {
+          for (let i=0; i < shipLength; i++) {
+            // get current cell by id
+            let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
+            // change cell class
+            currentCell.classList = `cell cell-ship`
+            // push cell location coordinates to ship's location array
+            currentShip.location.push([(Number(coords[0]) + Number(i)), coords[1]]);      // gameboard.setShipLocation(0,coords);
+            
+          }
         }
-      }
+        console.log(`currentShip.location is:`)
+        console.log(`${currentShip.location}`)
+      } // end for loop that cycles through gameboard's ships
+    }); // end eventListener
 
-
-    }
-  });
+    // wait for click before going to the next one
+  }  
 }
 
-// const getShipPlacement = (gameboard) => {
-//   for (let i=0; i < gameboard.placedShips.length; i++) {
-//     console.log('Please place carrier');
-//   }
 
-//   const shipLocation = document.getElementById('shipLocation');
-//   const shipLocationSubmit = document.getElementById('shipLocationSubmit');
 
-//   shipLocationSubmit.addEventListener('click', () => {
-//     gameboard.placedShips.carrier.location = shipLocation.value;
-//   })
 
-//   gbcontainer1.addEventListener('click', function () {
-//     var currentCell = target.id;
-//   })
-
-//   for (let i = 0; i < shipsToPlace.length; i++) {
-//     msgcontainer.textContent = `Please place your ${shipsToPlace[i].ship}.`;
-//   }
-
-//   // use index to look up location in array.
-  
+// thinking out loud
+// const cellClickHandler = async (event) => {
+//   return coords;
 // }
+// const coordsToPass = await cellClickHandler();
+
 
 
 

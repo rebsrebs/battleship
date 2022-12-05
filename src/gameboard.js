@@ -101,10 +101,6 @@ const gameboardFactory = (name) => {
     }
   }
 
-  // const setShipLocation = (index, array) => {
-  //   placedShips[index].location = array;
-  // }
-
   const getCells = () => cells;
   const getMissed = () => missed;
   const getSunk = () => sunk;
