@@ -12,7 +12,7 @@ const createBoards = () => {
   for (let i = 0; i < 100; i++) {
     var cell = document.createElement('div');
     cell.className = (`cell cell-plain`);
-    cell.id = (`cell-${1}-${i}`);
+    cell.id = (`gb1-${i}`);
     gbcontainer1.appendChild(cell);
     // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
   }
@@ -20,7 +20,7 @@ const createBoards = () => {
   for (let i = 0; i < 100; i++) {
     var cell = document.createElement('div');
     cell.className = (`cell cell-plain`)
-    cell.id = (`cell-${2}-${i}`);
+    cell.id = (`gb2-${i}`);
     gbcontainer2.appendChild(cell);
     // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
   }
@@ -28,7 +28,7 @@ const createBoards = () => {
 
 
 
-const testPlacement = () => {
+const testPlacement = (gameboard) => {
   // put event listener on gameboard container
   gbcontainer1.addEventListener('click', function(event) {
     // find out which cell was clicked
@@ -38,7 +38,14 @@ const testPlacement = () => {
       // change the cell classlist
       target.classList = (`cell cell-ship`);
       // log the cell id
-      console.log(target.id);
+      var cellID = target.id;
+      console.log(cellID);
+
+      var locatorIdx = cellID.slice(4);
+      console.log(locatorIdx);
+
+      var coords = gameboard.getCells()[locatorIdx];
+      console.log(coords);
     }
   });
 }
