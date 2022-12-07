@@ -24,38 +24,43 @@ const createBoards = () => {
 function placeShips (gameboard, shipIdx = 0) {
 
   // base case
-  if (shipIdx ===  5) {
-    return 'Ships have all been placed.'
+  if (shipIdx >  4) {
+    console.log('base case');
+    return;
   } else {
 
-    let currentShip = gameboard.getPlacedShips()[shipIdx];
-    msgcontainer.textContent = `Please place your ${currentShip.ship.name}.`;
+      let currentShip = gameboard.getPlacedShips()[shipIdx];
+      msgcontainer.textContent = `Please place your ${currentShip.ship.name}.`;
 
-    // define clickHandler
-    const clickHandler = function(e) {
-      let target = e.target;
-      if (target.classList.contains('cell')) {
-        target.classList = (`cell cell-hover`);
-        var cellID = target.id;
-        var locatorIdx = cellID.slice(4);
-        var coords = gameboard.getCells()[locatorIdx];
-        let shipLength = currentShip.ship.length;
-        console.log(`shipLength is ${shipLength}`);
-      
-          if (coords[0] + shipLength <= 11) {
-            for (let i=0; i < shipLength; i++) {
-              let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
-              currentCell.classList = `cell cell-ship`
-              currentShip.location.push([(Number(coords[0]) + Number(i)), coords[1]]);    
+      // define clickHandler
+      var clickHandler = function(e) {
+        let target = e.target;
+        if (target.classList.contains('cell')) {
+          target.classList = (`cell cell-hover`);
+          var cellID = target.id;
+          var locatorIdx = cellID.slice(4);
+          var coords = gameboard.getCells()[locatorIdx];
+          let shipLength = currentShip.ship.length;
+          console.log(`shipLength is ${shipLength}`);
+        
+            if (coords[0] + shipLength <= 11) {
+              for (let i=0; i < shipLength; i++) {
+                let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
+                currentCell.classList = `cell cell-ship`
+                currentShip.location.push([(Number(coords[0]) + Number(i)), coords[1]]);    
+              }
+              shipIdx += 1;
+              console.log(`shipIdx is ${shipIdx}`);
+              gbcontainer1.removeEventListener('click', clickHandler);
+              return placeShips(gameboard, shipIdx);
             }
-            shipIdx += 1;
-            console.log(`shipIdx is ${shipIdx}`);
-            return placeShips(gameboard, shipIdx);
-          }
-      }
-    }  // end clickhandler
-    gbcontainer1.addEventListener('click', clickHandler)
+        }
+      }  // end clickhandler
+      gbcontainer1.addEventListener('click', clickHandler)
+      
   }
+  msgcontainer.textContent = `Ships have all been placed.`;
+  return 'done a cycle';
 }
 
 // where to do?
