@@ -21,6 +21,22 @@ const createBoards = () => {
   }
 }
 
+
+
+const toggleBtn = document.getElementById('togglebtn');
+const directionDisplay = document.getElementById('direction');
+toggleBtn.addEventListener('click', function() {
+  if (directionDisplay.getAttribute("data-status") === 'horizontal') {
+    directionDisplay.setAttribute("data-status", "vertical");
+    directionDisplay.textContent="vertical";
+  } else {
+    directionDisplay.setAttribute("data-status", "horizontal");
+    directionDisplay.textContent="horizontal";
+  }
+})
+
+
+
 // change to 
 // if hzbtn is active, direction = hz, if vtbtn is active, direction = vt
 // function placeShips (gameboard, shipIdx = 0, direction) {
