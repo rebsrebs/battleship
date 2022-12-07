@@ -60,3 +60,12 @@ body {
 .cell-ship {
   background-color: var(--cell-ship-bg-color);
 }
+
+button[data-status='active'] {
+  background-color:red;
+}
+
+button[data-status='inactive'] {
+  background-color:blue;
+}
+

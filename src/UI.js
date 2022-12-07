@@ -43,12 +43,11 @@ function placeShips (gameboard, shipIdx = 0) {
       var clickHandler = function(e) {
         let target = e.target;
         if (target.classList.contains('cell')) {
-          // what about checking if it's in the possible array
-          // need a short utility function to find index of matching array if there is a match in the gameboard domestic animal guardians??
           target.classList = (`cell cell-hover`);
           var cellID = target.id;
           var locatorIdx = cellID.slice(4);
           var coords = gameboard.getCells()[locatorIdx];
+
           let shipLength = currentShip.ship.length;
           console.log(`shipLength is ${shipLength}`);
 
