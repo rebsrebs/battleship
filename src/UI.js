@@ -24,7 +24,7 @@ const createBoards = () => {
 function placeShips (gameboard, shipIdx = 0) {
 
   // base case
-  if (shipIdx >  4) {
+  if (shipIdx >  gameboard.getPlacedShips().length-1) {
     msgcontainer.textContent = `Ships have all been placed.`;
     console.log('base case');
     console.log(`The gameboards placed ships are`);
