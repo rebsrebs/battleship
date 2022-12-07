@@ -2,6 +2,8 @@ import { shipFactory } from "./ship";
 
 const gameboardFactory = (name) => {
 
+  let numShipsToPlace = 5;
+
    // create array of 100 cells
    let cells = [];
    for (let y = 1; y < 11; y++) {
@@ -31,19 +33,19 @@ const gameboardFactory = (name) => {
     },
     {
       ship: battleship,
-      location: undefined
+      location: []
     },
     {
       ship: destroyer,
-      location: undefined
+      location: []
     },
     {
       ship: submarine,
-      location: undefined
+      location: []
     },
     {
       ship: patrolBoat,
-      location: undefined
+      location: []
     }
   ]
 
@@ -106,8 +108,9 @@ const gameboardFactory = (name) => {
   const getSunk = () => sunk;
   const getPossible = () => possible;
   const getPlacedShips = () => placedShips;
+  const getNumShipsToPlace = () => numShipsToPlace;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips}
+  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace}
 }
 
 export { gameboardFactory };
