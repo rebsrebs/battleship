@@ -68,17 +68,30 @@ function placeShips (gameboard, shipIdx = 0) {
           console.log(`shipLength is ${shipLength}`);
 
           // if dir is horizontal:
+          let xOrY = undefined;
+          if (directionDisplay.getAttribute("data-status") === 'horizontal') {
+            xOrY = 0;
+            console.log(`xOrY is ${xOrY}`);
+          } else {
+            xOrY = 1;
+            console.log(`xOrY is ${xOrY}`);
+          }
         
             // if it fits
-            if (coords[0] + shipLength <= 11) {
+            if (coords[xOrY] + shipLength <= 11) {
               for (let i=0; i < shipLength; i++) {
+                // this is the problem:
                 let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
+                // change color of current cell
                 currentCell.classList = `cell cell-ship`
+                // push cell to ship location
+
+                if (xOrY === 0) {
                 currentShip.location.push([(Number(coords[0]) + Number(i)), coords[1]]);    
+                } else if (xOrY === 1) {
+                  currentShip.location.push([coords[0], (Number(coords[0]) + Number(i))]);  
+                }
               }
-
-          // else if dir is vt:
-
               shipIdx += 1;
               console.log(`shipIdx is ${shipIdx}`);
               gbcontainer1.removeEventListener('click', clickHandler);
