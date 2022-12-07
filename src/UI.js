@@ -25,7 +25,10 @@ function placeShips (gameboard, shipIdx = 0) {
 
   // base case
   if (shipIdx >  4) {
+    msgcontainer.textContent = `Ships have all been placed.`;
     console.log('base case');
+    console.log(`The gameboards placed ships are`);
+    console.log(gameboard.getPlacedShips());
     return;
   } else {
 
@@ -36,6 +39,8 @@ function placeShips (gameboard, shipIdx = 0) {
       var clickHandler = function(e) {
         let target = e.target;
         if (target.classList.contains('cell')) {
+          // what about checking if it's in the possible array
+          // need a short utility function to find index of matching array if there is a match in the gameboard domestic animal guardians??
           target.classList = (`cell cell-hover`);
           var cellID = target.id;
           var locatorIdx = cellID.slice(4);
@@ -43,6 +48,7 @@ function placeShips (gameboard, shipIdx = 0) {
           let shipLength = currentShip.ship.length;
           console.log(`shipLength is ${shipLength}`);
         
+            // if it fits
             if (coords[0] + shipLength <= 11) {
               for (let i=0; i < shipLength; i++) {
                 let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
@@ -59,7 +65,6 @@ function placeShips (gameboard, shipIdx = 0) {
       gbcontainer1.addEventListener('click', clickHandler)
       
   }
-  msgcontainer.textContent = `Ships have all been placed.`;
   return 'done a cycle';
 }
 
