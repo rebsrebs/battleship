@@ -16,6 +16,8 @@ const gameboardFactory = (name) => {
   let possible = [...cells];
   // create array of misses
   let missed = [];
+  // create array of shots
+  let firedShots = [];
   // how many ships are sunk on board
   let sunk = 0;
 
@@ -57,40 +59,41 @@ const gameboardFactory = (name) => {
 
   const receiveAttack = (x, y) => {
 
-    // find index of [x,y] in possible moves array
-    let idx = possible.findIndex(arr => (arr[0] === x && arr[1] === y));
+      // Check if this shot was already fired
+      var alreadyFired = firedShots.find(arr=> arr[0] ===x && arr[1] ===y);
+      if (alreadyFired != undefined) {
+        return 'Already tried this spot.'
 
-    // if move is not in possible array
-    if (idx === -1) {
-      return 'impossible!'
+      // if shot has not yet been fired in this game
+      } else {
 
-    // if move is possible
-    } else if (idx != undefined) {
+        const firedShot = [x,y];
+        firedShots.push(firedShot);
 
-      // remove [x,y] from possible moves array
-      possible.splice(idx,1);
+        // for every object in the placedShips array
+        for (let i = 0; i < placedShips.length; i++) {
+          let currentLocArray = placedShips[i].location;
+          let currentShip = placedShips[i].ship;
+          var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
 
-      // for every object in the placedShips array
-      for (let i = 0; i < placedShips.length; i++) {
-        let currentLocArray = placedShips[i].location;
-        let currentShip = placedShips[i].ship;
-        var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
-        if (match != undefined) {
-          currentShip.hit();
-          if (currentShip.isSunk() == true) {
-            sunk += 1;
-          }
-          return 'hit!';
-        } 
+          // if the shot hit a ship
+          if (match != undefined) {
+            currentShip.hit();
+            if (currentShip.isSunk() == true) {
+              sunk += 1;
+            }
+            return 'hit!';
+          } 
+        }
+
+        // if the shot did not hit a ship
+        if (match === undefined) {
+        
+        missed.push(firedShot);
+        return 'miss!';
+        }
       }
-
-      if (match === undefined) {
-      const missedShot = [x,y];
-      missed.push(missedShot);
-      return 'miss!';
-      }
-
-    } // end if move is possible loop
+   
     return;
   }
   
@@ -105,12 +108,13 @@ const gameboardFactory = (name) => {
 
   const getCells = () => cells;
   const getMissed = () => missed;
+  const getFiredShots = () => firedShots;
   const getSunk = () => sunk;
   const getPossible = () => possible;
   const getPlacedShips = () => placedShips;
   const getNumShipsToPlace = () => numShipsToPlace;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace}
+  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots}
 }
 
 export { gameboardFactory };

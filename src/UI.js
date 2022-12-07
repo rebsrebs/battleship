@@ -21,6 +21,10 @@ const createBoards = () => {
   }
 }
 
+// change to 
+// if hzbtn is active, direction = hz, if vtbtn is active, direction = vt
+// function placeShips (gameboard, shipIdx = 0, direction) {
+
 function placeShips (gameboard, shipIdx = 0) {
 
   // base case
@@ -47,6 +51,8 @@ function placeShips (gameboard, shipIdx = 0) {
           var coords = gameboard.getCells()[locatorIdx];
           let shipLength = currentShip.ship.length;
           console.log(`shipLength is ${shipLength}`);
+
+          // if dir is horizontal:
         
             // if it fits
             if (coords[0] + shipLength <= 11) {
@@ -55,6 +61,9 @@ function placeShips (gameboard, shipIdx = 0) {
                 currentCell.classList = `cell cell-ship`
                 currentShip.location.push([(Number(coords[0]) + Number(i)), coords[1]]);    
               }
+
+          // else if dir is vt:
+
               shipIdx += 1;
               console.log(`shipIdx is ${shipIdx}`);
               gbcontainer1.removeEventListener('click', clickHandler);
