@@ -80,15 +80,15 @@ function placeShips (gameboard, shipIdx = 0) {
             // if it fits
             if (coords[xOrY] + shipLength <= 11) {
               for (let i=0; i < shipLength; i++) {
-                // this is the problem:
-                let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
-                // change color of current cell
-                currentCell.classList = `cell cell-ship`
-                // push cell to ship location
+                
 
                 if (xOrY === 0) {
+                  let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
+                currentCell.classList = `cell cell-ship`
                 currentShip.location.push([(Number(coords[0]) + Number(i)), coords[1]]);    
                 } else if (xOrY === 1) {
+                  let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+(i*10)}`);
+                currentCell.classList = `cell cell-ship`
                   currentShip.location.push([coords[0], (Number(coords[0]) + Number(i))]);  
                 }
               }
