@@ -51,10 +51,24 @@ const gameboardFactory = (name) => {
     }
   ]
 
-  // get locations
-  // const receiveLocation = (ship, array) => {
-    // find 
-  // }
+
+  // returns true or undefined
+  const isThereAShipHere = (x ,y) => {
+    for (let i = 0; i < placedShips.length; i++) {
+      let currentLocArray = placedShips[i].location;
+      var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
+      if (match != undefined) {
+        return true;
+      } else if (match === undefined) {
+        continue;
+      }
+    }
+  }
+
+  // not working, returns false no matter what
+  function hasConflict(coords) { 
+    return placedShips.some(ship => ship.location.includes(coords)) 
+  }
 
 
   const receiveAttack = (x, y) => {
@@ -70,29 +84,39 @@ const gameboardFactory = (name) => {
         const firedShot = [x,y];
         firedShots.push(firedShot);
 
+        if (isThereAShipHere(x,y) == true) {
+          currentShip.hit();
+          if (currentShip.isSunk() == true) {
+            sunk += 1;
+          }
+            return 'hit!';
+        } else {
+          missed.push(firedShot);
+          return 'miss!';
+        }
+
         // for every object in the placedShips array
-        for (let i = 0; i < placedShips.length; i++) {
-          let currentLocArray = placedShips[i].location;
-          let currentShip = placedShips[i].ship;
-          var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
+        // for (let i = 0; i < placedShips.length; i++) {
+        //   let currentLocArray = placedShips[i].location;
+        //   let currentShip = placedShips[i].ship;
+        //   var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
 
           // if the shot hit a ship
-          if (match != undefined) {
-            currentShip.hit();
-            if (currentShip.isSunk() == true) {
-              sunk += 1;
-            }
-            return 'hit!';
-          } 
-        }
+        //   if (match != undefined) {
+        //     currentShip.hit();
+        //     if (currentShip.isSunk() == true) {
+        //       sunk += 1;
+        //     }
+        //     return 'hit!';
+        //   } 
+        // }
 
         // if the shot did not hit a ship
-        if (match === undefined) {
-        
-        missed.push(firedShot);
-        return 'miss!';
-        }
-      }
+        // if (match === undefined) {
+        // missed.push(firedShots);
+        // return 'miss!';
+        // }
+      } // end if shot was not previously fired
    
     return;
   }
@@ -114,7 +138,7 @@ const gameboardFactory = (name) => {
   const getPlacedShips = () => placedShips;
   const getNumShipsToPlace = () => numShipsToPlace;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots}
+  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere, hasConflict }
 }
 
 export { gameboardFactory };
