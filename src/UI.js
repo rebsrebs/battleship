@@ -59,7 +59,7 @@ function placeShips (gameboard, shipIdx = 0) {
       var clickHandler = function(e) {
         let target = e.target;
         if (target.classList.contains('cell')) {
-          target.classList = (`cell cell-hover`);
+          // target.classList = (`cell cell-hover`);
           var cellID = target.id;
           var locatorIdx = cellID.slice(4);
           var coords = gameboard.getCells()[locatorIdx];
@@ -69,7 +69,8 @@ function placeShips (gameboard, shipIdx = 0) {
 
           // if dir is horizontal:
           let xOrY = undefined;
-          if (directionDisplay.getAttribute("data-status") === 'horizontal') {
+          let dir = directionDisplay.getAttribute("data-status");
+          if (dir === 'horizontal') {
             xOrY = 0;
             console.log(`xOrY is ${xOrY}`);
           } else {
@@ -80,14 +81,27 @@ function placeShips (gameboard, shipIdx = 0) {
             // if it fits on board
             if (coords[xOrY] + shipLength <= 11) {
 
+              // make array of proposed ship locations
+              let proposedShipLoc = [];
+              for (let i=0; i < shipLength; i++) {
+                if (dir === 'horizontal') {
+                  proposedShipLoc.push(gameboard.getCells()[Number(locatorIdx)+Number(i)]);
+                } else {
+                  proposedShipLoc.push(gameboard.getCells()[Number(locatorIdx)+(Number(i)*10)]);
+                }
+              }
+
+              for (let i=0; i < shipLength; i++) {
+                if (gameboard.isThereAShipHere(proposedShipLoc[i][0], proposedShipLoc[i][1]) == true) {
+                  console.log ('ship in the way');
+                  return;
+                }
+              }
+             
               if (gameboard.isThereAShipHere(coords[0], coords[1]) == true) {
                 console.log('ship already here')
                 return 'ship already here'
               } else {
-
-              
-              
-              
 
               for (let i=0; i < shipLength; i++) {
                 if (xOrY === 0) {
