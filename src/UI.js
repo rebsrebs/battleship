@@ -41,6 +41,7 @@ toggleBtn.addEventListener('click', function() {
 function placeShips (gameboard, shipIdx = 0) {
 
   // base case
+  // if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
     msg.textContent = `Ships have all been placed.`;
     console.log('base case');
@@ -59,6 +60,7 @@ function placeShips (gameboard, shipIdx = 0) {
 
           var cellID = target.id;
           var locatorIdx = cellID.slice(4);
+          console.log(`locator index is ${locatorIdx}`)
           // coords is the array x,y representation of the cell in the grid
           var coords = gameboard.getCells()[locatorIdx];
           let shipLength = currentShip.ship.length;
@@ -75,6 +77,8 @@ function placeShips (gameboard, shipIdx = 0) {
           }
         
             // if it fits on board
+            // why isn't this logging?
+            console.log(`The coords[xOrY] is ${coords[xOrY]}`);
             if (coords[xOrY] + shipLength <= 11) {
 
               // necessary for loop
@@ -121,7 +125,7 @@ function placeShips (gameboard, shipIdx = 0) {
                 } else if (dir === 'vertical') {
                   let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+(i*10)}`);
                   currentCell.classList = `cell cell-ship`
-                  let currentCellCoords = [coords[0],(Number(coords[0]) + Number(i))];
+                  let currentCellCoords = [coords[0],(Number(coords[1]) + Number(i))];
                   console.log('About to push cell location to current ship location');
                   console.log(currentCellCoords);
                   currentShip.location.push(currentCellCoords);  
@@ -140,9 +144,8 @@ function placeShips (gameboard, shipIdx = 0) {
             }
         }
       }  // end clickhandler
-      gbcontainer1.addEventListener('click', clickHandler)
+    gbcontainer1.addEventListener('click', clickHandler)
   }
-  return 'done a cycle';
 }
 
 export { createBoards, placeShips }
