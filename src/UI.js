@@ -25,6 +25,7 @@ const createBoards = () => {
 
 const toggleBtn = document.getElementById('togglebtn');
 const directionDisplay = document.getElementById('direction');
+
 toggleBtn.addEventListener('click', function() {
   if (directionDisplay.getAttribute("data-status") === 'horizontal') {
     directionDisplay.setAttribute("data-status", "vertical");
@@ -36,10 +37,6 @@ toggleBtn.addEventListener('click', function() {
 })
 
 
-
-// change to 
-// if hzbtn is active, direction = hz, if vtbtn is active, direction = vt
-// function placeShips (gameboard, shipIdx = 0, direction) {
 
 function placeShips (gameboard, shipIdx = 0) {
 
@@ -59,13 +56,12 @@ function placeShips (gameboard, shipIdx = 0) {
       var clickHandler = function(e) {
         let target = e.target;
         if (target.classList.contains('cell')) {
-          // target.classList = (`cell cell-hover`);
+
           var cellID = target.id;
           var locatorIdx = cellID.slice(4);
+          // coords is the array x,y representation of the cell in the grid
           var coords = gameboard.getCells()[locatorIdx];
-
           let shipLength = currentShip.ship.length;
-          console.log(`shipLength is ${shipLength}`);
 
           // if dir is horizontal:
           let xOrY = undefined;
@@ -81,16 +77,20 @@ function placeShips (gameboard, shipIdx = 0) {
             // if it fits on board
             if (coords[xOrY] + shipLength <= 11) {
 
+              // necessary for loop
               // make array of proposed ship locations
               let proposedShipLoc = [];
               for (let i=0; i < shipLength; i++) {
+                // if placing horizontally
                 if (dir === 'horizontal') {
                   proposedShipLoc.push(gameboard.getCells()[Number(locatorIdx)+Number(i)]);
+                  // if placing vertically
                 } else {
                   proposedShipLoc.push(gameboard.getCells()[Number(locatorIdx)+(Number(i)*10)]);
                 }
               }
 
+              // this is working itself
               for (let i=0; i < shipLength; i++) {
                 if (gameboard.isThereAShipHere(proposedShipLoc[i][0], proposedShipLoc[i][1]) == true) {
                   console.log ('ship in the way');
@@ -98,20 +98,33 @@ function placeShips (gameboard, shipIdx = 0) {
                 }
               }
              
+              // this never returns true...
               if (gameboard.isThereAShipHere(coords[0], coords[1]) == true) {
                 console.log('ship already here')
                 return 'ship already here'
+
+
               } else {
 
+              // for as many cells as the ship takes up
               for (let i=0; i < shipLength; i++) {
-                if (xOrY === 0) {
+                if (dir === 'horizontal') {
+                  // make variable of cell DOM element
                   let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
-                currentCell.classList = `cell cell-ship`
-                currentShip.location.push([(Number(coords[0]) + Number(i)), coords[1]]);    
-                } else if (xOrY === 1) {
+                  // change color of cell to show a ship
+                  currentCell.classList = `cell cell-ship`
+                  // push coordinates of cell into ship's location array
+                  let currentCellCoords = [(Number(coords[0]) + Number(i)),coords[1]];
+                  console.log('About to push cell location to current ship location');
+                  console.log(currentCellCoords);
+                  currentShip.location.push(currentCellCoords);    
+                } else if (dir === 'vertical') {
                   let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+(i*10)}`);
-                currentCell.classList = `cell cell-ship`
-                  currentShip.location.push([coords[0], (Number(coords[0]) + Number(i))]);  
+                  currentCell.classList = `cell cell-ship`
+                  let currentCellCoords = [coords[0],(Number(coords[0]) + Number(i))];
+                  console.log('About to push cell location to current ship location');
+                  console.log(currentCellCoords);
+                  currentShip.location.push(currentCellCoords);  
                 }
               }
               shipIdx += 1;
