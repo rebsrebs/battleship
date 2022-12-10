@@ -1,10 +1,10 @@
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 
-const gameLoop = () => {
+const gameLoop = (p1name) => {
 
   // set up players
-  let playerOne = humanPlayerFactory('Rebecca');
+  let playerOne = humanPlayerFactory(p1name);
   let playerTwo = AIPlayerFactory('Computer');
   var winner = '';
 

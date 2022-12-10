@@ -13,8 +13,16 @@
     <p>Player One</p>
     <p>Player Two</p>
   </div> -->
-  
-  <div id="axiscontainer">
+
+  <div id="namestartcontainer">
+    <form action="">
+      <label for="p1name">Player 1: Please enter your name.</label>
+      <input type="text" id="p1name" name="p1name" placeholder="Name">
+      <button type="button" id="startbtn">Start Game</button>
+    </form>
+  </div>
+
+  <div id="axiscontainer" class="hidden">
     <button id="togglebtn" aria-controls = "direction">Toggle ship direction:</button>
     <p id="direction" data-status="horizontal">Horizontal</p>
   </div>
@@ -23,7 +31,7 @@
   <div id="gameboardrow">
 
     <div class="gameboardcolumn">
-      <div>
+      <div id="gb1msgcontainer" class="hidden">
         <p id="gb1msg" class = "message">Example message.</p>
       </div>
       <h3>Friendly Waters</h3>
@@ -32,6 +40,9 @@
     </div>
 
     <div class="gameboardcolumn">
+      <div id="gb2msgcontainer" class="hidden">
+        <p id="gb2msg" class = "message">Example message.</p>
+      </div>
       <h3>Enemy Waters</h3>
       <div class="gameboardcontainer" id="gbcontainer2">
       </div>

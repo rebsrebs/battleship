@@ -1,6 +1,11 @@
+import { humanPlayerFactory, AIPlayerFactory } from "./player";
+import { gameboardFactory } from "./gameboard";
+import { gameLoop } from "./gameloop";
+
 const msg = document.getElementById('gb1msg');
 const gbcontainer1 = document.getElementById('gbcontainer1');
 const gbcontainer2 = document.getElementById('gbcontainer2');
+
 
 // CREATE CELLS FOR TWO GAMEBOARDS
 const createBoards = () => {
@@ -23,6 +28,10 @@ const createBoards = () => {
 
 
 
+
+
+
+
 const toggleBtn = document.getElementById('togglebtn');
 const directionDisplay = document.getElementById('direction');
 
@@ -38,7 +47,7 @@ toggleBtn.addEventListener('click', function() {
 
 
 
-function placeShips (gameboard, shipIdx = 0) {
+function placeShips (name, gameboard, shipIdx = 0) {
 
   // base case
   // if all gameboard ships have been placed
@@ -51,7 +60,7 @@ function placeShips (gameboard, shipIdx = 0) {
   } else {
 
       let currentShip = gameboard.getPlacedShips()[shipIdx];
-      msg.textContent = `Please place your ${currentShip.ship.name}.`;
+      msg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
 
       // define clickHandler
       var clickHandler = function(e) {
@@ -77,7 +86,6 @@ function placeShips (gameboard, shipIdx = 0) {
           }
         
             // if it fits on board
-            // why isn't this logging?
             console.log(`The coords[xOrY] is ${coords[xOrY]}`);
             if (coords[xOrY] + shipLength <= 11) {
 
@@ -94,14 +102,14 @@ function placeShips (gameboard, shipIdx = 0) {
                 }
               }
 
-              // this is working itself
+              // check if there's a ship in the way of where you want to place ship
               for (let i=0; i < shipLength; i++) {
                 if (gameboard.isThereAShipHere(proposedShipLoc[i][0], proposedShipLoc[i][1]) == true) {
                   console.log ('ship in the way');
                   return;
                 }
               }
-             
+
               // this never returns true...
               if (gameboard.isThereAShipHere(coords[0], coords[1]) == true) {
                 console.log('ship already here')
@@ -110,6 +118,7 @@ function placeShips (gameboard, shipIdx = 0) {
 
               } else {
 
+              // here should I instead create each ship?
               // for as many cells as the ship takes up
               for (let i=0; i < shipLength; i++) {
                 if (dir === 'horizontal') {
@@ -132,7 +141,7 @@ function placeShips (gameboard, shipIdx = 0) {
                 }
               }
               shipIdx += 1;
-              console.log(`shipIdx is ${shipIdx}`);
+              console.log(`This many ships have been placed: ${shipIdx}`);
               gbcontainer1.removeEventListener('click', clickHandler);
 
               // recurse
@@ -146,6 +155,18 @@ function placeShips (gameboard, shipIdx = 0) {
       }  // end clickhandler
     gbcontainer1.addEventListener('click', clickHandler)
   }
+} // end placeShips function
+
+function startGame() {
+  const startBtn = document.getElementById('startbtn');
+  startBtn.addEventListener('click',function(){
+    const p1name = document.getElementById('p1name').value;
+    let gameboardOne = gameboardFactory('gameboardOne');
+    document.getElementById('namestartcontainer').classList = 'hidden';
+    document.getElementById('gb1msgcontainer').classList = 'shown';
+    document.getElementById('axiscontainer').classList = 'shown';
+    placeShips(p1name, gameboardOne);
+  });
 }
 
-export { createBoards, placeShips }
+export { createBoards, placeShips, startGame }

@@ -1,13 +1,15 @@
 // import { gameLoop } from "./gameloop";
-import { createBoards, placeShips } from "./UI";
+import { createBoards, placeShips, startGame } from "./UI";
 import { gameboardFactory} from "./gameboard";
 import './style.css';
+import { gameLoop } from "./gameloop";
 
-let gameboardOne = gameboardFactory('gameboardOne');
+
 // let gameboardTwo = gameboardFactory('gameboardTwo');
 
 createBoards();
-console.log(gameboardOne.getCells());
-placeShips(gameboardOne);
+startGame();
+
+
 
 // gameLoop();
