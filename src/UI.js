@@ -5,6 +5,64 @@ import { gameLoop } from "./gameloop";
 const msg = document.getElementById('gb1msg');
 const gbcontainer1 = document.getElementById('gbcontainer1');
 const gbcontainer2 = document.getElementById('gbcontainer2');
+const rulesbtn = document.getElementById('rulesbtn');
+const rules = document.getElementById('rules');
+const namestartcontainer = document.getElementById('namestartcontainer');
+
+
+// after you finish placing ships
+// gbcontainer2.addEventListener("click, function(e) {
+  // let target = e.target;
+  // if (target.classList.contains('cell')) {
+  //   var cellID = target.id;
+  //   var locatorIdx = cellID.slice(4);
+  //   var coords = gameboard.getCells()[locatorIdx];
+    // player.attack(coords[0],coords[y], gameboard)
+// }")
+
+
+
+
+
+
+
+
+
+// function createRules() {
+//   const rules2 = document.createElement('div');
+//   rules2.id = 'rules';
+//   rules2.innerHTML = <ol>
+//   <li>Place your battleships in the water.</li>
+//   <li>You and the computer will take turns firing at each other's water.</li>
+//   <li>When a ship has been hit in each cell, it sinks.</li>
+//   <li>The winner is the first to sink all of their enemy's boats.</li>
+// </ol>;
+// }
+
+// UI interactions for attack time
+// fireWhenReady function
+// set yellow glowing box shadow around enemy gameboard
+// await 1 second with ... before reporting back
+// You hit the enemy's (shipName);
+// Miss! 
+
+// enemysTurn
+// The enemy fired into your waters and ... 
+// hit your (shipName)
+// missed! 
+
+
+
+rulesbtn.addEventListener("click", function() {
+  if (rules.classList == 'hidden') {
+    rules.classList = 'shown';
+    rulesbtn.textContent = 'Hide Rules';
+    // remove rules container from DOM?
+  } else {
+    rules.classList = 'hidden';
+    rulesbtn.textContent = 'Show Rules';
+  }
+})
 
 
 // CREATE CELLS FOR TWO GAMEBOARDS
@@ -145,7 +203,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
               gbcontainer1.removeEventListener('click', clickHandler);
 
               // recurse
-              return placeShips(gameboard, shipIdx);
+              return placeShips(name, gameboard, shipIdx);
             } // end if there is no ship there
             }// end if it fits on board
             else {
@@ -166,6 +224,7 @@ function startGame() {
     document.getElementById('gb1msgcontainer').classList = 'shown';
     document.getElementById('axiscontainer').classList = 'shown';
     placeShips(p1name, gameboardOne);
+    namestartcontainer.remove();
   });
 }
 

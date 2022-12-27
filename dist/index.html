@@ -8,41 +8,53 @@
 </head>
 <body>
 
-  <h1>Battleship</h1>
-  <!-- <div id="players">
-    <p>Player One</p>
-    <p>Player Two</p>
-  </div> -->
+  <h1>BATTLESHIP</h1>
 
+  <!-- RULES -->
+  <div id="rulescontainer">
+  <button type="button" aria-controls="rules" id="rulesbtn">Show Rules</button>
+    <div id="rules" class="hidden">
+      <ol>
+        <li>Place your battleships in the water.</li>
+        <li>You and the computer will take turns firing at each other's water.</li>
+        <li>When a ship has been hit in each cell, it sinks.</li>
+        <li>The winner is the first to sink all of their enemy's boats.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- NAME START FORM -->
   <div id="namestartcontainer">
-    <form action="">
-      <label for="p1name">Player 1: Please enter your name.</label>
-      <input type="text" id="p1name" name="p1name" placeholder="Name">
-      <button type="button" id="startbtn">Start Game</button>
+    <form action="" id="namestartform">
+      <label for="p1name" class="nsformitem message">Player 1: Please enter your name:</label>
+      <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem">
+      <button type="button" id="startbtn" class="nsformitem">Submit</button>
     </form>
   </div>
 
+  <div id="topmessagearea">
+    <div id="gb1msgcontainer" class="hidden">
+    <p id="gb1msg" class = "message">Example message.</p>
+  </div>
   <div id="axiscontainer" class="hidden">
     <button id="togglebtn" aria-controls = "direction">Toggle ship direction:</button>
     <p id="direction" data-status="horizontal">Horizontal</p>
   </div>
 
+  </div>
+
+
 
   <div id="gameboardrow">
 
     <div class="gameboardcolumn">
-      <div id="gb1msgcontainer" class="hidden">
-        <p id="gb1msg" class = "message">Example message.</p>
-      </div>
       <h3>Friendly Waters</h3>
       <div class="gameboardcontainer" id="gbcontainer1">
       </div>
     </div>
 
+
     <div class="gameboardcolumn">
-      <div id="gb2msgcontainer" class="hidden">
-        <p id="gb2msg" class = "message">Example message.</p>
-      </div>
       <h3>Enemy Waters</h3>
       <div class="gameboardcontainer" id="gbcontainer2">
       </div>
