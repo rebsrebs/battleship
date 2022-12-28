@@ -111,6 +111,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
   // if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
     msg.textContent = `Ships have all been placed.`;
+    document.getElementById('axiscontainer').classList = 'hidden';
     console.log('base case');
     console.log(`The gameboards placed ships are`);
     console.log(gameboard.getPlacedShips());
