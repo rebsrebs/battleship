@@ -2,15 +2,20 @@ import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 import { gameLoop } from "./gameloop";
 
-const msg = document.getElementById('gb1msg');
+const welcomeform = document.getElementById('welcomeform');
+const placementwrapper = document.getElementById('placementwrapper');
+const startGameWrapper = document.getElementById('startgamebtnwrapper');
+const yourMoveWrapper = document.getElementById('yourmovewrapper');
+const enemyMoveWrapper = document.getElementById('enemymovewrapper');
+const gameOverWrapper = document.getElementById('gameoverwrapper');
 const placeMsg = document.getElementById('placemessage');
 const gbcontainer1 = document.getElementById('gbcontainer1');
 const gbcontainer2 = document.getElementById('gbcontainer2');
 const rulesbtn = document.getElementById('rulesbtn');
 const startbtn = document.getElementById('startbtn');
 const rules = document.getElementById('rules');
-const welcomeform = document.getElementById('welcomeform');
-const placementwrapper = document.getElementById('placementwrapper');
+const yourmovep2 = document.getElementById('yourmovep2');
+
 
 startbtn.addEventListener('click', function() {
   playGame();
@@ -19,7 +24,9 @@ startbtn.addEventListener('click', function() {
 // this is what happens after you click startbtn
 function playGame() {
   console.log('playing game')
-  placementwrapper.classList = 'hidden';
+  startGameWrapper.classList = 'hidden';
+  yourMoveWrapper.classList = 'shown wrappergrid';
+  yourmovep2.textContent = '(Click on enemy waters to fire a shot.)'
 }
 
 // after you finish placing ships
@@ -123,7 +130,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
   // if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
     // hide placement area
-    document.getElementById('placementwrapper').classList = 'hidden';
+    placementwrapper.classList = 'hidden';
     // show start wrapper
     document.getElementById('startgamebtnwrapper').classList='shown wrappergrid';
     console.log('base case');
