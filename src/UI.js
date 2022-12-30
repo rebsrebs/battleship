@@ -7,10 +7,20 @@ const placeMsg = document.getElementById('placemessage');
 const gbcontainer1 = document.getElementById('gbcontainer1');
 const gbcontainer2 = document.getElementById('gbcontainer2');
 const rulesbtn = document.getElementById('rulesbtn');
+const startbtn = document.getElementById('startbtn');
 const rules = document.getElementById('rules');
-// const namestartcontainer = document.getElementById('namestartcontainer');
-const namestartform = document.getElementById('namestartform');
+const welcomeform = document.getElementById('welcomeform');
+const placementwrapper = document.getElementById('placementwrapper');
 
+startbtn.addEventListener('click', function() {
+  playGame();
+});
+
+// this is what happens after you click startbtn
+function playGame() {
+  console.log('playing game')
+  placementwrapper.classList = 'hidden';
+}
 
 // after you finish placing ships
 // gbcontainer2.addEventListener("click, function(e) {
@@ -112,9 +122,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
   // base case
   // if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
-    msg.textContent = `Ships have all been placed.`;
     // hide placement area
-    document.getElementById('axisouterwrapper').classList = 'hidden';
+    document.getElementById('placementwrapper').classList = 'hidden';
     // show start wrapper
     document.getElementById('startgamebtnwrapper').classList='shown wrappergrid';
     console.log('base case');
@@ -225,20 +234,20 @@ function placeShips (name, gameboard, shipIdx = 0) {
 function startGame() {
 
   // the button to submit name
-  const startBtn = document.getElementById('startbtn');
-  startBtn.addEventListener('click',function(){
+  const nameBtn = document.getElementById('namebtn');
+  nameBtn.addEventListener('click',function(){
     // get player 1 name from form
     const p1name = document.getElementById('p1name').value;
     // create gameboard
     let gameboardOne = gameboardFactory('gameboardOne');
     // hide name start form
-    document.getElementById('namestartform').classList = 'hidden';
+    document.getElementById('welcomeform').classList = 'hidden';
     // show placement stuff
-    document.getElementById('axisouterwrapper').classList = 'shown wrappergrid';
+    document.getElementById('placementwrapper').classList = 'shown wrappergrid';
     // let player one place ships
     placeShips(p1name, gameboardOne);
     // remove name start form
-    namestartform.remove();
+    welcomeform.remove();
   });
 }
 

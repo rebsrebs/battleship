@@ -12,33 +12,64 @@
 
   <div id="messagearea">
 
-    <!-- NAME START FORM -->
-  <!-- <div id="namestartcontainer" class = "shown wrappergrid"> -->
-    <form action="" id="namestartform" class = "shown wrappergrid">
+    <!-- WELCOME FORM WRAPPER GRID -->
+    <form class = "shown wrappergrid" action="" id="welcomeform">
+      <!-- ROW 1 -->
       <label for="p1name" class="nsformitem message griditemtop griditem">Player 1: Please enter your name:</label>
+      <!-- ROW 2 -->
       <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem griditemmiddle griditem">
-      <button type="button" id="startbtn" class="nsformitem griditembottom griditem">Submit</button>
+      <!-- ROW 3 -->
+      <button type="button" id="namebtn" class="nsformitem griditembottom griditem">Submit</button>
     </form>
-  <!-- </div> -->
-  <!-- END NAME START FORM CONTAINER-->
+    <!-- END WELCOME FORM WRAPPER -->
 
-    <!-- TOP MESSAGE AREA -->
-    <div id="gb1msgcontainer" class="hidden">
-      <p id="gb1msg" class = "message griditem griditemmiddle">Example message.</p>
+    <!-- PLACEMENT WRAPPER -->
+    <div id="placementwrapper" class="hidden">
+      <!-- ROW 1 -->
+      <p id="placemessage" class = "message griditem griditemtop"></p>
+      <!-- ROW 2 -->
+      <p class = "griditem griditemmiddle" id="direction" data-status="horizontal">Horizontal</p>
+      <!-- ROW 3 -->
+      <button class = "griditem griditembottom" id="togglebtn" aria-controls = "direction">Toggle ship direction:</button>      
     </div>
-    <!-- END TOP MESSAGE AREA -->
+    <!-- END PLACEMENT WRAPPER -->
 
-      <!-- AXIS CONTAINER -->
-  <div id="axisouterwrapper" class="hidden">
-    <p id="placemessage" class = "message griditem griditemtop">Example message.</p>
-      <button class = "griditem griditem middle" id="togglebtn" aria-controls = "direction">Toggle ship direction:</button>
-      <p class = "griditem griditembottom" id="direction" data-status="horizontal">Horizontal</p>
-  </div>
-  <!-- END AXIS CONTAINER -->
+    <!-- START GAME WRAPPER -->
+    <div id="startgamebtnwrapper" class="hidden">
+      <!-- ROW 1 -->
+      <!-- ROW 2 -->
+      <p id="shipsinplace" class="griditem griditemmiddle">All ships are in place.</p>
+      <!-- ROW 3 -->
+      <button id="startbtn" class="griditem griditembottom">Start Game</button>
+    </div>
+    <!-- END START GAME WRAPPER -->
 
-  <div id="startgamebtnwrapper" class="hidden">
-  <button id="startgame" class="griditem griditembottom">Start Game</button>
-  </div>
+    <!-- YOUR MOVE WRAPPER -->
+    <div id="gb1msgcontainer" class="hidden">
+      <!-- ROW 1 -->
+      <p id="gb1msg" class = "message griditem griditemmiddle">Example message.</p>
+      <!-- ROW 2 -->
+      <!-- ROW 3 -->
+    </div>
+    <!-- END YOUR MOVE WRAPPER -->
+
+    <!-- ENEMY MOVE WRAPPER -->
+    <div id="um" class="hidden">
+      <!-- ROW 1 -->
+      <!-- ROW 2 -->
+      <p id="um" class = "message griditem griditemmiddle"></p>
+      <!-- ROW 3 -->
+    </div>
+    <!-- END ENEMY MOVE WRAPPER -->
+
+    <!-- GAME OVER WRAPPER -->
+    <div id="uh" class="hidden">
+      <!-- ROW 1 -->
+      <p id="uh" class = "message griditem griditemmiddle"></p>
+      <!-- ROW 2 -->
+      <!-- ROW 3 -->
+    </div>
+    <!-- END GAME OVER WRAPPER -->
 
   </div>
   <!-- END MESSAGE AREA -->
