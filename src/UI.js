@@ -3,11 +3,13 @@ import { gameboardFactory } from "./gameboard";
 import { gameLoop } from "./gameloop";
 
 const msg = document.getElementById('gb1msg');
+const placeMsg = document.getElementById('placemessage');
 const gbcontainer1 = document.getElementById('gbcontainer1');
 const gbcontainer2 = document.getElementById('gbcontainer2');
 const rulesbtn = document.getElementById('rulesbtn');
 const rules = document.getElementById('rules');
-const namestartcontainer = document.getElementById('namestartcontainer');
+// const namestartcontainer = document.getElementById('namestartcontainer');
+const namestartform = document.getElementById('namestartform');
 
 
 // after you finish placing ships
@@ -104,14 +106,17 @@ toggleBtn.addEventListener('click', function() {
 })
 
 
-
+// place ships recursive function
 function placeShips (name, gameboard, shipIdx = 0) {
 
   // base case
   // if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
     msg.textContent = `Ships have all been placed.`;
-    document.getElementById('axiscontainer').classList = 'hidden';
+    // hide placement area
+    document.getElementById('axisouterwrapper').classList = 'hidden';
+    // show start wrapper
+    document.getElementById('startgamebtnwrapper').classList='shown wrappergrid';
     console.log('base case');
     console.log(`The gameboards placed ships are`);
     console.log(gameboard.getPlacedShips());
@@ -119,7 +124,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
   } else {
 
       let currentShip = gameboard.getPlacedShips()[shipIdx];
-      msg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
+      // place message content
+      placeMsg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
 
       // define clickHandler
       var clickHandler = function(e) {
@@ -217,15 +223,22 @@ function placeShips (name, gameboard, shipIdx = 0) {
 } // end placeShips function
 
 function startGame() {
+
+  // the button to submit name
   const startBtn = document.getElementById('startbtn');
   startBtn.addEventListener('click',function(){
+    // get player 1 name from form
     const p1name = document.getElementById('p1name').value;
+    // create gameboard
     let gameboardOne = gameboardFactory('gameboardOne');
-    document.getElementById('namestartcontainer').classList = 'hidden';
-    document.getElementById('gb1msgcontainer').classList = 'shown';
-    document.getElementById('axiscontainer').classList = 'shown';
+    // hide name start form
+    document.getElementById('namestartform').classList = 'hidden';
+    // show placement stuff
+    document.getElementById('axisouterwrapper').classList = 'shown wrappergrid';
+    // let player one place ships
     placeShips(p1name, gameboardOne);
-    namestartcontainer.remove();
+    // remove name start form
+    namestartform.remove();
   });
 }
 

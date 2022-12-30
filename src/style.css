@@ -52,6 +52,7 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color:aquamarine;
 }
 
 #rules {
@@ -67,7 +68,8 @@ li {
 #gb1msgcontainer */
 
 .hidden {
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
 }
 
 .shown {
@@ -101,6 +103,7 @@ input.nsformitem {
 #gameboardrow {
   display: flex;
   flex-direction: row;
+  background-color:rgb(244, 236, 237);
 }
 
 .gameboardcolumn {
@@ -140,9 +143,14 @@ input.nsformitem {
   font-size: 20px;
 }
 
-/* #topmessagearea {
-  height: 20px;
-} */
+#messagearea {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color:rgb(249, 224, 228);
+  width: 600px;
+  height: 150px;
+  margin-bottom: 20px;
+}
 
 
 
@@ -154,4 +162,46 @@ input.nsformitem {
 
 .message {
   font-size: 20px;
+}
+
+/* #namestartcontainer {
+  background-color:violet;
+} */
+
+/* #axisouterwrapper {
+  background-color:peachpuff;
+} */
+
+.griditem {
+  display: flex;
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.wrappergrid {
+  width: 600px;
+  height: 150px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 50px 50px;
+}
+
+.griditemtop {
+  grid-row: 1 / 2;
+}
+
+.griditemmiddle {
+  grid-row: 2 / 3;
+}
+
+.griditembottom {
+  grid-row: 3 / 4;
+}
+
+.griditembottomtwo {
+  grid-row: 2 / 4;
 }

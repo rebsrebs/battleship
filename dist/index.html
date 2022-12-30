@@ -10,52 +10,38 @@
 
   <h1>BATTLESHIP</h1>
 
-  <!-- RULES -->
-  <div id="rulescontainer">
+  <div id="messagearea">
 
-  <button type="button" aria-controls="rules" id="rulesbtn">Show Rules</button>
-
-    <div id="rules" class="hidden">
-      <ol>
-        <li>Place your battleships in the water.</li>
-        <li>You and the computer will take turns firing at each other's water.</li>
-        <li>When a ship has been hit in each cell, it sinks.</li>
-        <li>The winner is the first to sink all of their enemy's boats.</li>
-      </ol>
-    </div>
-
-  </div>
-  <!-- END RULES CONTAINER--> 
-
-  <!-- NAME START FORM -->
-  <div id="namestartcontainer">
-    <form action="" id="namestartform">
-      <label for="p1name" class="nsformitem message">Player 1: Please enter your name:</label>
-      <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem">
-      <button type="button" id="startbtn" class="nsformitem">Submit</button>
+    <!-- NAME START FORM -->
+  <!-- <div id="namestartcontainer" class = "shown wrappergrid"> -->
+    <form action="" id="namestartform" class = "shown wrappergrid">
+      <label for="p1name" class="nsformitem message griditemtop griditem">Player 1: Please enter your name:</label>
+      <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem griditemmiddle griditem">
+      <button type="button" id="startbtn" class="nsformitem griditembottom griditem">Submit</button>
     </form>
-  </div>
+  <!-- </div> -->
   <!-- END NAME START FORM CONTAINER-->
 
-  <!-- TOP MESSAGE AREA -->
-  <div id="topmessagearea">
+    <!-- TOP MESSAGE AREA -->
     <div id="gb1msgcontainer" class="hidden">
-    <p id="gb1msg" class = "message">Example message.</p>
-  </div>
-</div>
-  <!-- END TOP MESSAGE AREA -->
-
-  <!-- AXIS CONTAINER -->
-  <div id="axisouterwrapper">
-    <div id="axiscontainer" class="hidden">
-      <button id="togglebtn" aria-controls = "direction">Toggle ship direction:</button>
-      <p id="direction" data-status="horizontal">Horizontal</p>
+      <p id="gb1msg" class = "message griditem griditemmiddle">Example message.</p>
     </div>
+    <!-- END TOP MESSAGE AREA -->
+
+      <!-- AXIS CONTAINER -->
+  <div id="axisouterwrapper" class="hidden">
+    <p id="placemessage" class = "message griditem griditemtop">Example message.</p>
+      <button class = "griditem griditem middle" id="togglebtn" aria-controls = "direction">Toggle ship direction:</button>
+      <p class = "griditem griditembottom" id="direction" data-status="horizontal">Horizontal</p>
   </div>
   <!-- END AXIS CONTAINER -->
 
+  <div id="startgamebtnwrapper" class="hidden">
+  <button id="startgame" class="griditem griditembottom">Start Game</button>
+  </div>
 
-
+  </div>
+  <!-- END MESSAGE AREA -->
 
 
   <div id="gameboardrow">
@@ -72,9 +58,25 @@
       <div class="gameboardcontainer" id="gbcontainer2">
       </div>
     </div>
-
-
   </div>
+
+
+  <!-- RULES -->
+  <div id="rulescontainer">
+
+    <button type="button" aria-controls="rules" id="rulesbtn">Show Rules</button>
+  
+      <div id="rules" class="hidden">
+        <ol>
+          <li>Place your battleships in the water.</li>
+          <li>You and the computer will take turns firing at each other's water.</li>
+          <li>When a ship has been hit in each cell, it sinks.</li>
+          <li>The winner is the first to sink all of their enemy's boats.</li>
+        </ol>
+      </div>
+  
+    </div>
+    <!-- END RULES CONTAINER--> 
 
   
   <script src="bundle.js"></script>
