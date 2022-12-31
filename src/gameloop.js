@@ -1,6 +1,22 @@
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 
+const yourMoveWrapper = document.getElementById('yourmovewrapper');
+const enemyMoveWrapper = document.getElementById('enemymovewrapper');
+const gameOverWrapper = document.getElementById('gameoverwrapper');
+const gbcontainer1 = document.getElementById('gbcontainer1');
+const gbcontainer2 = document.getElementById('gbcontainer2');
+const yourmovep1 = document.getElementById('yourmovep1');
+const yourmovep2 = document.getElementById('yourmovep2');
+const yourmovep3 = document.getElementById('yourmovep3');
+const enemymovep1 = document.getElementById('enemymovep1');
+const enemymovep2 = document.getElementById('enemymovep2');
+const enemymovep3 = document.getElementById('enemymovep3');
+const gameoverp1 = document.getElementById('gameoverp1');
+const gameoverp2 = document.getElementById('gameoverp2');
+const gameoverp3 = document.getElementById('gameoverp3');
+
+
 const gameLoop = (p1name) => {
 
   // set up players

@@ -1,5 +1,5 @@
 // import { gameLoop } from "./gameloop";
-import { createBoards, placeShips, startGame } from "./UI";
+import { createBoards, placeShips, welcome } from "./UI";
 import { gameboardFactory} from "./gameboard";
 import './style.css';
 import { gameLoop } from "./gameloop";
@@ -8,7 +8,7 @@ import { gameLoop } from "./gameloop";
 // let gameboardTwo = gameboardFactory('gameboardTwo');
 
 createBoards();
-startGame();
+welcome();
 
 
 
