@@ -2,12 +2,12 @@ import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 import { gameLoop } from "./gameloop";
 
+
 const id = (ID) => document.getElementById(ID);
 const welcomeform = id('welcomeform');
 const placementwrapper = id('placementwrapper');
 const startGameWrapper = id('startgamebtnwrapper');
-const yourMoveWrapper = id('yourmovewrapper');
-const enemyMoveWrapper = id('enemymovewrapper');
+const moveWrapper = id('movewrapper');
 const gameOverWrapper = id('gameoverwrapper');
 const placeMsg = id('placemessage');
 const gbcontainer1 = id('gbcontainer1');
@@ -15,17 +15,88 @@ const gbcontainer2 = id('gbcontainer2');
 const rulesbtn = id('rulesbtn');
 const startbtn = id('startbtn');
 const rules = id('rules');
-const yourmovep2 = id('yourmovep2');
+const movep2 = id('movep2');
 const toggleBtn = id('togglebtn');
 const directionDisplay = id('direction');
+const startgamebtnwrapper = id('startgamebtnwrapper');
+
+function updateText(ID, string) {
+  const domElement = document.getElementById(ID);
+  domElement.textContent = string;
+}
+
+function showWrapper(ID) {
+  const domElement = document.getElementById(ID);
+  domElement.classList = 'shown wrappergrid';
+}
+
+function hide(ID) {
+  const domElement = document.getElementById(ID);
+  domElement.classList = 'hidden';
+}
+
+// UI
+// RULES EVENT LISTENER
+rulesbtn.addEventListener("click", function() {
+  if (rules.classList == 'hidden') {
+    rules.classList = 'shown';
+    rulesbtn.textContent = 'Hide Rules';
+    // remove rules container from DOM?
+  } else {
+    rules.classList = 'hidden';
+    rulesbtn.textContent = 'Show Rules';
+  }
+}) // END RULES EVENT LISTENER
+
+// STAYS IN UI - CALLED BY INDEX.JS
+// CREATE CELLS FOR TWO GAMEBOARDS
+// DOM BOARDS ONLY
+const createBoards = () => {
+  for (let i = 0; i < 100; i++) {
+    var cell = document.createElement('div');
+    cell.className = (`cell cell-plain`);
+    cell.id = (`gb1-${i}`);
+    gbcontainer1.appendChild(cell);
+    // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
+  }
+
+  for (let i = 0; i < 100; i++) {
+    var cell = document.createElement('div');
+    cell.className = (`cell cell-plain`)
+    cell.id = (`gb2-${i}`);
+    gbcontainer2.appendChild(cell);
+    // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
+  }
+} // END CREATE BOARDS
+
+// WELCOME FUNCTION
+// When you submit your name, hide the welcome form, show the placement wrapper,
+// create the gameboards
+function welcome() {
+  const nameBtn = id('namebtn');
+  nameBtn.addEventListener('click', function(){
+    const p1name = id('p1name').value;
+    welcomeform.classList = 'hidden';
+    welcomeform.remove();
+    placementwrapper.classList = 'shown wrappergrid';
+    let gameboardOne = gameboardFactory('gameboardOne');
+    // placeAIShips('Computer', gameboardTwo);
+    placeShips(p1name, gameboardOne); 
+
+  });
+}
+
+// this should change to call the gameloop right?
+// startbtn.addEventListener('click', function() {
+  // playGame();
+// });
+// end event listener
 
 
 
 
 
-startbtn.addEventListener('click', function() {
-  playGame();
-});
+
 
 // PLAY GAME FUNCTION
 // runs after you place ships and press start
@@ -33,8 +104,8 @@ startbtn.addEventListener('click', function() {
 function playGame() {
   console.log('playing game')
   startGameWrapper.classList = 'hidden';
-  yourMoveWrapper.classList = 'shown wrappergrid';
-  yourmovep2.textContent = '(Click on enemy waters to fire a shot.)'
+  moveWrapper.classList = 'shown wrappergrid';
+  movep2.textContent = '(Click on enemy waters to fire a shot.)'
   // what happens when you click on enemy board
   // gbcontainer2.addEventListener("click", function(e) {
   // let target = e.target;
@@ -50,7 +121,15 @@ function playGame() {
 
 
 
-
+toggleBtn.addEventListener('click', function() {
+  if (directionDisplay.getAttribute("data-status") === 'horizontal') {
+    directionDisplay.setAttribute("data-status", "vertical");
+    directionDisplay.textContent="vertical";
+  } else {
+    directionDisplay.setAttribute("data-status", "horizontal");
+    directionDisplay.textContent="horizontal";
+  }
+})
 
 
 
@@ -83,36 +162,6 @@ function playGame() {
 
 
 
-rulesbtn.addEventListener("click", function() {
-  if (rules.classList == 'hidden') {
-    rules.classList = 'shown';
-    rulesbtn.textContent = 'Hide Rules';
-    // remove rules container from DOM?
-  } else {
-    rules.classList = 'hidden';
-    rulesbtn.textContent = 'Show Rules';
-  }
-})
-
-
-// CREATE CELLS FOR TWO GAMEBOARDS
-const createBoards = () => {
-  for (let i = 0; i < 100; i++) {
-    var cell = document.createElement('div');
-    cell.className = (`cell cell-plain`);
-    cell.id = (`gb1-${i}`);
-    gbcontainer1.appendChild(cell);
-    // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
-  }
-
-  for (let i = 0; i < 100; i++) {
-    var cell = document.createElement('div');
-    cell.className = (`cell cell-plain`)
-    cell.id = (`gb2-${i}`);
-    gbcontainer2.appendChild(cell);
-    // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
-  }
-}
 
 
 
@@ -121,29 +170,25 @@ const createBoards = () => {
 
 
 
-toggleBtn.addEventListener('click', function() {
-  if (directionDisplay.getAttribute("data-status") === 'horizontal') {
-    directionDisplay.setAttribute("data-status", "vertical");
-    directionDisplay.textContent="vertical";
-  } else {
-    directionDisplay.setAttribute("data-status", "horizontal");
-    directionDisplay.textContent="horizontal";
-  }
-})
 
 // PLACE SHIPS RECURSIVE FUNCTION
 function placeShips (name, gameboard, shipIdx = 0) {
+
   // base case
   // if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
     // hide placement area
     placementwrapper.classList = 'hidden';
     // show start wrapper
-    document.getElementById('startgamebtnwrapper').classList='shown wrappergrid';
+    // startgamebtnwrapper.classList='shown wrappergrid';
     console.log('base case');
     console.log(`The gameboards placed ships are`);
     console.log(gameboard.getPlacedShips());
+    gameLoop(name, gameboard)
+    
     return;
+
+
   } else {
       let currentShip = gameboard.getPlacedShips()[shipIdx];
       // place message content
@@ -190,18 +235,12 @@ function placeShips (name, gameboard, shipIdx = 0) {
                   return;
                 }
               }
-              // this never returns true...
-              if (gameboard.isThereAShipHere(coords[0], coords[1]) == true) {
-                console.log('ship already here')
-                return 'ship already here'
-              } else {
 
-              // here should I instead create each ship?
               // for as many cells as the ship takes up
               for (let i=0; i < shipLength; i++) {
                 if (dir === 'horizontal') {
                   // make variable of cell DOM element
-                  let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+i}`);
+                  let currentCell = id(`gb1-${Number(locatorIdx)+i}`);
                   // change color of cell to show a ship
                   currentCell.classList = `cell cell-ship`
                   // push coordinates of cell into ship's location array
@@ -224,7 +263,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
               // recurse
               return placeShips(name, gameboard, shipIdx);
-            } // end if there is no ship there
+            // } // end if there is no ship there
             }// end if it fits on board
             else {
               return;
@@ -235,24 +274,6 @@ function placeShips (name, gameboard, shipIdx = 0) {
   }
 } // END PLACE SHIPS FUNCTION
 
-// WELCOME FUNCTION
-function welcome() {
-  // the button to submit name
-  const nameBtn = document.getElementById('namebtn');
-  nameBtn.addEventListener('click',function(){
-    // get player 1 name from form
-    const p1name = document.getElementById('p1name').value;
-    // create gameboard
-    let gameboardOne = gameboardFactory('gameboardOne');
-    // hide name start form
-    welcomeform.classList = 'hidden';
-    // show placement stuff
-    placementwrapper.classList = 'shown wrappergrid';
-    // let player one place ships
-    placeShips(p1name, gameboardOne);
-    // remove name start form
-    welcomeform.remove();
-  });
-}
 
-export { createBoards, placeShips, welcome }
+
+export { createBoards, placeShips, welcome, updateText, showWrapper, hide }

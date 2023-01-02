@@ -90,35 +90,13 @@ const gameboardFactory = (name) => {
             sunk += 1;
           }
             return 'hit!';
+            // updateUI
         } else {
           missed.push(firedShot);
+          // updateUI
           return 'miss!';
         }
-
-        // for every object in the placedShips array
-        // for (let i = 0; i < placedShips.length; i++) {
-        //   let currentLocArray = placedShips[i].location;
-        //   let currentShip = placedShips[i].ship;
-        //   var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
-
-          // if the shot hit a ship
-        //   if (match != undefined) {
-        //     currentShip.hit();
-        //     if (currentShip.isSunk() == true) {
-        //       sunk += 1;
-        //     }
-        //     return 'hit!';
-        //   } 
-        // }
-
-        // if the shot did not hit a ship
-        // if (match === undefined) {
-        // missed.push(firedShots);
-        // return 'miss!';
-        // }
       } // end if shot was not previously fired
-   
-    return;
   }
   
   const areAllSunk = () => {
