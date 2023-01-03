@@ -93,6 +93,7 @@ const gameboardFactory = (name) => {
           console.log('there is a ship here.')
           let currentShip = isThereAShipHere(x,y);
           currentShip.hit();
+          // change cell classList to 'cell cell-ship'
           if (currentShip.isSunk() == true) {
             sunk += 1;
           }
@@ -101,6 +102,7 @@ const gameboardFactory = (name) => {
         } else {
           console.log('no ship here.')
           missed.push(firedShot);
+          // change cell classList to 'cell cell-miss'
           // updateUI
           return 'miss!';
         }

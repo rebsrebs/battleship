@@ -3,6 +3,7 @@
   --cell-plain-bg-color: rgb(163, 230, 245);
   --cell-hover-bg-color: orange;
   --cell-ship-bg-color: red;
+  --cell-miss-bg-color: gray;
   --gb-bg-color:lightgray;
   --gbOne-bg-color: green;
   --gbTwo-bg-color:blue;
@@ -138,6 +139,10 @@ input.nsformitem {
 
 .cell-ship {
   background-color: var(--cell-ship-bg-color);
+}
+
+.cell-miss {
+  background-color: var(--cell-miss-bg-color);
 }
 
 .message {

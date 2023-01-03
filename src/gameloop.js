@@ -1,6 +1,6 @@
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
-import { welcome, showWrapper, hide, updateText } from "./UI";
+import { showWrapper, hide, updateText, cellMiss, cellShip } from "./UI";
 
 const id = (ID) => document.getElementById(ID);
 const moveWrapper = id('movewrapper');
@@ -13,9 +13,6 @@ const movep3 = id('movep3');
 const gameoverp1 = id('gameoverp1');
 const gameoverp2 = id('gameoverp2');
 const gameoverp3 = id('gameoverp3');
-
-
-
 
 const gameLoop = (p1name, gameboardOne) => {
 
@@ -83,12 +80,18 @@ const gameLoop = (p1name, gameboardOne) => {
           console.log(`target is ${target}`)
           if (target.classList.contains('cell')) {
             var cellID = target.id;
+            console.log(`cellID is ${cellID}`);
             var locatorIdx = cellID.slice(4);
             console.log(`locator index is ${locatorIdx}`)
             var coords = gameboardTwo.getCells()[locatorIdx];
             // attack
-            currentPlayer.attack(coords[0],coords[1],enemyGameboard);
-            // switch turns
+            let result = currentPlayer.attack(coords[0],coords[1],enemyGameboard);
+            console.log(`result is ${result}`);
+            if (result === 'hit!') {
+              document.getElementById(cellID).classList = 'cell cell-ship';
+            } else if (result === 'miss!') {
+              document.getElementById(cellID).classList = 'cell cell-miss';
+            }
             switchTurns(currentPlayer, enemyGameboard);
             playGame(currentPlayer, enemyGameboard);
           }

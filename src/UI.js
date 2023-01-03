@@ -2,7 +2,6 @@ import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 import { gameLoop } from "./gameloop";
 
-
 const id = (ID) => document.getElementById(ID);
 const welcomeform = id('welcomeform');
 const placementwrapper = id('placementwrapper');
@@ -85,39 +84,6 @@ function welcome() {
 
   });
 }
-
-// this should change to call the gameloop right?
-// startbtn.addEventListener('click', function() {
-  // playGame();
-// });
-// end event listener
-
-
-
-
-
-
-
-// PLAY GAME FUNCTION
-// runs after you place ships and press start
-// actually this doesn't go here!
-function playGame() {
-  console.log('playing game')
-  startGameWrapper.classList = 'hidden';
-  moveWrapper.classList = 'shown wrappergrid';
-  movep2.textContent = '(Click on enemy waters to fire a shot.)'
-  // what happens when you click on enemy board
-  // gbcontainer2.addEventListener("click", function(e) {
-  // let target = e.target;
-  //   if (target.classList.contains('cell')) {
-  //     var cellID = target.id;
-  //     var locatorIdx = cellID.slice(4);
-  //     var coords = gameboard.getCells()[locatorIdx];
-  //     player.attack(coords[0],coords[y], gameboard)
-  //   }
-  // })
-}
-// END PLAY GAME FUNCTION
 
 
 
@@ -269,11 +235,17 @@ function placeShips (name, gameboard, shipIdx = 0) {
               return;
             }
         }
-      }  // end clickhandler
+      } // end clickhandler
     gbcontainer1.addEventListener('click', clickHandler)
   }
 } // END PLACE SHIPS FUNCTION
 
+function cellMiss(targ) {
+  targ.classList = 'cell cell-miss'
+}
 
+function cellShip(targ) {
+  targ.classList = 'cell cell-ship'
+}
 
-export { createBoards, placeShips, welcome, updateText, showWrapper, hide }
+export { createBoards, placeShips, welcome, updateText, showWrapper, hide, cellMiss, cellShip }
