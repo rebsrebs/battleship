@@ -54,15 +54,17 @@ const gameboardFactory = (name) => {
 
   // returns true or undefined
   const isThereAShipHere = (x ,y) => {
+    let result = '';
     for (let i = 0; i < placedShips.length; i++) {
       let currentLocArray = placedShips[i].location;
       var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
       if (match != undefined) {
-        return true;
+        return result = placedShips[i].ship;
       } else if (match === undefined) {
         continue;
       }
-    }
+    } // end for loop
+    return result;
   }
 
   // not working, returns false no matter what
@@ -72,6 +74,7 @@ const gameboardFactory = (name) => {
 
 
   const receiveAttack = (x, y) => {
+    console.log(`${name} is receiving attack at ${x}, ${y}`);
 
       // Check if this shot was already fired
       var alreadyFired = firedShots.find(arr=> arr[0] ===x && arr[1] ===y);
@@ -81,10 +84,14 @@ const gameboardFactory = (name) => {
       // if shot has not yet been fired in this game
       } else {
 
+        // record shot in firedShots array
         const firedShot = [x,y];
         firedShots.push(firedShot);
 
-        if (isThereAShipHere(x,y) == true) {
+
+        if (isThereAShipHere(x,y) != '') {
+          console.log('there is a ship here.')
+          let currentShip = isThereAShipHere(x,y);
           currentShip.hit();
           if (currentShip.isSunk() == true) {
             sunk += 1;
@@ -92,6 +99,7 @@ const gameboardFactory = (name) => {
             return 'hit!';
             // updateUI
         } else {
+          console.log('no ship here.')
           missed.push(firedShot);
           // updateUI
           return 'miss!';
@@ -101,6 +109,7 @@ const gameboardFactory = (name) => {
   
   const areAllSunk = () => {
     if (sunk >= 5) {
+      console.log(`All ${name} ships are sunk.`)
       return true;
     } else {
       // console.log(`There are ${possible.length} moves left on ${name} gameboard`)

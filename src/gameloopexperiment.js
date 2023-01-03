@@ -1,18 +1,23 @@
-import { humanPlayerFactory, AIPlayerFactory } from "./player";
-import { gameboardFactory } from "./gameboard";
-import { welcome, showWrapper, hide, updateText } from "./UI";
 
-const id = (ID) => document.getElementById(ID);
-const moveWrapper = id('movewrapper');
-const gameOverWrapper = id('gameoverwrapper');
-const gbcontainer1 = id('gbcontainer1');
-const gbcontainer2 = id('gbcontainer2');
-const movep1 = id('movep1');
-const movep2 = id('movep2');
-const movep3 = id('movep3');
-const gameoverp1 = id('gameoverp1');
-const gameoverp2 = id('gameoverp2');
-const gameoverp3 = id('gameoverp3');
+
+// PLACE SHIPS RECURSIVE
+// base case 
+// - all game boards were placed
+// - hide placement wrapper
+// - run game loop
+// not base case
+// - set click handler
+// - when clicked, that recurses the function!
+
+// GAME LOOP CURRENT - playGame function
+// base case
+// - if either gameboard's ships are all sunk
+// - hide move wrapper
+// - show game over wrapper with message and play again button
+// not base case
+
+
+
 
 
 const gameLoop = (p1name, gameboardOne) => {
@@ -87,5 +92,3 @@ const gameLoop = (p1name, gameboardOne) => {
   playGame(); // why was this here?
   return winner;
 }
-
-export { gameLoop }
