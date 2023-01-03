@@ -15,9 +15,22 @@ const gameoverp2 = id('gameoverp2');
 const gameoverp3 = id('gameoverp3');
 
 
+
+
 const gameLoop = (p1name, gameboardOne) => {
 
   console.log('gameloop is running.')
+
+  function switchTurns(currentPlayer, enemyGameboard){
+    // switch players
+    if (currentPlayer === playerOne) {
+      currentPlayer = playerTwo;
+      enemyGameboard = gameboardOne;
+    } else {
+      currentPlayer = playerOne;
+      enemyGameboard = gameboardTwo;
+    }
+  }
 
   // set up players
   let playerOne = humanPlayerFactory(p1name);
@@ -55,36 +68,45 @@ const gameLoop = (p1name, gameboardOne) => {
       winner = 'Player 1 wins!';
       return;
     } else {
+
       // NOT BASE CASE
       // show enemy gameboard
       console.log('not the base case.')
 
       // attack
       if (currentPlayer.category === 'human') {
-        movep1.textContent = 'Please click on enemy waters.'
-        currentPlayer.attack(1,2,enemyGameboard);
-      }
-  
-      if (currentPlayer.category === 'robot') {
 
+        var attackHandler = function(e) {
+          console.log('attackHandler is running');
+
+          let target = e.target;
+          console.log(`target is ${target}`)
+          if (target.classList.contains('cell')) {
+            var cellID = target.id;
+            var locatorIdx = cellID.slice(4);
+            console.log(`locator index is ${locatorIdx}`)
+            var coords = gameboardTwo.getCells()[locatorIdx];
+            // attack
+            currentPlayer.attack(coords[0],coords[1],enemyGameboard);
+            // switch turns
+            switchTurns(currentPlayer, enemyGameboard);
+            playGame(currentPlayer, enemyGameboard);
+          }
+        } 
+
+        movep1.textContent = 'Please click on enemy waters.'
+        gbcontainer2.addEventListener('click', attackHandler);
+        
+      } else if (currentPlayer.category === 'robot') {
         movep1.textContent = 'The enemy is firing.'
         currentPlayer.attack(enemyGameboard);
+        switchTurns();
+        playGame(currentPlayer, enemyGameboard);
       }
-  
-      // switch players
-      if (currentPlayer === playerOne) {
-        currentPlayer = playerTwo;
-        enemyGameboard = gameboardOne;
-      } else {
-        currentPlayer = playerOne;
-        enemyGameboard = gameboardTwo;
-      }
-      //recurse
-      playGame(currentPlayer, enemyGameboard);
     }
   }
   // run game playing loop
-  playGame(); // why was this here?
+  playGame(); 
   return winner;
 }
 
