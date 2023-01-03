@@ -51,6 +51,11 @@ const gameLoop = (p1name, gameboardOne) => {
   // define gameplaying function
   const playGame = (currentPlayer = playerOne, enemyGameboard = gameboardTwo) => {
     console.log('playGame is running.')
+    if (currentPlayer === playerOne) {
+      console.log('your turn');
+    } else if (currentPlayer === playerTwo) {
+      console.log('Computers turn.')
+    }
 
     // BASE CASES
     if (gameboardOne.areAllSunk() == true) {
@@ -93,7 +98,8 @@ const gameLoop = (p1name, gameboardOne) => {
               document.getElementById(cellID).classList = 'cell cell-miss';
             }
             switchTurns(currentPlayer, enemyGameboard);
-            playGame(currentPlayer, enemyGameboard);
+            gbcontainer2.removeEventListener('click', attackHandler);
+            return playGame(currentPlayer, enemyGameboard);
           }
         } 
 
@@ -104,11 +110,12 @@ const gameLoop = (p1name, gameboardOne) => {
         movep1.textContent = 'The enemy is firing.'
         currentPlayer.attack(enemyGameboard);
         switchTurns();
-        playGame(currentPlayer, enemyGameboard);
+        return playGame(currentPlayer, enemyGameboard);
       }
     }
   }
   // run game playing loop
+  console.log('about to run the outer playGame()');
   playGame(); 
   return winner;
 }
