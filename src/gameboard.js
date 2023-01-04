@@ -1,3 +1,4 @@
+import { indexOf } from "lodash";
 import { shipFactory } from "./ship";
 
 const gameboardFactory = (name) => {
@@ -75,12 +76,14 @@ const gameboardFactory = (name) => {
 
   const receiveAttack = (x, y) => {
 
-    console.log('testing hasConflict inside receiveAttack');
+    // console.log('testing hasConflict inside receiveAttack');
     // let testResult = hasConflict(x,y);
     // console.log(`test result is ${testResult}`);
 
-    // get target id?
-    const targetCell = document.getElementById();
+    let targetCellNum = cells.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
+    console.log(`targetCellNum is ${targetCellNum}`);
+    let targetCellID = `${name}-${targetCellNum}`;
+    let targetCell = document.getElementById(targetCellID);
 
     console.log(`${name} is receiving attack at ${x}, ${y}`);
       // Check if this shot was already fired
@@ -96,18 +99,16 @@ const gameboardFactory = (name) => {
           console.log('there is a ship here.')
           let currentShip = isThereAShipHere(x,y);
           currentShip.hit();
-          // change cell classList to 'cell cell-ship'
           // using firedShot which is [x,y]
           if (currentShip.isSunk() == true) {
             sunk += 1;
           }
+            targetCell.classList = 'cell cell-ship'
             return 'hit!';
-            // updateUI
         } else {
           console.log('no ship here.')
           missed.push(firedShot);
-          // change cell classList to 'cell cell-miss'
-          // updateUI
+          targetCell.classList = 'cell cell-miss'
           return 'miss!';
         }
       } // end if shot was not previously fired

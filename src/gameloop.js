@@ -92,11 +92,13 @@ const gameLoop = (p1name, gb1) => {
             let result = currentPlayer.attack(coords[0],coords[1],enemyGameboard);
             console.log(`result is ${result}`);
             // update UI with hit or miss - but actually maybe that should happen in the receiveAttack method in the gamebaord
-            if (result === 'hit!') {
-              document.getElementById(cellID).classList = 'cell cell-ship';
-            } else if (result === 'miss!') {
-              document.getElementById(cellID).classList = 'cell cell-miss';
-            }
+
+            // if (result === 'hit!') {
+            //   document.getElementById(cellID).classList = 'cell cell-ship';
+            // } else if (result === 'miss!') {
+            //   document.getElementById(cellID).classList = 'cell cell-miss';
+            // }
+
             switchTurns(currentPlayer, enemyGameboard);
             gbcontainer2.removeEventListener('click', attackHandler);
             return playGame(currentPlayer, enemyGameboard);
@@ -107,6 +109,7 @@ const gameLoop = (p1name, gb1) => {
         
       } else if (currentPlayer.category === 'robot') {
         movep1.textContent = 'The enemy is firing.'
+        currentPlayer.attack(enemyGameboard);
         switchTurns();
         return playGame(currentPlayer, enemyGameboard);
       }
