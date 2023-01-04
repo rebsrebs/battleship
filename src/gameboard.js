@@ -68,32 +68,36 @@ const gameboardFactory = (name) => {
   }
 
   // not working, returns false no matter what
-  function hasConflict(coords) { 
-    return placedShips.some(ship => ship.location.includes(coords)) 
+  function hasConflict(x,y) { 
+    return placedShips.includes(ship => ship.location.includes((idx) => idx[0] === x && idx[1] === y)); 
   }
 
 
   const receiveAttack = (x, y) => {
-    console.log(`${name} is receiving attack at ${x}, ${y}`);
 
+    console.log('testing hasConflict inside receiveAttack');
+    // let testResult = hasConflict(x,y);
+    // console.log(`test result is ${testResult}`);
+
+    // get target id?
+    const targetCell = document.getElementById();
+
+    console.log(`${name} is receiving attack at ${x}, ${y}`);
       // Check if this shot was already fired
       var alreadyFired = firedShots.find(arr=> arr[0] ===x && arr[1] ===y);
       if (alreadyFired != undefined) {
         return 'Already tried this spot.'
-
       // if shot has not yet been fired in this game
       } else {
-
-        // record shot in firedShots array
         const firedShot = [x,y];
         firedShots.push(firedShot);
-
-
+        // if it's a hit
         if (isThereAShipHere(x,y) != '') {
           console.log('there is a ship here.')
           let currentShip = isThereAShipHere(x,y);
           currentShip.hit();
           // change cell classList to 'cell cell-ship'
+          // using firedShot which is [x,y]
           if (currentShip.isSunk() == true) {
             sunk += 1;
           }

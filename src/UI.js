@@ -78,9 +78,9 @@ function welcome() {
     welcomeform.classList = 'hidden';
     welcomeform.remove();
     placementwrapper.classList = 'shown wrappergrid';
-    let gameboardOne = gameboardFactory('gameboardOne');
+    let gb1 = gameboardFactory('gb1');
     // placeAIShips('Computer', gameboardTwo);
-    placeShips(p1name, gameboardOne); 
+    placeShips(p1name, gb1); 
 
   });
 }

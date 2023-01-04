@@ -14,7 +14,7 @@ const gameoverp1 = id('gameoverp1');
 const gameoverp2 = id('gameoverp2');
 const gameoverp3 = id('gameoverp3');
 
-const gameLoop = (p1name, gameboardOne) => {
+const gameLoop = (p1name, gb1) => {
 
   console.log('gameloop is running.')
 
@@ -22,10 +22,10 @@ const gameLoop = (p1name, gameboardOne) => {
     // switch players
     if (currentPlayer === playerOne) {
       currentPlayer = playerTwo;
-      enemyGameboard = gameboardOne;
+      enemyGameboard = gb1;
     } else {
       currentPlayer = playerOne;
-      enemyGameboard = gameboardTwo;
+      enemyGameboard = gb2;
     }
   }
 
@@ -33,23 +33,23 @@ const gameLoop = (p1name, gameboardOne) => {
   let playerOne = humanPlayerFactory(p1name);
   let playerTwo = AIPlayerFactory('Computer');
   // set up AI gameboard
-  let gameboardTwo = gameboardFactory('gameboardTwo');
+  let gb2 = gameboardFactory('gb2');
   console.log('about to update movewrapper classList');
   moveWrapper.classList = 'shown wrappergrid';
   movep1.textContent = 'Your move admiral.'
   // temp placing AI ships
-  gameboardTwo.getPlacedShips()[0].location = [[1,2],[1,3],[1,4],[1,5],[1,6]]
-  gameboardTwo.getPlacedShips()[1].location = [[2,2],[2,3],[2,4],[2,5]]
-  gameboardTwo.getPlacedShips()[2].location = [[3,2],[3,3],[3,4]]
-  gameboardTwo.getPlacedShips()[3].location = [[4,2],[4,3],[4,4]]
-  gameboardTwo.getPlacedShips()[4].location = [[5,2],[5,3]]
+  gb2.getPlacedShips()[0].location = [[1,2],[1,3],[1,4],[1,5],[1,6]]
+  gb2.getPlacedShips()[1].location = [[2,2],[2,3],[2,4],[2,5]]
+  gb2.getPlacedShips()[2].location = [[3,2],[3,3],[3,4]]
+  gb2.getPlacedShips()[3].location = [[4,2],[4,3],[4,4]]
+  gb2.getPlacedShips()[4].location = [[5,2],[5,3]]
   var winner = '';
 
-  console.log(gameboardOne.getPlacedShips());
-  console.log(gameboardTwo.getPlacedShips());
+  console.log(gb1.getPlacedShips());
+  console.log(gb2.getPlacedShips());
 
   // define gameplaying function
-  const playGame = (currentPlayer = playerOne, enemyGameboard = gameboardTwo) => {
+  const playGame = (currentPlayer = playerOne, enemyGameboard = gb2) => {
     console.log('playGame is running.')
     if (currentPlayer === playerOne) {
       console.log('your turn');
@@ -58,14 +58,14 @@ const gameLoop = (p1name, gameboardOne) => {
     }
 
     // BASE CASES
-    if (gameboardOne.areAllSunk() == true) {
+    if (gb1.areAllSunk() == true) {
       // function to show gameover wrapper, maybe UI.showWinner(winner);
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
       gameoverp1.textContent = 'game over.'
       winner = 'Player 2 wins!';
       return;
-    } else if (gameboardTwo.areAllSunk() == true) {
+    } else if (gb2.areAllSunk() == true) {
       // UI gameover wrapper
       winner = 'Player 1 wins!';
       return;
@@ -77,10 +77,9 @@ const gameLoop = (p1name, gameboardOne) => {
 
       // attack
       if (currentPlayer.category === 'human') {
-
+        // define attackHandler
         var attackHandler = function(e) {
           console.log('attackHandler is running');
-
           let target = e.target;
           console.log(`target is ${target}`)
           if (target.classList.contains('cell')) {
@@ -88,10 +87,11 @@ const gameLoop = (p1name, gameboardOne) => {
             console.log(`cellID is ${cellID}`);
             var locatorIdx = cellID.slice(4);
             console.log(`locator index is ${locatorIdx}`)
-            var coords = gameboardTwo.getCells()[locatorIdx];
+            var coords = gb2.getCells()[locatorIdx];
             // attack
             let result = currentPlayer.attack(coords[0],coords[1],enemyGameboard);
             console.log(`result is ${result}`);
+            // update UI with hit or miss - but actually maybe that should happen in the receiveAttack method in the gamebaord
             if (result === 'hit!') {
               document.getElementById(cellID).classList = 'cell cell-ship';
             } else if (result === 'miss!') {
@@ -101,14 +101,12 @@ const gameLoop = (p1name, gameboardOne) => {
             gbcontainer2.removeEventListener('click', attackHandler);
             return playGame(currentPlayer, enemyGameboard);
           }
-        } 
-
+        } // end attackHandler
         movep1.textContent = 'Please click on enemy waters.'
         gbcontainer2.addEventListener('click', attackHandler);
         
       } else if (currentPlayer.category === 'robot') {
         movep1.textContent = 'The enemy is firing.'
-        currentPlayer.attack(enemyGameboard);
         switchTurns();
         return playGame(currentPlayer, enemyGameboard);
       }
