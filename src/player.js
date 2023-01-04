@@ -14,6 +14,7 @@ const AIPlayerFactory = (name) => {
     console.log('Placing AI ships');
   }
   const attack = (board) => {
+    console.log('AI is attacking')
     let possibleMoves = board.getPossible();
     let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
     let a = shot[0];

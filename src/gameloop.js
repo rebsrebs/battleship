@@ -18,17 +18,6 @@ const gameLoop = (p1name, gb1) => {
 
   console.log('gameloop is running.')
 
-  function switchTurns(currentPlayer, enemyGameboard){
-    // switch players
-    if (currentPlayer === playerOne) {
-      currentPlayer = playerTwo;
-      enemyGameboard = gb1;
-    } else {
-      currentPlayer = playerOne;
-      enemyGameboard = gb2;
-    }
-  }
-
   // set up players
   let playerOne = humanPlayerFactory(p1name);
   let playerTwo = AIPlayerFactory('Computer');
@@ -51,9 +40,10 @@ const gameLoop = (p1name, gb1) => {
   // define gameplaying function
   const playGame = (currentPlayer = playerOne, enemyGameboard = gb2) => {
     console.log('playGame is running.')
-    if (currentPlayer === playerOne) {
-      console.log('your turn');
-    } else if (currentPlayer === playerTwo) {
+    // if (currentPlayer === playerOne) {
+    //   console.log('your turn');
+    // } else 
+    if (currentPlayer === playerTwo) {
       console.log('Computers turn.')
     }
 
@@ -91,15 +81,8 @@ const gameLoop = (p1name, gb1) => {
             // attack
             let result = currentPlayer.attack(coords[0],coords[1],enemyGameboard);
             console.log(`result is ${result}`);
-            // update UI with hit or miss - but actually maybe that should happen in the receiveAttack method in the gamebaord
-
-            // if (result === 'hit!') {
-            //   document.getElementById(cellID).classList = 'cell cell-ship';
-            // } else if (result === 'miss!') {
-            //   document.getElementById(cellID).classList = 'cell cell-miss';
-            // }
-
-            switchTurns(currentPlayer, enemyGameboard);
+            currentPlayer = playerTwo;
+            enemyGameboard = gb1;
             gbcontainer2.removeEventListener('click', attackHandler);
             return playGame(currentPlayer, enemyGameboard);
           }
@@ -110,7 +93,8 @@ const gameLoop = (p1name, gb1) => {
       } else if (currentPlayer.category === 'robot') {
         movep1.textContent = 'The enemy is firing.'
         currentPlayer.attack(enemyGameboard);
-        switchTurns();
+        currentPlayer = playerOne;
+        enemyGameboard = gb2;
         return playGame(currentPlayer, enemyGameboard);
       }
     }
