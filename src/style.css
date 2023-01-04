@@ -2,6 +2,7 @@
   --main-bg-color: white;
   --cell-plain-bg-color: rgb(163, 230, 245);
   --cell-hover-bg-color: orange;
+  --cell-place-bg-color: pink;
   --cell-ship-bg-color: red;
   --cell-miss-bg-color: gray;
   --gb-bg-color:lightgray;
@@ -135,6 +136,10 @@ input.nsformitem {
 
 .cell-hover {
   background-color: var(--cell-hover-bg-color);
+}
+
+.cell-placed {
+  background-color: var(--cell-place-bg-color);
 }
 
 .cell-ship {

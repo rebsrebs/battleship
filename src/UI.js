@@ -208,7 +208,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
                   // make variable of cell DOM element
                   let currentCell = id(`gb1-${Number(locatorIdx)+i}`);
                   // change color of cell to show a ship
-                  currentCell.classList = `cell cell-ship`
+                  currentCell.classList = `cell cell-placed`
                   // push coordinates of cell into ship's location array
                   let currentCellCoords = [(Number(coords[0]) + Number(i)),coords[1]];
                   console.log('About to push cell location to current ship location');
@@ -216,7 +216,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
                   currentShip.location.push(currentCellCoords);    
                 } else if (dir === 'vertical') {
                   let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+(i*10)}`);
-                  currentCell.classList = `cell cell-ship`
+                  currentCell.classList = `cell cell-placed`
                   let currentCellCoords = [coords[0],(Number(coords[1]) + Number(i))];
                   console.log('About to push cell location to current ship location');
                   console.log(currentCellCoords);

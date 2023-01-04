@@ -49,16 +49,18 @@ const gameLoop = (p1name, gb1) => {
 
     // BASE CASES
     if (gb1.areAllSunk() == true) {
-      // function to show gameover wrapper, maybe UI.showWinner(winner);
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
-      gameoverp1.textContent = 'game over.'
+      gameoverp1.textContent = 'game over. player 2 wins.'
       winner = 'Player 2 wins!';
       return;
     } else if (gb2.areAllSunk() == true) {
-      // UI gameover wrapper
+      moveWrapper.classList = 'hidden';
+      gameOverWrapper.classList = 'shown wrappergrid';
+      gameoverp1.textContent = 'game over. player 1 wins.'
       winner = 'Player 1 wins!';
       return;
+
     } else {
 
       // NOT BASE CASE
