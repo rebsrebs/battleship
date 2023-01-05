@@ -18,7 +18,6 @@ const gameLoop = (p1name, gb1) => {
 
   console.log('gameloop is running.')
   
-
   // set up players
   let playerOne = humanPlayerFactory(p1name);
   let playerTwo = AIPlayerFactory('Computer');
@@ -41,13 +40,6 @@ const gameLoop = (p1name, gb1) => {
   // define gameplaying function
   const playGame = (currentPlayer = playerOne, enemyGameboard = gb2) => {
     console.log('playGame is running.')
-    
-    // if (currentPlayer === playerOne) {
-    //   console.log('your turn');
-    // } else 
-    if (currentPlayer === playerTwo) {
-      console.log('Computers turn.')
-    }
 
     // BASE CASES
     if (gb1.areAllSunk() == true) {
@@ -66,7 +58,6 @@ const gameLoop = (p1name, gb1) => {
     } else {
 
       // NOT BASE CASE
-      // show enemy gameboard
       console.log('not the base case.')
 
       // attack
@@ -93,7 +84,6 @@ const gameLoop = (p1name, gb1) => {
             currentPlayer = playerTwo;
             enemyGameboard = gb1;
             gbcontainer2.removeEventListener('click', attackHandler);
-            console.log(`gb1 has ${gb1.getSunk()} sunk ships and gb2 has ${gb2.getSunk()} ships.`)
             return playGame(currentPlayer, enemyGameboard);
             }
           }
@@ -106,13 +96,11 @@ const gameLoop = (p1name, gb1) => {
         currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;
-        console.log(`gb1 has ${gb1.getSunk()} sunk ships and gb2 has ${gb2.getSunk()} ships.`)
         return playGame(currentPlayer, enemyGameboard);
       }
     }
   }
   // run game playing loop
-  console.log('about to run the outer playGame()');
   playGame(); 
   return winner;
 }
