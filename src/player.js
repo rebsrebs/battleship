@@ -9,10 +9,13 @@ const humanPlayerFactory = (name) => {
 };
 
 const AIPlayerFactory = (name) => {
+
   const category = 'robot';
+
   const placeAIships = (board) => {
     console.log('Placing AI ships');
   }
+  
   const attack = (board) => {
     console.log('AI is attacking')
     let possibleMoves = board.getPossible();
