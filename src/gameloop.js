@@ -17,6 +17,7 @@ const gameoverp3 = id('gameoverp3');
 const gameLoop = (p1name, gb1) => {
 
   console.log('gameloop is running.')
+  
 
   // set up players
   let playerOne = humanPlayerFactory(p1name);
@@ -40,6 +41,7 @@ const gameLoop = (p1name, gb1) => {
   // define gameplaying function
   const playGame = (currentPlayer = playerOne, enemyGameboard = gb2) => {
     console.log('playGame is running.')
+    
     // if (currentPlayer === playerOne) {
     //   console.log('your turn');
     // } else 
@@ -86,6 +88,7 @@ const gameLoop = (p1name, gb1) => {
             currentPlayer = playerTwo;
             enemyGameboard = gb1;
             gbcontainer2.removeEventListener('click', attackHandler);
+            console.log(`gb1 has ${gb1.getSunk()} sunk ships and gb2 has ${gb2.getSunk()} ships.`)
             return playGame(currentPlayer, enemyGameboard);
           }
         } // end attackHandler
@@ -97,6 +100,7 @@ const gameLoop = (p1name, gb1) => {
         currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;
+        console.log(`gb1 has ${gb1.getSunk()} sunk ships and gb2 has ${gb2.getSunk()} ships.`)
         return playGame(currentPlayer, enemyGameboard);
       }
     }

@@ -69,9 +69,9 @@ const gameboardFactory = (name) => {
   }
 
   // not working, returns false no matter what
-  function hasConflict(x,y) { 
-    return placedShips.includes(ship => ship.location.includes((idx) => idx[0] === x && idx[1] === y)); 
-  }
+  // function hasConflict(x,y) { 
+  //   return placedShips.includes(ship => ship.location.includes((idx) => idx[0] === x && idx[1] === y)); 
+  // }
 
 
   const receiveAttack = (x, y) => {
@@ -84,6 +84,10 @@ const gameboardFactory = (name) => {
     console.log(`targetCellNum is ${targetCellNum}`);
     let targetCellID = `${name}-${targetCellNum}`;
     let targetCell = document.getElementById(targetCellID);
+
+    let noLongerPossible = possible.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
+    possible.splice(noLongerPossible,1);
+
 
     console.log(`${name} is receiving attack at ${x}, ${y}`);
       // Check if this shot was already fired
@@ -132,7 +136,7 @@ const gameboardFactory = (name) => {
   const getPlacedShips = () => placedShips;
   const getNumShipsToPlace = () => numShipsToPlace;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere, hasConflict }
+  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere }
 }
 
 export { gameboardFactory };
