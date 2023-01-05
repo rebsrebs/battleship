@@ -85,11 +85,17 @@ const gameLoop = (p1name, gb1) => {
             // attack
             let result = currentPlayer.attack(coords[0],coords[1],enemyGameboard);
             console.log(`result is ${result}`);
+            // if result was already clicked, recurse without switching??
+            if (result === 'Already tried this spot.') {
+              gbcontainer2.removeEventListener('click', attackHandler);
+              return playGame(currentPlayer, enemyGameboard);
+            } else {
             currentPlayer = playerTwo;
             enemyGameboard = gb1;
             gbcontainer2.removeEventListener('click', attackHandler);
             console.log(`gb1 has ${gb1.getSunk()} sunk ships and gb2 has ${gb2.getSunk()} ships.`)
             return playGame(currentPlayer, enemyGameboard);
+            }
           }
         } // end attackHandler
         movep1.textContent = 'Please click on enemy waters.'
