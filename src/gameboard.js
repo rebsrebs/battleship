@@ -1,5 +1,17 @@
 import { shipFactory } from "./ship";
 
+const id = (ID) => document.getElementById(ID);
+const moveWrapper = id('movewrapper');
+const gameOverWrapper = id('gameoverwrapper');
+const gbcontainer1 = id('gbcontainer1');
+const gbcontainer2 = id('gbcontainer2');
+const movep1 = id('movep1');
+const movep2 = id('movep2');
+const movep3 = id('movep3');
+const gameoverp1 = id('gameoverp1');
+const gameoverp2 = id('gameoverp2');
+const gameoverp3 = id('gameoverp3');
+
 const gameboardFactory = (name) => {
 
   let numShipsToPlace = 5;
@@ -12,6 +24,7 @@ const gameboardFactory = (name) => {
      }
    }
 
+  // declare more arrays
   let possible = [...cells]; // possible moves
   let missed = [];
   let firedShots = []; 
@@ -24,6 +37,7 @@ const gameboardFactory = (name) => {
    const submarine = shipFactory('submarine', 3);
    const patrolBoat = shipFactory('patrolBoat', 2);
 
+  // create placedShips object
   let placedShips = [
     {
       ship: carrier,
@@ -47,7 +61,7 @@ const gameboardFactory = (name) => {
     }
   ]
 
-  // returns true or undefined
+  // Is there a ship here function - returns true or undefined
   const isThereAShipHere = (x ,y) => {
     let result = '';
     for (let i = 0; i < placedShips.length; i++) {
@@ -62,6 +76,7 @@ const gameboardFactory = (name) => {
     return result;
   }
 
+  // Receive Attack Method
   const receiveAttack = (x, y) => {
     console.log(`${name} is receiving attack at ${x}, ${y}`);
     // make variable of DOM element of attacked spot
@@ -80,16 +95,18 @@ const gameboardFactory = (name) => {
     } else {
       const firedShot = [x,y];
       firedShots.push(firedShot);
-      // if it's a hit
+      // IF HIT
       if (isThereAShipHere(x,y) != '') {
         let currentShip = isThereAShipHere(x,y);
         currentShip.hit();
-        // using firedShot which is [x,y]
+        targetCell.classList = 'cell cell-ship'
         if (currentShip.isSunk() == true) {
           sunk += 1;
         }
-          targetCell.classList = 'cell cell-ship'
-          return 'hit!';
+        console.log(`${name}'s ${currentShip.name} was hit.`)
+        movep2.textContent = `${name}'s ${currentShip.name} was hit.`
+        return 'hit!';
+      // IF MISS
       } else {
         missed.push(firedShot);
         targetCell.classList = 'cell cell-miss'
@@ -98,6 +115,7 @@ const gameboardFactory = (name) => {
     } // end if shot was not previously fired
   } // end receiveAttack method
   
+  // Are All Sunk Method
   const areAllSunk = () => {
     if (sunk >= 5) {
       console.log(`All ${name} ships are sunk.`)
@@ -108,6 +126,7 @@ const gameboardFactory = (name) => {
     }
   }
 
+  // Getters
   const getCells = () => cells;
   const getMissed = () => missed;
   const getFiredShots = () => firedShots;

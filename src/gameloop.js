@@ -21,20 +21,17 @@ const gameLoop = (p1name, gb1) => {
   // set up players
   let playerOne = humanPlayerFactory(p1name);
   let playerTwo = AIPlayerFactory('Computer');
+  
   // set up AI gameboard
   let gb2 = gameboardFactory('gb2');
-  console.log('about to update movewrapper classList');
+  playerTwo.placeAIships(gb2);
   moveWrapper.classList = 'shown wrappergrid';
   movep1.textContent = 'Your move admiral.'
-  // temp placing AI ships
-  gb2.getPlacedShips()[0].location = [[1,2],[1,3],[1,4],[1,5],[1,6]]
-  gb2.getPlacedShips()[1].location = [[2,2],[2,3],[2,4],[2,5]]
-  gb2.getPlacedShips()[2].location = [[3,2],[3,3],[3,4]]
-  gb2.getPlacedShips()[3].location = [[4,2],[4,3],[4,4]]
-  gb2.getPlacedShips()[4].location = [[5,2],[5,3]]
   var winner = '';
 
+  console.log('gameboard 1: Friendly Waters');
   console.log(gb1.getPlacedShips());
+  console.log('gameboard 2: Enemy Waters');
   console.log(gb2.getPlacedShips());
 
   // define gameplaying function
@@ -79,18 +76,19 @@ const gameLoop = (p1name, gb1) => {
             currentPlayer = playerTwo;
             enemyGameboard = gb1;
             gbcontainer2.removeEventListener('click', attackHandler);
+            // wait before recursing
             return playGame(currentPlayer, enemyGameboard);
             }
           }
         } // end attackHandler
-        movep1.textContent = 'Please click on enemy waters.'
+        // movep1.textContent = 'Please click on enemy waters.'
         gbcontainer2.addEventListener('click', attackHandler);
         
       } else if (currentPlayer.category === 'robot') {
-        movep1.textContent = 'The enemy is firing.'
         currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;
+        // wait before recursing
         return playGame(currentPlayer, enemyGameboard);
       }
     }
