@@ -63,9 +63,11 @@ const gameboardFactory = (name) => {
 
   // Is there a ship here function - returns true or undefined
   const isThereAShipHere = (x ,y) => {
+    console.log(`isThereAShipHere method is running, checking if ${x}, ${y} already has a ship.` )
     let result = '';
     for (let i = 0; i < placedShips.length; i++) {
       let currentLocArray = placedShips[i].location;
+      // console.log(`currentLocArray is ${currentLocArray}`);
       var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
       if (match != undefined) {
         return result = placedShips[i].ship;

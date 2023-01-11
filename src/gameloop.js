@@ -24,14 +24,15 @@ const gameLoop = (p1name, gb1) => {
   
   // set up AI gameboard
   let gb2 = gameboardFactory('gb2');
+
   playerTwo.placeAIships(gb2);
+  console.log('about to update movewrapper classList');
   moveWrapper.classList = 'shown wrappergrid';
   movep1.textContent = 'Your move admiral.'
+ 
   var winner = '';
 
-  console.log('gameboard 1: Friendly Waters');
   console.log(gb1.getPlacedShips());
-  console.log('gameboard 2: Enemy Waters');
   console.log(gb2.getPlacedShips());
 
   // define gameplaying function

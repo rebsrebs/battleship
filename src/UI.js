@@ -143,7 +143,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
       if (target.classList.contains('cell')) {
         var cellID = target.id;
         var locatorIdx = cellID.slice(4);
-        console.log(`locator index is ${locatorIdx}`)
+        // console.log(`locator index is ${locatorIdx}`)
         // coords is the array x,y representation of the cell in the grid
         var coords = gameboard.getCells()[locatorIdx];
         let shipLength = currentShip.ship.length;
@@ -156,7 +156,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
           xOrY = 1;
         }
         // if it fits on board
-        console.log(`The coords[xOrY] is ${coords[xOrY]}`);
+        // console.log(`The coords[xOrY] is ${coords[xOrY]}`);
         if (coords[xOrY] + shipLength <= 11) {
           let proposedShipLoc = [];
           for (let i=0; i < shipLength; i++) {
@@ -169,12 +169,12 @@ function placeShips (name, gameboard, shipIdx = 0) {
           } // end for loop
           // check if there's a ship in the way of where you want to place ship
           for (let i=0; i < shipLength; i++) {
-            if (gameboard.isThereAShipHere(proposedShipLoc[i][0], proposedShipLoc[i][1]) == true) {
+            if (gameboard.isThereAShipHere(proposedShipLoc[i][0], proposedShipLoc[i][1]) != '') {
               console.log ('ship in the way');
               return;
             }
           } // end for loop
-          
+
           // for as many cells as the ship takes up
           for (let i=0; i < shipLength; i++) {
             if (dir === 'horizontal') {
@@ -183,15 +183,15 @@ function placeShips (name, gameboard, shipIdx = 0) {
               currentCell.classList = `cell cell-placed`
               // push coordinates of cell into ship's location array
               let currentCellCoords = [(Number(coords[0]) + Number(i)),coords[1]];
-              console.log('About to push cell location to current ship location');
-              console.log(currentCellCoords);
+              // console.log('About to push cell location to current ship location');
+              // console.log(currentCellCoords);
               currentShip.location.push(currentCellCoords);    
             } else if (dir === 'vertical') {
               let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+(i*10)}`);
               currentCell.classList = `cell cell-placed`
               let currentCellCoords = [coords[0],(Number(coords[1]) + Number(i))];
-              console.log('About to push cell location to current ship location');
-              console.log(currentCellCoords);
+              // console.log('About to push cell location to current ship location');
+              // console.log(currentCellCoords);
               currentShip.location.push(currentCellCoords);  
             }
           }
