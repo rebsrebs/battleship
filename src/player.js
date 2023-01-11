@@ -19,7 +19,7 @@ const AIPlayerFactory = (name) => {
 
   // PLACE AI SHIPS
   const placeAIships = (board, shipIdx = 0) => {
-    console.log('PlaceAIships is running.')
+    console.log('PLACEAISHIPS IS RUNNING')
     // BASE CASE
     if (shipIdx > board.getPlacedShips().length-1) {
       console.log('base case - AI ships placed');
@@ -29,7 +29,7 @@ const AIPlayerFactory = (name) => {
     // NOT BASE CASE
     } else {
       console.log('Not base case. Still placing AI ships');
-      let currentShip = board.getPlacedShips()[shipIdx];
+      let presentShip = board.getPlacedShips()[shipIdx];
       var choice = Math.round(Math.random());
       if (choice === 0) {
         var axis = 'horizontal';
@@ -37,12 +37,13 @@ const AIPlayerFactory = (name) => {
         var axis = 'vertical';
       }
       console.log(`axis is ${axis}`);
-      let shipLength = currentShip.ship.length;
-      console.log(`currentShip is ${currentShip.ship.name}`);
+      let shipLength = presentShip.ship.length;
+      console.log(`presentShip is ${presentShip.ship.name}`);
       console.log(`shipLength is ${shipLength}`);
       // choose a starting location
       let randomIndex = Math.floor(Math.random() * 100);
       let coords = [...(board.getCells()[randomIndex])];
+      console.log(`randomIndex is ${randomIndex}`);
       console.log(`coords is ${coords}`);
       console.log(`coords[choice] is ${coords[choice]}`);
 
@@ -51,6 +52,7 @@ const AIPlayerFactory = (name) => {
         console.log('coords[choice] + shipLength was <= 11, the ship fits!')
         // create array of where ship would go
         var proposedShipLoc = [];
+        // for length of ship, push cell valus to proposedShipLoc
         for (let i = 0; i < shipLength; i++) {
           if (axis === 'horizontal') {
             proposedShipLoc.push(board.getCells()[Number(randomIndex)+Number(i)]);
@@ -59,16 +61,19 @@ const AIPlayerFactory = (name) => {
             proposedShipLoc.push(board.getCells()[Number(randomIndex)+(Number(i)*10)]);
           }
         } // end for loop
-        console.log('proposedShipLoc is:')
+        console.log('proposedShipLoc (where to place the presentShip) is:')
         console.log(proposedShipLoc);
 
 
 
-        console.log('About to start for loop: For the length of the ship, checking if a ship is in the way.')
+      console.log('About to start for loop: For the length of the ship, checking if a ship is in the way.')
       for (let i=0; i < shipLength; i++) {
         let tempLoc = [...(proposedShipLoc[i])];
         console.log(`tempLoc is ${tempLoc}`)
-        if (board.isThereAShipHere(tempLoc[0], tempLoc[1]) == true) {
+        console.log(tempLoc);
+        console.log(Array.isArray(tempLoc))
+
+        if (board.isThereAShipHere([tempLoc[0], tempLoc[1]]) != '') {
           console.log ('SHIP');
           console.log ('IN');
           console.log ('THE');
@@ -76,11 +81,17 @@ const AIPlayerFactory = (name) => {
           return
           // return placeAIships(board, shipIdx);
         } else {
-          console.log('About to push tempLoc to currentShip location:');
-          currentShip.location.push(tempLoc); 
+          console.log('Apparently there is no ship in the way.')
+          console.log('About to push tempLoc to presentShip location:');
+          presentShip.location.push(tempLoc); 
         }
       } // end for loop for checking if ships are in the way
-      console.log(`currentShip.location is ${currentShip.location}`);
+
+
+
+      console.log(`presentShip.location is ${presentShip.location}`);
+      console.log(presentShip.location);
+      console.log(Array.isArray(presentShip.location));
       shipIdx = shipIdx + 1;
       return placeAIships(board, shipIdx);
 
