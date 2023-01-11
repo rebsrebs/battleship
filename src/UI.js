@@ -128,15 +128,51 @@ toggleBtn.addEventListener('click', function() {
 
 // PLACE SHIPS RECURSIVE FUNCTION
 function placeShips (name, gameboard, shipIdx = 0) {
-  // base case - if all gameboard ships have been placed
+  // BASE CASE - if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
     console.log('base case - ships placed');
     placementwrapper.classList = 'hidden';
     gameLoop(name, gameboard)
     return;
+  // NOT BASE CASE
   } else {
     let currentShip = gameboard.getPlacedShips()[shipIdx];
     placeMsg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
+
+
+    // define hoverHandler
+    var hoverHandler = function(e) {
+      let target = e.target;
+      if (target.classList.contains('cell')) {
+        var cellID = target.id;
+        var locatorIdx = cellID.slice(4);
+        var coords = gameboard.getCells()[locatorIdx];
+        let shipLength = currentShip.ship.length;
+        let xOrY = undefined;
+        let dir = directionDisplay.getAttribute("data-status");
+        if (dir === 'horizontal') {
+          xOrY = 0;
+        } else {
+          xOrY = 1;
+        }
+        if (coords[xOrY] + shipLength <= 11) {
+          for (let i=0; i < shipLength; i++) {
+            if (dir === 'horizontal') {
+              let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)}`)
+              currentCell.classList = 'cell cell-hover'
+            } else if (dir === 'vertical') {
+              let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)*10}`)
+              currentCell.classList = 'cell cell-hover'
+            }
+          } // end for loop
+        }
+      }
+    } // end hover handler
+
+
+
+
+
     // define clickHandler
     var clickHandler = function(e) {
     let target = e.target;
@@ -198,6 +234,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
           shipIdx += 1;
           console.log(`This many ships have been placed: ${shipIdx}`);
           gbcontainer1.removeEventListener('click', clickHandler);
+          gbcontainer1.removeEventListener('mouseover', hoverHandler);
           // recurse
           return placeShips(name, gameboard, shipIdx);
         // end if it fits on board
@@ -207,6 +244,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
       } // end if target contains 'cell' class
     } // end clickhandler
     gbcontainer1.addEventListener('click', clickHandler)
+    gbcontainer1.addEventListener('mouseover', hoverHandler);
   }  // end not base case
 } // END PLACE SHIPS FUNCTION
 
