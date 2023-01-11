@@ -8,11 +8,6 @@ const humanPlayerFactory = (name) => {
   return {name, category, attack};
 };
 
-
-
-
-
-
 const AIPlayerFactory = (name) => {
 
   const category = 'robot';
@@ -36,7 +31,6 @@ const AIPlayerFactory = (name) => {
       let shipLength = presentShip.ship.length;
       let randomIndex = Math.floor(Math.random() * 100);
       let coords = [...(board.getCells()[randomIndex])];
-
       // if it fits
       if (coords[choice] + shipLength <= 11 ) {
         console.log('coords[choice] + shipLength was <= 11, the ship fits!')
@@ -49,8 +43,7 @@ const AIPlayerFactory = (name) => {
             proposedShipLoc.push(board.getCells()[Number(randomIndex)+(Number(i)*10)]);
           }
         } // end for loop
-
-        console.log('About to start for loop: For the length of the ship, checking if a ship is in the way.')
+        // checking if ship is in the way
         for (let i=0; i < shipLength; i++) {
           let tempLoc = [...(proposedShipLoc[i])];
           if (board.isThereAShipHere(tempLoc[0], tempLoc[1]) != '') {
@@ -65,15 +58,12 @@ const AIPlayerFactory = (name) => {
         } // end for loop for checking if ships are in the way
         shipIdx = shipIdx + 1;
         return placeAIships(board, shipIdx);
-        
       } // end if it fits 
       else {
         console.log('The ship did not fit, running recursively again without increasing shipIdx')
         return placeAIships(board, shipIdx);
       }
     } // end not base case
-
-
   } // END PLACE AI SHIPS
   
   const attack = (board) => {
