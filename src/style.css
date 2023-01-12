@@ -1,7 +1,7 @@
 :root {
   --main-bg-color: white;
   --cell-plain-bg-color: rgb(163, 230, 245);
-  --cell-hover-bg-color: orange;
+  --cell-hover-bg-color: rgba(247, 138, 88, 0.531);
   --cell-place-bg-color: pink;
   --cell-ship-bg-color: red;
   --cell-miss-bg-color: gray;
@@ -128,11 +128,12 @@ input.nsformitem {
 
 .cell {
   border: 1px solid black;
-}
-
-.cell-plain {
   background-color: var(--cell-plain-bg-color);
 }
+
+/* .cell-plain {
+  
+} */
 
 .cell-hover {
   background-color: var(--cell-hover-bg-color);

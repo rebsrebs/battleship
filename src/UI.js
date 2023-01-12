@@ -142,6 +142,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
     // define hoverHandler
     var hoverHandler = function(e) {
+      console.log('hovered!');
       let target = e.target;
       if (target.classList.contains('cell')) {
         var cellID = target.id;
@@ -159,15 +160,55 @@ function placeShips (name, gameboard, shipIdx = 0) {
           for (let i=0; i < shipLength; i++) {
             if (dir === 'horizontal') {
               let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)}`)
+              if (!currentCell.classList.contains('cell-placed')) {
+                console.log('no ship class')
               currentCell.classList = 'cell cell-hover'
+              }
             } else if (dir === 'vertical') {
               let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)*10}`)
-              currentCell.classList = 'cell cell-hover'
+              if (!currentCell.classList.contains('cell-placed')) {
+                console.log('no ship class')
+                currentCell.classList = 'cell cell-hover'
+                }
             }
           } // end for loop
         }
       }
     } // end hover handler
+
+    // define unhoverHandler
+    var unhoverHandler = function(e) {
+      console.log('unhovered!')
+      let target = e.target;
+      if (target.classList.contains('cell')) {
+        var cellID = target.id;
+        var locatorIdx = cellID.slice(4);
+        var coords = gameboard.getCells()[locatorIdx];
+        let shipLength = currentShip.ship.length;
+        let xOrY = undefined;
+        let dir = directionDisplay.getAttribute("data-status");
+        if (dir === 'horizontal') {
+          xOrY = 0;
+        } else {
+          xOrY = 1;
+        }
+        if (coords[xOrY] + shipLength <= 11) {
+          for (let i=0; i < shipLength; i++) {
+            if (dir === 'horizontal') {
+              let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)}`)
+              if (currentCell.classList.contains('cell-hover')) {
+                currentCell.classList.remove('cell-hover');
+              }
+            } else if (dir === 'vertical') {
+              let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)*10}`)
+              if (currentCell.classList.contains('cell-hover')) {
+                currentCell.classList.remove('cell-hover');
+              }
+            }
+          } // end for loop
+        }
+      }
+    } // end unhover handler
 
 
 
@@ -175,6 +216,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
     // define clickHandler
     var clickHandler = function(e) {
+     
     let target = e.target;
       if (target.classList.contains('cell')) {
         var cellID = target.id;
@@ -235,6 +277,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
           console.log(`This many ships have been placed: ${shipIdx}`);
           gbcontainer1.removeEventListener('click', clickHandler);
           gbcontainer1.removeEventListener('mouseover', hoverHandler);
+          gbcontainer1.removeEventListener('mouseout', unhoverHandler);
+          
           // recurse
           return placeShips(name, gameboard, shipIdx);
         // end if it fits on board
@@ -244,7 +288,9 @@ function placeShips (name, gameboard, shipIdx = 0) {
       } // end if target contains 'cell' class
     } // end clickhandler
     gbcontainer1.addEventListener('click', clickHandler)
+    gbcontainer1.addEventListener('mouseout', unhoverHandler);
     gbcontainer1.addEventListener('mouseover', hoverHandler);
+    
   }  // end not base case
 } // END PLACE SHIPS FUNCTION
 
