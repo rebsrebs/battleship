@@ -2,6 +2,8 @@ import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 import { resetMessageArea } from "./UI";
 
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 const id = (ID) => document.getElementById(ID);
 const moveWrapper = id('movewrapper');
 const gameOverWrapper = id('gameoverwrapper');
@@ -41,7 +43,7 @@ const gameLoop = (p1name, gb1) => {
   console.log(gb2.getPlacedShips());
 
   // define gameplaying function
-  const playGame = (currentPlayer = playerOne, enemyGameboard = gb2) => {
+  const playGame = async(currentPlayer = playerOne, enemyGameboard = gb2) => {
     console.log('playGame is running.')
 
     // BASE CASES
@@ -94,6 +96,7 @@ const gameLoop = (p1name, gb1) => {
         gbcontainer2.addEventListener('click', attackHandler);
         
       } else if (currentPlayer.category === 'robot') {
+        await delay(1500);
         p2moveA.textContent = 'The enemy fired and ...';
         currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
