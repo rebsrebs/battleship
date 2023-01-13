@@ -107,6 +107,8 @@ const gameLoop = (p1name, gb1) => {
         await currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;
+        await delay(500);
+        movePrompt.textContent = 'Your move, admiral.'
         // wait before recursing
         gbcontainer2.classList.add('crosshair');
         return playGame(currentPlayer, enemyGameboard);
