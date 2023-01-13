@@ -115,7 +115,7 @@ const gameboardFactory = (name) => {
       if (isThereAShipHere(x,y) != '') {
         let currentShip = isThereAShipHere(x,y);
         currentShip.hit();
-        pCode.textContent += `and hit ${name}'s ${currentShip.name}.`
+        pCode.textContent += ` and hit ${name}'s ${currentShip.name}.`
         targetCell.classList = 'cell cell-ship'
         if (currentShip.isSunk() == true) {
           sunk += 1;
@@ -124,7 +124,7 @@ const gameboardFactory = (name) => {
       // IF MISS
       } else {
         missed.push(firedShot);
-        pCode.textContent += `and missed.`
+        pCode.textContent += ` and missed.`
         targetCell.classList = 'cell cell-miss'
         return 'miss!';
       }
