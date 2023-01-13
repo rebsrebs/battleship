@@ -89,15 +89,17 @@ const gameLoop = (p1name, gb1) => {
             // wait before recursing
             return playGame(currentPlayer, enemyGameboard);
             }
-          }
+          } // end if target is cell
         } // end attackHandler
-        // movep1.textContent = 'Please click on enemy waters.'
+    
+        // this should only add when current player is human
         gbcontainer2.addEventListener('click', attackHandler);
         
       } else if (currentPlayer.category === 'robot') {
         await delay(1500);
         p2move.textContent = 'The enemy fired ...';
-        currentPlayer.attack(enemyGameboard);
+        // the follow await makes sure you can't fire again before the enemy finishes firing.
+        await currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;
         // wait before recursing
