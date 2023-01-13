@@ -230,3 +230,7 @@ p.griditem {
   align-content: center;
   justify-content: left;
 }
+
+.crosshair {
+  cursor: crosshair;
+}

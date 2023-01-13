@@ -34,6 +34,7 @@ const gameLoop = (p1name, gb1) => {
   console.log('about to update movewrapper classList');
   moveWrapper.classList = 'shown wrappergrid';
   movePrompt.textContent = 'Your move admiral.'
+  gbcontainer2.classList.add('crosshair');
  
   var winner = '';
 
@@ -62,14 +63,18 @@ const gameLoop = (p1name, gb1) => {
 
       // NOT BASE CASE
       console.log('not the base case.')
+      
       // resetMessageArea();
 
       // attack
       if (currentPlayer.category === 'human') {
         // define attackHandler
         var attackHandler = function(e) {
+          gbcontainer2.classList.remove('crosshair');
           console.log('Human attack handler is running.')
           resetMessageArea();
+          // console.log('about to add crosshair')
+          // gbcontainer2.classList.add('crosshair');
           p1move.textContent = 'You fired ...'
           let target = e.target;
           if (target.classList.contains('cell')) {
@@ -103,6 +108,7 @@ const gameLoop = (p1name, gb1) => {
         currentPlayer = playerOne;
         enemyGameboard = gb2;
         // wait before recursing
+        gbcontainer2.classList.add('crosshair');
         return playGame(currentPlayer, enemyGameboard);
       }
     }
