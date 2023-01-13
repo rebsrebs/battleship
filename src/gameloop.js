@@ -1,6 +1,6 @@
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
-import { showWrapper, hide, updateText, cellMiss, cellShip } from "./UI";
+import { resetMessageArea } from "./UI";
 
 const id = (ID) => document.getElementById(ID);
 const moveWrapper = id('movewrapper');
@@ -13,6 +13,11 @@ const movep3 = id('movep3');
 const gameoverp1 = id('gameoverp1');
 const gameoverp2 = id('gameoverp2');
 const gameoverp3 = id('gameoverp3');
+const p1moveA = id('p1moveA');
+const p1moveB = id('p1moveB');
+const p2moveA = id('p2moveA');
+const p2moveB = id('p2moveB');
+const movePrompt = id('moveprompt')
 
 const gameLoop = (p1name, gb1) => {
 
@@ -22,13 +27,13 @@ const gameLoop = (p1name, gb1) => {
   let playerOne = humanPlayerFactory(p1name);
   let playerTwo = AIPlayerFactory('Computer');
   
-  // set up AI gameboard
+  // set up AI gameboard 
   let gb2 = gameboardFactory('gb2');
 
   playerTwo.placeAIships(gb2);
   console.log('about to update movewrapper classList');
   moveWrapper.classList = 'shown wrappergrid';
-  movep1.textContent = 'Your move admiral.'
+  movePrompt.textContent = 'Your move admiral.'
  
   var winner = '';
 
@@ -57,11 +62,14 @@ const gameLoop = (p1name, gb1) => {
 
       // NOT BASE CASE
       console.log('not the base case.')
+      // resetMessageArea();
 
       // attack
       if (currentPlayer.category === 'human') {
         // define attackHandler
         var attackHandler = function(e) {
+          resetMessageArea();
+          p1moveA.textContent = 'You fired and ...'
           let target = e.target;
           if (target.classList.contains('cell')) {
             var cellID = target.id;
@@ -86,6 +94,7 @@ const gameLoop = (p1name, gb1) => {
         gbcontainer2.addEventListener('click', attackHandler);
         
       } else if (currentPlayer.category === 'robot') {
+        p2moveA.textContent = 'The enemy fired and ...';
         currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;

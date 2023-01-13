@@ -1,6 +1,8 @@
 const humanPlayerFactory = (name) => {
   const category = 'human';
 
+  
+
   const attack = (a,b,board) => {
     return board.receiveAttack(a,b);
   }
@@ -66,6 +68,8 @@ const AIPlayerFactory = (name) => {
     } // end not base case
   } // END PLACE AI SHIPS
   
+
+  // How can I make this wait before returning?
   const attack = (board) => {
     console.log('AI is attacking')
     let possibleMoves = board.getPossible();

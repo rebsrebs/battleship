@@ -11,6 +11,11 @@ const movep3 = id('movep3');
 const gameoverp1 = id('gameoverp1');
 const gameoverp2 = id('gameoverp2');
 const gameoverp3 = id('gameoverp3');
+const p1moveA = id('p1moveA');
+const p1moveB = id('p1moveB');
+const p2moveA = id('p2moveA');
+const p2moveB = id('p2moveB');
+const movePrompt = id('moveprompt')
 
 const gameboardFactory = (name) => {
 
@@ -78,8 +83,11 @@ const gameboardFactory = (name) => {
     return result;
   }
 
+  const delay = ms => new Promise(res => setTimeout(res, ms));
+
   // Receive Attack Method
-  const receiveAttack = (x, y) => {
+  const receiveAttack = async (x, y) => {
+    await delay(800);
     console.log(`${name} is receiving attack at ${x}, ${y}`);
     // make variable of DOM element of attacked spot
     let targetCellNum = cells.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
@@ -97,20 +105,31 @@ const gameboardFactory = (name) => {
     } else {
       const firedShot = [x,y];
       firedShots.push(firedShot);
+
+      // GET CORRECT DOM ELEMENT TO UPDATE
+      let gbNum = name.slice(2);
+      if (gbNum == 1) {
+        var attackerNum = 2;
+      } else if (gbNum == 2) {
+        var attackerNum = 1;
+      }
+      console.log(`gbNum is ${gbNum} and attackerNum is ${attackerNum}`)
+      let pCode = document.getElementById(`p${attackerNum}moveB`);
+      
       // IF HIT
       if (isThereAShipHere(x,y) != '') {
         let currentShip = isThereAShipHere(x,y);
         currentShip.hit();
+        pCode.textContent = `and hit ${name}'s ${currentShip.name}.`
         targetCell.classList = 'cell cell-ship'
         if (currentShip.isSunk() == true) {
           sunk += 1;
         }
-        console.log(`${name}'s ${currentShip.name} was hit.`)
-        movep2.textContent = `${name}'s ${currentShip.name} was hit.`
         return 'hit!';
       // IF MISS
       } else {
         missed.push(firedShot);
+        pCode.textContent = `missed.`
         targetCell.classList = 'cell cell-miss'
         return 'miss!';
       }
