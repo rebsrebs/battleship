@@ -15,10 +15,8 @@ const movep3 = id('movep3');
 const gameoverp1 = id('gameoverp1');
 const gameoverp2 = id('gameoverp2');
 const gameoverp3 = id('gameoverp3');
-const p1moveA = id('p1moveA');
-const p1moveB = id('p1moveB');
-const p2moveA = id('p2moveA');
-const p2moveB = id('p2moveB');
+const p1move = id('p1move');
+const p2move = id('p2move');
 const movePrompt = id('moveprompt')
 
 const gameLoop = (p1name, gb1) => {
@@ -70,8 +68,9 @@ const gameLoop = (p1name, gb1) => {
       if (currentPlayer.category === 'human') {
         // define attackHandler
         var attackHandler = function(e) {
+          console.log('Human attack handler is running.')
           resetMessageArea();
-          p1moveA.textContent = 'You fired and ...'
+          p1move.textContent = 'You fired ...'
           let target = e.target;
           if (target.classList.contains('cell')) {
             var cellID = target.id;
@@ -97,7 +96,7 @@ const gameLoop = (p1name, gb1) => {
         
       } else if (currentPlayer.category === 'robot') {
         await delay(1500);
-        p2moveA.textContent = 'The enemy fired and ...';
+        p2move.textContent = 'The enemy fired ...';
         currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;

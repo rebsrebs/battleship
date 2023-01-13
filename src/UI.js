@@ -18,10 +18,8 @@ const movep2 = id('movep2');
 const toggleBtn = id('togglebtn');
 const directionDisplay = id('direction');
 const startgamebtnwrapper = id('startgamebtnwrapper');
-const p1moveA = id('p1moveA');
-const p1moveB = id('p1moveB');
-const p2moveA = id('p2moveA');
-const p2moveB = id('p2moveB');
+const p1move = id('p1move');
+const p2move = id('p2move');
 const movePrompt = id('moveprompt')
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -310,10 +308,8 @@ function cellShip(targ) {
 }
 
 function resetMessageArea() {
-  p1moveA.textContent = '';
-  p1moveB.textContent = '';
-  p2moveA.textContent = '';
-  p2moveB.textContent = '';
+  p1move.textContent = '';
+  p2move.textContent = '';
   movePrompt.textContent = '';
 }
 

@@ -216,3 +216,9 @@ input.nsformitem {
 p.griditem {
   font-size: 20px;
 }
+
+.movediv {
+  display: flex;
+  justify-content: left;
+  width: 50%;
+}

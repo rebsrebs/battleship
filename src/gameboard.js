@@ -5,16 +5,11 @@ const moveWrapper = id('movewrapper');
 const gameOverWrapper = id('gameoverwrapper');
 const gbcontainer1 = id('gbcontainer1');
 const gbcontainer2 = id('gbcontainer2');
-const movep1 = id('movep1');
-const movep2 = id('movep2');
-const movep3 = id('movep3');
 const gameoverp1 = id('gameoverp1');
 const gameoverp2 = id('gameoverp2');
 const gameoverp3 = id('gameoverp3');
-const p1moveA = id('p1moveA');
-const p1moveB = id('p1moveB');
-const p2moveA = id('p2moveA');
-const p2moveB = id('p2moveB');
+const p1move = id('p1move');
+const p2move = id('p2move');
 const movePrompt = id('moveprompt')
 
 const gameboardFactory = (name) => {
@@ -114,13 +109,13 @@ const gameboardFactory = (name) => {
         var attackerNum = 1;
       }
       console.log(`gbNum is ${gbNum} and attackerNum is ${attackerNum}`)
-      let pCode = document.getElementById(`p${attackerNum}moveB`);
+      let pCode = document.getElementById(`p${attackerNum}move`);
       
       // IF HIT
       if (isThereAShipHere(x,y) != '') {
         let currentShip = isThereAShipHere(x,y);
         currentShip.hit();
-        pCode.textContent = `and hit ${name}'s ${currentShip.name}.`
+        pCode.textContent += `and hit ${name}'s ${currentShip.name}.`
         targetCell.classList = 'cell cell-ship'
         if (currentShip.isSunk() == true) {
           sunk += 1;
@@ -129,7 +124,7 @@ const gameboardFactory = (name) => {
       // IF MISS
       } else {
         missed.push(firedShot);
-        pCode.textContent = `missed.`
+        pCode.textContent += `and missed.`
         targetCell.classList = 'cell cell-miss'
         return 'miss!';
       }
