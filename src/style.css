@@ -1,8 +1,8 @@
 :root {
   --main-bg-color: white;
   --cell-plain-bg-color: rgb(163, 230, 245);
-  --cell-hover-bg-color: rgba(247, 138, 88, 0.531);
-  --cell-place-bg-color: pink;
+  --cell-hover-bg-color: rgba(9, 116, 140, 0.7);
+  --cell-place-bg-color: rgb(9, 116, 140);
   --cell-ship-bg-color: red;
   --cell-miss-bg-color: gray;
   --gb-bg-color:white;
