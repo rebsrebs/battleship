@@ -69,7 +69,7 @@ const gameLoop = (p1name, gb1) => {
       // attack
       if (currentPlayer.category === 'human') {
         // define attackHandler
-        gbcontainer1.classList.remove('firehere');
+        // gbcontainer1.classList.remove('firehere');
         gbcontainer2.classList.add('firehere');
         var attackHandler = function(e) {
           gbcontainer2.classList.remove('crosshair');
@@ -104,7 +104,7 @@ const gameLoop = (p1name, gb1) => {
       } else if (currentPlayer.category === 'robot') {
         await delay(1200);
         gbcontainer2.classList.remove('firehere');
-        gbcontainer1.classList.add('firehere');
+        // gbcontainer1.classList.add('firehere');
         p2move.textContent = 'The enemy fired ...';
         // the follow await makes sure you can't fire again before the enemy finishes firing.
         await currentPlayer.attack(enemyGameboard);
