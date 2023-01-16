@@ -20,7 +20,8 @@ const directionDisplay = id('direction');
 const startgamebtnwrapper = id('startgamebtnwrapper');
 const p1move = id('p1move');
 const p2move = id('p2move');
-const movePrompt = id('moveprompt')
+const movePrompt = id('moveprompt');
+const messagearea = id('messagearea');
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -79,6 +80,7 @@ const createBoards = () => {
 function welcome() {
   const nameBtn = id('namebtn');
   nameBtn.addEventListener('click', function(){
+    messagearea.classList.remove('firehere');
     const p1name = id('p1name').value;
     welcomeform.classList = 'hidden';
     welcomeform.remove();
