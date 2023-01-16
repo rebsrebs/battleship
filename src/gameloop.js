@@ -101,13 +101,13 @@ const gameLoop = (p1name, gb1) => {
         gbcontainer2.addEventListener('click', attackHandler);
         
       } else if (currentPlayer.category === 'robot') {
-        await delay(1500);
+        await delay(1200);
         p2move.textContent = 'The enemy fired ...';
         // the follow await makes sure you can't fire again before the enemy finishes firing.
         await currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;
-        await delay(500);
+        await delay(400);
         movePrompt.textContent = 'Your move, admiral.'
         // wait before recursing
         gbcontainer2.classList.add('crosshair');

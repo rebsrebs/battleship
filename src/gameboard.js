@@ -82,7 +82,7 @@ const gameboardFactory = (name) => {
 
   // Receive Attack Method
   const receiveAttack = async (x, y) => {
-    await delay(800);
+    await delay(500);
     console.log(`${name} is receiving attack at ${x}, ${y}`);
     // make variable of DOM element of attacked spot
     let targetCellNum = cells.indexOf((cells.find((el) => el[0] === x && el[1] === y)));

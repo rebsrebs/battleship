@@ -119,18 +119,6 @@ toggleBtn.addEventListener('click', function() {
 // </ol>;
 // }
 
-// UI interactions for attack time
-// fireWhenReady function
-// set yellow glowing box shadow around enemy gameboard
-// await 1 second with ... before reporting back
-// You hit the enemy's (shipName);
-// Miss! 
-
-// enemysTurn
-// The enemy fired into your waters and ... 
-// hit your (shipName)
-// missed! 
-
 // PLACE SHIPS RECURSIVE FUNCTION
 function placeShips (name, gameboard, shipIdx = 0) {
   // BASE CASE - if all gameboard ships have been placed
