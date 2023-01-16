@@ -5,6 +5,7 @@
   --cell-place-bg-color: rgb(9, 116, 140);
   --cell-ship-bg-color: red;
   --cell-miss-bg-color: gray;
+  --cell-fire-bg-color: orange;
   --gb-bg-color:white;
   --message-area-bg-color: white;
   --gbOne-bg-color: green;
@@ -168,6 +169,12 @@ input.nsformitem {
 
 .cell-miss {
   background-color: var(--cell-miss-bg-color);
+}
+
+.cell-fire {
+  /* background-color: var(--cell-fire-bg-color); */
+  transition: transform .2s; /* Animation */
+  transform: scale(1.1);
 }
 
 .message {

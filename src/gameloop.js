@@ -68,18 +68,16 @@ const gameLoop = (p1name, gb1) => {
 
       // attack
       if (currentPlayer.category === 'human') {
-        // define attackHandler
-        // gbcontainer1.classList.remove('firehere');
         gbcontainer2.classList.add('firehere');
         var attackHandler = function(e) {
           gbcontainer2.classList.remove('crosshair');
           console.log('Human attack handler is running.')
           resetMessageArea();
-          // console.log('about to add crosshair')
-          // gbcontainer2.classList.add('crosshair');
           p1move.textContent = 'You fired ...'
           let target = e.target;
           if (target.classList.contains('cell')) {
+            // change color of cell when its clicked before it changes again
+            target.classList.add('cell-fire');
             var cellID = target.id;
             var locatorIdx = cellID.slice(4);
             var coords = gb2.getCells()[locatorIdx];
