@@ -35,7 +35,7 @@ const gameboardFactory = (name) => {
    const battleship = shipFactory('battleship', 4);
    const destroyer = shipFactory('destroyer', 3);
    const submarine = shipFactory('submarine', 3);
-   const patrolBoat = shipFactory('patrolBoat', 2);
+   const patrolBoat = shipFactory('patrol boat', 2);
 
   // create placedShips object
   let placedShips = [
