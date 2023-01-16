@@ -85,6 +85,7 @@ function welcome() {
     placementwrapper.classList = 'shown wrappergrid';
     let gb1 = gameboardFactory('gb1');
     // placeAIShips('Computer', gameboardTwo);
+    gbcontainer1.classList.add('placeshipshere');
     placeShips(p1name, gb1); 
 
   });
@@ -125,6 +126,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
     console.log('base case - ships placed');
     placementwrapper.classList = 'hidden';
+    gbcontainer1.classList.remove('placeshipshere');
     gameLoop(name, gameboard)
     return;
   // NOT BASE CASE
