@@ -5,7 +5,7 @@
   --cell-place-bg-color: rgb(9, 116, 140);
   --cell-ship-bg-color: red;
   --cell-miss-bg-color: gray;
-  --cell-fire-bg-color: orange;
+  --cell-fire-bg-color: rgba(9, 116, 140, 0.4);
   --gb-bg-color:white;
   --message-area-bg-color: white;
   --gbOne-bg-color: green;
