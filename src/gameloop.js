@@ -25,15 +25,15 @@ const gameLoop = (p1name, gb1) => {
   
   // set up players
   let playerOne = humanPlayerFactory(p1name);
-  let playerTwo = AIPlayerFactory('Computer');
+  let playerTwo = AIPlayerFactory('The Enemy');
   
   // set up AI gameboard 
-  let gb2 = gameboardFactory('gb2');
+  let gb2 = gameboardFactory('gb2', `the enemy's`);
 
   playerTwo.placeAIships(gb2);
   console.log('about to update movewrapper classList');
   moveWrapper.classList = 'shown wrappergrid';
-  movePrompt.textContent = 'Your move admiral.'
+  movePrompt.textContent = `Your move, Admiral ${p1name}.`
   gbcontainer2.classList.add('crosshair');
  
   var winner = '';
@@ -49,13 +49,13 @@ const gameLoop = (p1name, gb1) => {
     if (gb1.areAllSunk() == true) {
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
-      gameoverp1.textContent = 'game over. player 2 wins.'
+      gameoverp1.textContent = 'Game over. The enemy won.'
       winner = 'Player 2 wins!';
       return;
     } else if (gb2.areAllSunk() == true) {
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
-      gameoverp1.textContent = 'game over. player 1 wins.'
+      gameoverp1.textContent = `Game over. Admiral ${p1name}'s fleet defeated the enemy.`
       winner = 'Player 1 wins!';
       return;
 
@@ -131,7 +131,7 @@ const gameLoop = (p1name, gb1) => {
         currentPlayer = playerOne;
         enemyGameboard = gb2;
         await delay(400);
-        movePrompt.textContent = 'Your move, admiral.'
+        movePrompt.textContent = `Your move, Admiral ${p1name}.`
         // wait before recursing
         gbcontainer2.classList.add('crosshair');
         return playGame(currentPlayer, enemyGameboard);

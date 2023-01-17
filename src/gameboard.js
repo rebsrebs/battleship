@@ -2,17 +2,9 @@ import { shipFactory } from "./ship";
 
 const id = (ID) => document.getElementById(ID);
 const moveWrapper = id('movewrapper');
-const gameOverWrapper = id('gameoverwrapper');
-const gbcontainer1 = id('gbcontainer1');
-const gbcontainer2 = id('gbcontainer2');
-const gameoverp1 = id('gameoverp1');
-const gameoverp2 = id('gameoverp2');
-const gameoverp3 = id('gameoverp3');
-const p1move = id('p1move');
-const p2move = id('p2move');
-const movePrompt = id('moveprompt')
 
-const gameboardFactory = (name) => {
+
+const gameboardFactory = (name, posessive) => {
 
   let numShipsToPlace = 5;
 
@@ -115,7 +107,7 @@ const gameboardFactory = (name) => {
       if (isThereAShipHere(x,y) != '') {
         let currentShip = isThereAShipHere(x,y);
         currentShip.hit();
-        pCode.textContent += ` and hit ${name}'s ${currentShip.name}.`
+        pCode.textContent += ` and hit ${posessive} ${currentShip.name}.`
         targetCell.classList = 'cell cell-ship'
         if (currentShip.isSunk() == true) {
           sunk += 1;
@@ -151,7 +143,7 @@ const gameboardFactory = (name) => {
   const getPlacedShips = () => placedShips;
   const getNumShipsToPlace = () => numShipsToPlace;
 
-  return { name, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere }
+  return { name, posessive, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere }
 }
 
 export { gameboardFactory };

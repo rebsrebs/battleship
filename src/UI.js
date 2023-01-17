@@ -74,7 +74,8 @@ function welcome() {
     welcomeform.classList = 'hidden';
     welcomeform.remove();
     placementwrapper.classList = 'shown wrappergrid';
-    let gb1 = gameboardFactory('gb1');
+    // create human's gameboard object
+    let gb1 = gameboardFactory('gb1', 'your');
     gbcontainer1.classList.add('placeshipshere');
     placeShips(p1name, gb1);
   });
