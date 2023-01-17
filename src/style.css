@@ -281,3 +281,30 @@ p.griditem {
   margin-left: 5px;
   height: 18px;
 }
+
+#scorecontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+ul.score {
+  margin-left: 15px;
+}
+
+li {
+  list-style-type: none;
+  margin: 5px 0px 5px 0px;
+}
+
+.shipslist {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.scoresunkship {
+  text-decoration: line-through;
+}

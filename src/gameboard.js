@@ -1,4 +1,5 @@
 import { shipFactory } from "./ship";
+import { crossOutShip } from "./UI";
 
 const id = (ID) => document.getElementById(ID);
 const moveWrapper = id('movewrapper');
@@ -111,7 +112,7 @@ const gameboardFactory = (name, posessive) => {
         if (currentShip.isSunk() == true) {
           sunk += 1;
           pCode.textContent += ` and sunk ${posessive} ${currentShip.name}!`
-          // also update score area
+          crossOutShip(name, currentShip.name);
         } else {
           pCode.textContent += ` and hit ${posessive} ${currentShip.name}.`
         }

@@ -8,8 +8,10 @@
 </head>
 <body>
 
+  <!-- SIDEBAR -->
   <div id="sidebar">
-     <!-- RULES -->
+
+    <!-- RULES -->
     <div id="rulescontainer">
       <button type="button" aria-controls="rules" id="rulesbtn">Show Rules</button>
         <div id="rules" class="hidden">
@@ -20,94 +22,123 @@
             <li>The winner is the first to sink all of their enemy's boats.</li>
           </ol>
         </div>
-    
       </div>
       <!-- END RULES CONTAINER--> 
+
+      <!-- SCORE -->
+      <div id="scorecontainer" class="invisible">
+        <!-- YOUR ACTIVE SHIPS --> 
+        <div id="gb1-ships" class="shipslist">
+          <h3>Your Fleet</h3>
+          <ul class="score">
+            <li id="gb1-carrier">Carrier</li>
+            <li id="gb1-battleship">Battleship</li>
+            <li id="gb1-destroyer">Desyroyer</li>
+            <li id="gb1-submarine">Submarine</li>
+            <li id="gb1-patrolboat">Patrol Boat</li>
+          </ul>
+        </div>
+        <!-- ENEMY'S ACTIVE SHIPS --> 
+        <div id="gb2-ships" class="shipslist">
+          <h3>The Enemy's Fleet</h3>
+          <ul class="score">
+            <li id="gb2-carrier">Carrier</li>
+            <li id="gb2-battleship">Battleship</li>
+            <li id="gb2-destroyer">Desyroyer</li>
+            <li id="gb2-submarine">Submarine</li>
+            <li id="gb2-patrolboat">Patrol Boat</li>
+          </ul>
+        </div>
+      </div> <!-- END SCORE CONTAINER--> 
+
   </div>
   <!-- END SIDEBAR--> 
 
+  <!-- MAIN -->
   <div id="main">
   <h1 id ="maintitle">BATTLESHIP</h1>
 
-  <div id="messagearea" class="firehere">
+    <!-- MESSAGE AREA -->
+    <div id="messagearea" class="firehere">
 
-    <!-- WELCOME FORM WRAPPER GRID -->
-    <form class = "shown wrappergrid" action="" id="welcomeform">
-      <!-- ROW 1 -->
-      <label for="p1name" class="nsformitem message griditemtop griditem">Please enter your name:</label>
-      <!-- ROW 2 -->
-      <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem griditemmiddle griditem">
-      <!-- ROW 3 -->
-      <button type="button" id="namebtn" class="nsformitem griditembottom griditem">Submit</button>
-    </form>
-    <!-- END WELCOME FORM WRAPPER -->
+      <!-- WELCOME FORM WRAPPER GRID -->
+      <form class = "shown wrappergrid" action="" id="welcomeform">
+        <!-- ROW 1 -->
+        <label for="p1name" class="nsformitem message griditemtop griditem">Please enter your name:</label>
+        <!-- ROW 2 -->
+        <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem griditemmiddle griditem">
+        <!-- ROW 3 -->
+        <button type="button" id="namebtn" class="nsformitem griditembottom griditem">Submit</button>
+      </form>
+      <!-- END WELCOME FORM WRAPPER -->
 
-    <!-- PLACEMENT WRAPPER -->
-    <div id="placementwrapper" class="hidden">
-      <!-- ROW 1 -->
-      <p id="placemessage" class = "message griditem griditemtop"></p>
-      <!-- ROW 2 -->
-      <button class = "griditem griditemmiddle" id="togglebtn" aria-controls = "direction">
-        Toggle Ship Direction
-        <img src="src/images/refresh-cw..svg" alt="toggle icon" id="toggleicon">
-      </button>   
-      <!-- ROW 3 -->
-      <p class = "griditem griditembottom" id="direction" data-status="horizontal">Horizontal</p>
-    </div>
-    <!-- END PLACEMENT WRAPPER -->
-
-    <!-- MOVE WRAPPER -->
-    <div id="movewrapper" class="hidden">
-      <!-- ROW 1 -->
-      <div class="griditem griditemtop movediv">
-        <p id="p1move" class = "message"></p>
+      <!-- PLACEMENT WRAPPER -->
+      <div id="placementwrapper" class="hidden">
+        <!-- ROW 1 -->
+        <p id="placemessage" class = "message griditem griditemtop"></p>
+        <!-- ROW 2 -->
+        <button class = "griditem griditemmiddle" id="togglebtn" aria-controls = "direction">
+          Toggle Ship Direction
+          <img src="src/images/refresh-cw..svg" alt="toggle icon" id="toggleicon">
+        </button>   
+        <!-- ROW 3 -->
+        <p class = "griditem griditembottom" id="direction" data-status="horizontal">Horizontal</p>
       </div>
-      <!-- ROW 2 -->
-      <div class="griditem griditemmiddle movediv">
-        <p id="p2move" class = "message"></p>
+      <!-- END PLACEMENT WRAPPER -->
+
+      <!-- MOVE WRAPPER -->
+      <div id="movewrapper" class="hidden">
+        <!-- ROW 1 -->
+        <div class="griditem griditemtop movediv">
+          <p id="p1move" class = "message"></p>
+        </div>
+        <!-- ROW 2 -->
+        <div class="griditem griditemmiddle movediv">
+          <p id="p2move" class = "message"></p>
+        </div>
+        <!-- ROW 3 -->
+        <div class = "griditem griditembottom movediv">
+          <p id="moveprompt" class="message"></p>
+        </div>
       </div>
-      <!-- ROW 3 -->
-      <div class = "griditem griditembottom movediv">
-        <p id="moveprompt" class="message"></p>
+      <!-- END YOUR MOVE WRAPPER -->
+
+      <!-- GAME OVER WRAPPER -->
+      <div id="gameoverwrapper" class="hidden">
+        <!-- ROW 1 -->
+        <p id="gameoverp1" class = "movemsg message griditem griditemtop">Game over.</p>
+        <!-- ROW 2 -->
+        <p id="gameoverp2" class = "movemsg message griditem griditemmiddle"></p>
+        <!-- ROW 3 -->
+        <p id="gameoverp3" class = "message griditem griditembottom"></p>
       </div>
+      <!-- END GAME OVER WRAPPER -->
+
     </div>
-    <!-- END YOUR MOVE WRAPPER -->
-
-    <!-- GAME OVER WRAPPER -->
-    <div id="gameoverwrapper" class="hidden">
-      <!-- ROW 1 -->
-      <p id="gameoverp1" class = "movemsg message griditem griditemtop">Game over.</p>
-      <!-- ROW 2 -->
-      <p id="gameoverp2" class = "movemsg message griditem griditemmiddle"></p>
-      <!-- ROW 3 -->
-      <p id="gameoverp3" class = "message griditem griditembottom"></p>
-    </div>
-    <!-- END GAME OVER WRAPPER -->
-
-  </div>
-  <!-- END MESSAGE AREA -->
+    <!-- END MESSAGE AREA -->
 
 
-  <div id="gameboardrow">
+    <!-- GAMEBOARD ROW -->
+    <div id="gameboardrow">
 
-    <div class="gameboardcolumn">
-      <h3>Friendly Waters</h3>
-      <div class="gameboardcontainer" id="gbcontainer1">
+      <div class="gameboardcolumn">
+        <h3>Friendly Waters</h3>
+        <div class="gameboardcontainer" id="gbcontainer1">
+        </div>
       </div>
-    </div>
 
-
-    <div class="gameboardcolumn">
-      <h3>Enemy Waters</h3>
-      <div class="gameboardcontainer" id="gbcontainer2">
+      <div class="gameboardcolumn">
+        <h3>Enemy Waters</h3>
+        <div class="gameboardcontainer" id="gbcontainer2">
+        </div>
       </div>
+
     </div>
-  </div>
+    <!-- END GAMEBOARD ROW -->
 
 </div>
+<!-- END MAIN -->
 
- 
-  
   <script src="bundle.js"></script>
 </body>
 </html>

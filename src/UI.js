@@ -18,6 +18,15 @@ const messagearea = id('messagearea');
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+function crossOutShip(board, ship) {
+  console.log(`board is ${board} and ship is ${ship}`);
+  if (ship === 'patrol boat') {
+    ship = 'patrolboat';
+  }
+  const targ = document.getElementById(`${board}-${ship}`);
+  targ.classList.add('scoresunkship');
+}
+
 function updateText(ID, string) {
   const domElement = document.getElementById(ID);
   domElement.textContent = string;
@@ -263,4 +272,4 @@ function resetMessageArea() {
   movePrompt.textContent = '';
 }
 
-export { createBoards, placeShips, welcome, updateText, showWrapper, hide, cellMiss, cellShip, resetMessageArea, delay }
+export { createBoards, placeShips, welcome, updateText, showWrapper, hide, cellMiss, cellShip, resetMessageArea, delay, crossOutShip }

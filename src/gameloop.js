@@ -18,6 +18,7 @@ const gameoverp3 = id('gameoverp3');
 const p1move = id('p1move');
 const p2move = id('p2move');
 const movePrompt = id('moveprompt')
+const scoreContainer = id('scorecontainer');
 
 const gameLoop = (p1name, gb1) => {
 
@@ -31,6 +32,10 @@ const gameLoop = (p1name, gb1) => {
   let gb2 = gameboardFactory('gb2', `the enemy's`);
 
   playerTwo.placeAIships(gb2);
+
+  // console.log('about to show scorecontainer)
+  scoreContainer.classList = 'shown';
+
   console.log('about to update movewrapper classList');
   moveWrapper.classList = 'shown wrappergrid';
   movePrompt.textContent = `Your move, Admiral ${p1name}.`
