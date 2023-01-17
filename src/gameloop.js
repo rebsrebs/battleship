@@ -64,11 +64,30 @@ const gameLoop = (p1name, gb1) => {
       // NOT BASE CASE
       console.log('not the base case.')
       
-      // resetMessageArea();
+      
 
       // attack
       if (currentPlayer.category === 'human') {
         gbcontainer2.classList.add('firehere');
+
+        // define aimHandler - highlights cells you hover over before attacking
+        var aimHandler = function(e) {
+          let target = e.target;
+          if (target.classList.contains('cell')) {
+            target.classList.add('cell-aim');
+        }
+      }
+
+        // define unAimHandler - removes highlight
+        var unAimHandler = function(e) {
+          let target = e.target;
+          if (target.classList.contains('cell')) {
+            target.classList.remove('cell-aim');
+        }
+      }
+
+
+        // define attackHandler
         var attackHandler = function(e) {
           gbcontainer2.classList.remove('crosshair');
           console.log('Human attack handler is running.')
@@ -77,6 +96,7 @@ const gameLoop = (p1name, gb1) => {
           let target = e.target;
           if (target.classList.contains('cell')) {
             // change color of cell when its clicked before it changes again
+            // target.classList.remove('cell-aim');
             target.classList.add('cell-fire');
             var cellID = target.id;
             var locatorIdx = cellID.slice(4);
@@ -97,6 +117,8 @@ const gameLoop = (p1name, gb1) => {
         } // end attackHandler
     
         // this should only add when current player is human
+        gbcontainer2.addEventListener('mouseover', aimHandler);
+        gbcontainer2.addEventListener('mouseout', unAimHandler);
         gbcontainer2.addEventListener('click', attackHandler);
         
       } else if (currentPlayer.category === 'robot') {
