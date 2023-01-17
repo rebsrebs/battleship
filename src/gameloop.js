@@ -20,36 +20,23 @@ const p2move = id('p2move');
 const movePrompt = id('moveprompt')
 const scoreContainer = id('scorecontainer');
 
-const gameLoop = (p1name, gb1) => {
-
+const playGame = (p1name, gb1) => {
   console.log('gameloop is running.')
-  
   // set up players
   let playerOne = humanPlayerFactory(p1name);
   let playerTwo = AIPlayerFactory('The Enemy');
-  
   // set up AI gameboard 
   let gb2 = gameboardFactory('gb2', `the enemy's`);
-
   playerTwo.placeAIships(gb2);
-
-  // console.log('about to show scorecontainer)
   scoreContainer.classList = 'shown';
-
-  console.log('about to update movewrapper classList');
+  // show move message area
   moveWrapper.classList = 'shown wrappergrid';
   movePrompt.textContent = `Your move, Admiral ${p1name}.`
   gbcontainer2.classList.add('crosshair');
- 
   var winner = '';
-
-  console.log(gb1.getPlacedShips());
-  console.log(gb2.getPlacedShips());
-
   // define gameplaying function
-  const playGame = async(currentPlayer = playerOne, enemyGameboard = gb2) => {
-    console.log('playGame is running.')
-
+  const gameLoop = async(currentPlayer = playerOne, enemyGameboard = gb2) => {
+    console.log('gameLoop is running.')
     // BASE CASES
     if (gb1.areAllSunk() == true) {
       moveWrapper.classList = 'hidden';
@@ -111,12 +98,12 @@ const gameLoop = (p1name, gb1) => {
             // if result was already clicked, recurse without switching
             if (result === 'Already tried this spot.') {
               gbcontainer2.removeEventListener('click', attackHandler);
-              return playGame(currentPlayer, enemyGameboard);
+              return gameLoop(currentPlayer, enemyGameboard);
             } else {
             currentPlayer = playerTwo;
             enemyGameboard = gb1;
             gbcontainer2.removeEventListener('click', attackHandler);
-            return playGame(currentPlayer, enemyGameboard);
+            return gameLoop(currentPlayer, enemyGameboard);
             }
           } // end if target is cell
         } // end attackHandler
@@ -139,13 +126,13 @@ const gameLoop = (p1name, gb1) => {
         movePrompt.textContent = `Your move, Admiral ${p1name}.`
         // wait before recursing
         gbcontainer2.classList.add('crosshair');
-        return playGame(currentPlayer, enemyGameboard);
+        return gameLoop(currentPlayer, enemyGameboard);
       }
     }
   }
   // run game playing loop
-  playGame(); 
+  gameLoop(); 
   return winner;
 }
 
-export { gameLoop }
+export { playGame }

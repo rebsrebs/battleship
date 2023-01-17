@@ -1,5 +1,5 @@
 import { gameboardFactory } from "./gameboard";
-import { gameLoop } from "./gameloop";
+import { playGame } from "./gameloop";
 
 const id = (ID) => document.getElementById(ID);
 const welcomeform = id('welcomeform');
@@ -108,7 +108,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
     console.log('base case - ships placed');
     placementwrapper.classList = 'hidden';
     gbcontainer1.classList.remove('placeshipshere');
-    gameLoop(name, gameboard)
+    playGame(name, gameboard)
     return;
   // NOT BASE CASE
   } else {
