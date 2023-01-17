@@ -107,10 +107,13 @@ const gameboardFactory = (name, posessive) => {
       if (isThereAShipHere(x,y) != '') {
         let currentShip = isThereAShipHere(x,y);
         currentShip.hit();
-        pCode.textContent += ` and hit ${posessive} ${currentShip.name}.`
         targetCell.classList = 'cell cell-ship'
         if (currentShip.isSunk() == true) {
           sunk += 1;
+          pCode.textContent += ` and sunk ${posessive} ${currentShip.name}!`
+          // also update score area
+        } else {
+          pCode.textContent += ` and hit ${posessive} ${currentShip.name}.`
         }
         return 'hit!';
       // IF MISS
