@@ -27,7 +27,7 @@
   <!-- END SIDEBAR--> 
 
   <div id="main">
-  <h1>BATTLESHIP</h1>
+  <h1 id ="maintitle">BATTLESHIP</h1>
 
   <div id="messagearea" class="firehere">
 
@@ -47,21 +47,14 @@
       <!-- ROW 1 -->
       <p id="placemessage" class = "message griditem griditemtop"></p>
       <!-- ROW 2 -->
-      <p class = "griditem griditemmiddle" id="direction" data-status="horizontal">Horizontal</p>
+      <button class = "griditem griditemmiddle" id="togglebtn" aria-controls = "direction">
+        Toggle Ship Direction
+        <img src="src/images/refresh-cw..svg" alt="toggle icon" id="toggleicon">
+      </button>   
       <!-- ROW 3 -->
-      <button class = "griditem griditembottom" id="togglebtn" aria-controls = "direction">Toggle ship direction:</button>      
+      <p class = "griditem griditembottom" id="direction" data-status="horizontal">Horizontal</p>
     </div>
     <!-- END PLACEMENT WRAPPER -->
-
-    <!-- START GAME WRAPPER -->
-    <!-- <div id="startgamebtnwrapper" class="hidden"> -->
-      <!-- ROW 1 -->
-      <!-- ROW 2 -->
-      <!-- <p id="shipsinplace" class="griditem griditemmiddle">All ships are in place.</p> -->
-      <!-- ROW 3 -->
-      <!-- <button id="startbtn" class="griditem griditembottom">Start Game</button>
-    </div> -->
-    <!-- END START GAME WRAPPER -->
 
     <!-- MOVE WRAPPER -->
     <div id="movewrapper" class="hidden">

@@ -28,6 +28,10 @@ body {
   grid-template-rows: auto;
 }
 
+h1#maintitle {
+  margin-bottom: 10px;
+}
+
 #sidebar {
   box-sizing: border-box;
   width: 100%;
@@ -267,4 +271,9 @@ p.griditem {
 
 .firehere {
   box-shadow: var(--place-here-box-shadow);
+}
+
+#toggleicon {
+  margin-left: 5px;
+  height: 18px;
 }

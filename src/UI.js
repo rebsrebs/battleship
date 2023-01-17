@@ -1,4 +1,3 @@
-import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 import { gameLoop } from "./gameloop";
 
@@ -84,7 +83,10 @@ function welcome() {
     const p1name = id('p1name').value;
     welcomeform.classList = 'hidden';
     welcomeform.remove();
+    
     placementwrapper.classList = 'shown wrappergrid';
+    console.log('About to append toggle icon')
+    
     let gb1 = gameboardFactory('gb1');
     // placeAIShips('Computer', gameboardTwo);
     gbcontainer1.classList.add('placeshipshere');
