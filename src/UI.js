@@ -4,19 +4,13 @@ import { gameLoop } from "./gameloop";
 const id = (ID) => document.getElementById(ID);
 const welcomeform = id('welcomeform');
 const placementwrapper = id('placementwrapper');
-const startGameWrapper = id('startgamebtnwrapper');
-const moveWrapper = id('movewrapper');
-const gameOverWrapper = id('gameoverwrapper');
 const placeMsg = id('placemessage');
 const gbcontainer1 = id('gbcontainer1');
 const gbcontainer2 = id('gbcontainer2');
 const rulesbtn = id('rulesbtn');
-const startbtn = id('startbtn');
 const rules = id('rules');
-const movep2 = id('movep2');
 const toggleBtn = id('togglebtn');
 const directionDisplay = id('direction');
-const startgamebtnwrapper = id('startgamebtnwrapper');
 const p1move = id('p1move');
 const p2move = id('p2move');
 const movePrompt = id('moveprompt');
@@ -52,16 +46,13 @@ rulesbtn.addEventListener("click", function() {
   }
 }) // END RULES EVENT LISTENER
 
-// STAYS IN UI - CALLED BY INDEX.JS
-// CREATE CELLS FOR TWO GAMEBOARDS
-// DOM BOARDS ONLY
+// CREATE CELLS FOR TWO DOM GAMEBOARDS - called by index.js
 const createBoards = () => {
   for (let i = 0; i < 100; i++) {
     var cell = document.createElement('div');
     cell.className = (`cell cell-plain`);
     cell.id = (`gb1-${i}`);
     gbcontainer1.appendChild(cell);
-    // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
   }
 
   for (let i = 0; i < 100; i++) {
@@ -69,13 +60,12 @@ const createBoards = () => {
     cell.className = (`cell cell-plain`)
     cell.id = (`gb2-${i}`);
     gbcontainer2.appendChild(cell);
-    // console.log(`cell class is ${cell.className} and cell id is ${cell.id}`);
   }
 } // END CREATE BOARDS
 
 // WELCOME FUNCTION
 // When you submit your name, hide the welcome form, show the placement wrapper,
-// create the gameboards
+// create the gameboards pbjects
 function welcome() {
   const nameBtn = id('namebtn');
   nameBtn.addEventListener('click', function(){
@@ -83,19 +73,12 @@ function welcome() {
     const p1name = id('p1name').value;
     welcomeform.classList = 'hidden';
     welcomeform.remove();
-    
     placementwrapper.classList = 'shown wrappergrid';
-    console.log('About to append toggle icon')
-    
     let gb1 = gameboardFactory('gb1');
-    // placeAIShips('Computer', gameboardTwo);
     gbcontainer1.classList.add('placeshipshere');
-    placeShips(p1name, gb1); 
-
+    placeShips(p1name, gb1);
   });
 }
-
-
 
 toggleBtn.addEventListener('click', function() {
   if (directionDisplay.getAttribute("data-status") === 'horizontal') {
@@ -107,22 +90,6 @@ toggleBtn.addEventListener('click', function() {
   }
 })
 
-
-
-
-
-
-
-// function createRules() {
-//   const rules2 = document.createElement('div');
-//   rules2.id = 'rules';
-//   rules2.innerHTML = <ol>
-//   <li>Place your battleships in the water.</li>
-//   <li>You and the computer will take turns firing at each other's water.</li>
-//   <li>When a ship has been hit in each cell, it sinks.</li>
-//   <li>The winner is the first to sink all of their enemy's boats.</li>
-// </ol>;
-// }
 
 // PLACE SHIPS RECURSIVE FUNCTION
 function placeShips (name, gameboard, shipIdx = 0) {
@@ -137,7 +104,6 @@ function placeShips (name, gameboard, shipIdx = 0) {
   } else {
     let currentShip = gameboard.getPlacedShips()[shipIdx];
     placeMsg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
-
 
     // define hoverHandler
     var hoverHandler = function(e) {
@@ -209,13 +175,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
       }
     } // end unhover handler
 
-
-
-
-
     // define clickHandler
     var clickHandler = function(e) {
-     
     let target = e.target;
       if (target.classList.contains('cell')) {
         var cellID = target.id;
@@ -260,15 +221,11 @@ function placeShips (name, gameboard, shipIdx = 0) {
               currentCell.classList = `cell cell-placed`
               // push coordinates of cell into ship's location array
               let currentCellCoords = [(Number(coords[0]) + Number(i)),coords[1]];
-              // console.log('About to push cell location to current ship location');
-              // console.log(currentCellCoords);
               currentShip.location.push(currentCellCoords);    
             } else if (dir === 'vertical') {
               let currentCell = document.getElementById(`gb1-${Number(locatorIdx)+(i*10)}`);
               currentCell.classList = `cell cell-placed`
               let currentCellCoords = [coords[0],(Number(coords[1]) + Number(i))];
-              // console.log('About to push cell location to current ship location');
-              // console.log(currentCellCoords);
               currentShip.location.push(currentCellCoords);  
             }
           }
@@ -277,7 +234,6 @@ function placeShips (name, gameboard, shipIdx = 0) {
           gbcontainer1.removeEventListener('click', clickHandler);
           gbcontainer1.removeEventListener('mouseover', hoverHandler);
           gbcontainer1.removeEventListener('mouseout', unhoverHandler);
-          
           // recurse
           return placeShips(name, gameboard, shipIdx);
         // end if it fits on board
@@ -289,7 +245,6 @@ function placeShips (name, gameboard, shipIdx = 0) {
     gbcontainer1.addEventListener('click', clickHandler)
     gbcontainer1.addEventListener('mouseout', unhoverHandler);
     gbcontainer1.addEventListener('mouseover', hoverHandler);
-    
   }  // end not base case
 } // END PLACE SHIPS FUNCTION
 
