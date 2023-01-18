@@ -16,10 +16,12 @@ const p2move = id('p2move');
 const movePrompt = id('moveprompt');
 const messagearea = id('messagearea');
 
+
+
+
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 function crossOutShip(board, ship) {
-  // console.log(`board is ${board} and ship is ${ship}`);
   if (ship === 'patrol boat') {
     ship = 'patrolboat';
   }
@@ -41,20 +43,6 @@ function hide(ID) {
   const domElement = document.getElementById(ID);
   domElement.classList = 'hidden';
 }
-
-// UI
-// RULES EVENT LISTENER
-// rulesbtn.addEventListener("click", function() {
-//   if (rules.classList == 'hidden') {
-//     rules.classList = 'shown';
-//     rulesbtn.textContent = 'Hide Rules';
-//     // remove rules container from DOM?
-//   } else {
-//     rules.classList = 'hidden';
-//     rulesbtn.textContent = 'Show Rules';
-//   }
-// }) 
-// END RULES EVENT LISTENER
 
 // CREATE CELLS FOR TWO DOM GAMEBOARDS - called by index.js
 const createBoards = () => {

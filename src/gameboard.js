@@ -4,6 +4,15 @@ import { crossOutShip } from "./UI";
 const id = (ID) => document.getElementById(ID);
 const moveWrapper = id('movewrapper');
 
+// get index from DOMgameboard ID and return location
+function lookUpLocation(clickedCell) {
+  let cellID = clickedCell.ID;
+  let gb = cellID.slice(0,3);
+  let idx = cellID.slice(4);
+  let loc = gb.getCells()[idx];
+  return loc;
+}
+
 const gameboardFactory = (name, posessive) => {
   let numShipsToPlace = 5;
   // create array of 100 cells
@@ -104,14 +113,11 @@ const gameboardFactory = (name, posessive) => {
           for (let i = 0; i < sunkCells.length; i++) {
             let xx = sunkCells[i][0];
             let yy = sunkCells[i][1];
+            // later write utility function to do this?
             let locId = cells.indexOf((cells.find((el) => el[0] === xx && el[1] === yy)));
             let tarCel = document.getElementById(`gb${gbNum}-${locId}`);
             tarCel.classList = 'cell cell-sunk-ship';
           }
-          // gbNum is the number of this gameBoard
-          // change all cells of ship to 'cell cell-sunk-ship'
-          // for every item in sunkCells, get the DOM element
-
 
           pCode.textContent += ` and sunk ${posessive} ${currentShip.name}!`
           crossOutShip(name, currentShip.name);

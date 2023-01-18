@@ -9,7 +9,7 @@ const humanPlayerFactory = (name) => {
   return {name, category, attack};
 };
 
-
+const gbcontainer1 = document.getElementById('gbcontainer1');
 
 const AIPlayerFactory = (name) => {
 
@@ -71,24 +71,79 @@ const AIPlayerFactory = (name) => {
   
 
   // AI Attack
-  const attack = (board) => {
+  const attack = (otherBoard) => {
     console.log('AI is attacking')
-    let possibleMoves = board.getPossible();
+    let possibleMoves = otherBoard.getPossible();
+    // find the first cell on the board that has class 'cell-hit-ship'
+    let hitCell = gbcontainer1.querySelector('.cell-hit-ship');
 
-    // this finds a ship that has been hit - but AI should not have access to the ships coordinates
-    let hitShip = board.getPlacedShips().find((entry) => entry.ship.getHits() > 0);
-    console.log(hitShip);
-    
-    // if there are any ships that are hit but not sunk
-      // try firing next to the hit square
-
-    // else
-      // random move
+    if (hitCell == null) {
+      console.log('There are no hit cells, so making a random move.')
       let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
       let a = shot[0];
       let b = shot[1];
-      return board.receiveAttack(a,b);
-    
+      return otherBoard.receiveAttack(a,b);
+
+    // if there is a hit but not sunk cell - find adjacent cell to fire on
+    } else if (hitCell != null) {
+      console.log('There is a hit cell.')
+      let hitCells = gbcontainer1.querySelectorAll('.cell-hit-ship');
+
+      // LOOP THRU HIT CELLS
+      for (let i = 0; i < hitCells.length; i++) {
+        let hitCellID = hitCells[i].id; //example gb1-74
+        let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
+        console.log(`hitCoords is:`)
+        console.log(hitCoords);
+        let hitX = Number(hitCoords[0]);
+        let hitY = Number(hitCoords[1]);
+        // check if you can try X + 1
+        if (hitX + 1 < 10) {
+          console.log('hitX + 1 is < 11')
+          let adjCoords = [hitX + 1, hitY];
+          // if its a possible move
+          if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+            console.log('Adjacent cell found in possible moves.')
+            return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+          } 
+        }
+
+        if (hitX - 1 > 0) {
+          console.log('hitX - 1 is > 0')
+          let adjCoords = [hitX - 1, hitY];
+          if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+            console.log('Adjacent cell found in possible moves.')
+            return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+          } 
+        }
+
+        if (hitY + 1 < 10) {
+          console.log('hitY + 1 is < 11')
+          let adjCoords = [hitX, hitY + 1];
+          if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+            console.log('Adjacent cell found in possible moves.')
+            return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+          }
+        }
+
+        if (hitY - 1 > 0) {
+          console.log('hitY - 1 is > 0')
+          let adjCoords = [hitX, hitY -1];
+          if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+            console.log('Adjacent cell found in possible moves.')
+            return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+          }
+        } // end possible adjacent moves
+      } // end for loop
+
+      // if there are no adjacent moves - make a random move
+      console.log('gave up on smart move, gonna do a random attack.')
+      let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+      let a = shot[0];
+      let b = shot[1];
+      return otherBoard.receiveAttack(a,b);
+    } 
+      
   } // End AI Attack
   
   return {name, category, attack, placeAIships};
