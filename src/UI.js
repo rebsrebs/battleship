@@ -19,7 +19,7 @@ const messagearea = id('messagearea');
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 function crossOutShip(board, ship) {
-  console.log(`board is ${board} and ship is ${ship}`);
+  // console.log(`board is ${board} and ship is ${ship}`);
   if (ship === 'patrol boat') {
     ship = 'patrolboat';
   }
@@ -117,7 +117,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
     // define hoverHandler
     var hoverHandler = function(e) {
-      console.log('hovered!');
+      // console.log('hovered!');
       let target = e.target;
       if (target.classList.contains('cell')) {
         var cellID = target.id;
@@ -136,13 +136,13 @@ function placeShips (name, gameboard, shipIdx = 0) {
             if (dir === 'horizontal') {
               let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)}`)
               if (!currentCell.classList.contains('cell-placed')) {
-                console.log('no ship class')
+                // console.log('no ship class')
               currentCell.classList = 'cell cell-hover'
               }
             } else if (dir === 'vertical') {
               let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)*10}`)
               if (!currentCell.classList.contains('cell-placed')) {
-                console.log('no ship class')
+                // console.log('no ship class')
                 currentCell.classList = 'cell cell-hover'
                 }
             }
@@ -153,7 +153,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
     // define unhoverHandler
     var unhoverHandler = function(e) {
-      console.log('unhovered!')
+      // console.log('unhovered!')
       let target = e.target;
       if (target.classList.contains('cell')) {
         var cellID = target.id;
@@ -218,7 +218,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
           // check if there's a ship in the way of where you want to place ship
           for (let i=0; i < shipLength; i++) {
             if (gameboard.isThereAShipHere(proposedShipLoc[i][0], proposedShipLoc[i][1]) != '') {
-              console.log ('ship in the way');
+              // console.log ('ship in the way');
               return;
             }
           } // end for loop

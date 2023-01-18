@@ -4,32 +4,26 @@ import { crossOutShip } from "./UI";
 const id = (ID) => document.getElementById(ID);
 const moveWrapper = id('movewrapper');
 
-
 const gameboardFactory = (name, posessive) => {
-
   let numShipsToPlace = 5;
-
-   // create array of 100 cells
-   let cells = [];
-   for (let y = 1; y < 11; y++) {
-     for (let x = 1; x< 11; x++) {
-       cells.push([x,y]);
-     }
-   }
-
+  // create array of 100 cells
+  let cells = [];
+  for (let y = 1; y < 11; y++) {
+    for (let x = 1; x< 11; x++) {
+      cells.push([x,y]);
+    }
+  }
   // declare more arrays
   let possible = [...cells]; // possible moves
   let missed = [];
   let firedShots = []; 
   let sunk = 0; // sunk ships
-
    // create ships
    const carrier = shipFactory('carrier', 5);
    const battleship = shipFactory('battleship', 4);
    const destroyer = shipFactory('destroyer', 3);
    const submarine = shipFactory('submarine', 3);
    const patrolBoat = shipFactory('patrol boat', 2);
-
   // create placedShips object
   let placedShips = [
     {
@@ -53,14 +47,11 @@ const gameboardFactory = (name, posessive) => {
       location: []
     }
   ]
-
   // Is there a ship here function - returns true or undefined
   const isThereAShipHere = (x ,y) => {
-    console.log(`isThereAShipHere method is running, checking if ${x}, ${y} already has a ship.` )
     let result = '';
     for (let i = 0; i < placedShips.length; i++) {
       let currentLocArray = placedShips[i].location;
-      // console.log(`currentLocArray is ${currentLocArray}`);
       var match = currentLocArray.find(arr => arr[0] === x && arr[1] === y);
       if (match != undefined) {
         return result = placedShips[i].ship;
@@ -69,14 +60,14 @@ const gameboardFactory = (name, posessive) => {
       }
     } // end for loop
     return result;
-  }
+  } // end isThereAShipHere method
 
   const delay = ms => new Promise(res => setTimeout(res, ms));
 
   // Receive Attack Method
   const receiveAttack = async (x, y) => {
+    console.log(`${name}'s is receiveAttack is running at ${x}, ${y}`);
     await delay(500);
-    console.log(`${name} is receiving attack at ${x}, ${y}`);
     // make variable of DOM element of attacked spot
     let targetCellNum = cells.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
     let targetCell = document.getElementById(`${name}-${targetCellNum}`);
@@ -93,7 +84,6 @@ const gameboardFactory = (name, posessive) => {
     } else {
       const firedShot = [x,y];
       firedShots.push(firedShot);
-
       // GET CORRECT DOM ELEMENT TO UPDATE
       let gbNum = name.slice(2);
       if (gbNum == 1) {
@@ -101,9 +91,7 @@ const gameboardFactory = (name, posessive) => {
       } else if (gbNum == 2) {
         var attackerNum = 1;
       }
-      console.log(`gbNum is ${gbNum} and attackerNum is ${attackerNum}`)
       let pCode = document.getElementById(`p${attackerNum}move`);
-      
       // IF HIT
       if (isThereAShipHere(x,y) != '') {
         let currentShip = isThereAShipHere(x,y);
@@ -116,6 +104,7 @@ const gameboardFactory = (name, posessive) => {
         } else {
           pCode.textContent += ` and hit ${posessive} ${currentShip.name}.`
         }
+        // could i return all sunk info here?
         return 'hit!';
       // IF MISS
       } else {
@@ -133,7 +122,8 @@ const gameboardFactory = (name, posessive) => {
       console.log(`All ${name} ships are sunk.`)
       return true;
     } else {
-      console.log(`There are ${possible.length} moves left on ${name} gameboard`)
+      // console.log(`There are ${possible.length} moves left on ${name} gameboard`)
+      console.log(`Not all ships on ${name} have been sunk yet.`)
       return false;
     }
   }
@@ -147,7 +137,7 @@ const gameboardFactory = (name, posessive) => {
   const getPlacedShips = () => placedShips;
   const getNumShipsToPlace = () => numShipsToPlace;
 
-  return { name, posessive, getCells, getMissed, receiveAttack, getSunk, areAllSunk,  getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere }
+  return { name, posessive, getCells, getMissed, receiveAttack, getSunk, areAllSunk, getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere }
 }
 
 export { gameboardFactory };

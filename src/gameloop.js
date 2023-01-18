@@ -34,6 +34,7 @@ const playGame = (p1name, gb1) => {
   movePrompt.textContent = `Your move, Admiral ${p1name}.`
   gbcontainer2.classList.add('crosshair');
   var winner = '';
+
   // define gameplaying function
   const gameLoop = async(currentPlayer = playerOne, enemyGameboard = gb2) => {
     console.log('gameLoop is running.')
@@ -43,58 +44,53 @@ const playGame = (p1name, gb1) => {
       gameOverWrapper.classList = 'shown wrappergrid';
       gameoverp1.textContent = 'Game over. The enemy won.'
       winner = 'Player 2 wins!';
-      return;
+      console.log(winner);
+      // return;
     } else if (gb2.areAllSunk() == true) {
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
       gameoverp1.textContent = `Game over. Admiral ${p1name}'s fleet defeated the enemy.`
       winner = 'Player 1 wins!';
-      return;
+      console.log(winner);
+      // return;
 
     } else {
-
       // NOT BASE CASE
       console.log('not the base case.')
-      
-      
-
-      // attack
+      // IF HUMANS TURN
       if (currentPlayer.category === 'human') {
+        console.log('currentPlayer.category is human');
+        // make enemy gameboard look active
         gbcontainer2.classList.add('firehere');
-
         // define aimHandler - highlights cells you hover over before attacking
         var aimHandler = function(e) {
           let target = e.target;
           if (target.classList.contains('cell')) {
             target.classList.add('cell-aim');
+          }
         }
-      }
-
         // define unAimHandler - removes highlight
         var unAimHandler = function(e) {
           let target = e.target;
           if (target.classList.contains('cell')) {
             target.classList.remove('cell-aim');
+          }
         }
-      }
-
-
         // define attackHandler
-        var attackHandler = function(e) {
-          gbcontainer2.classList.remove('crosshair');
+        var attackHandler = async function(e) {
           console.log('Human attack handler is running.')
+          gbcontainer2.classList.remove('crosshair');
+          gbcontainer2.classList.remove('firehere');
           resetMessageArea();
           p1move.textContent = 'You fired ...'
           let target = e.target;
           if (target.classList.contains('cell')) {
-            // change color of cell when its clicked before it changes again
-            // target.classList.remove('cell-aim');
             target.classList.add('cell-fire');
             var cellID = target.id;
             var locatorIdx = cellID.slice(4);
             var coords = gb2.getCells()[locatorIdx];
             // attack
-            let result = currentPlayer.attack(coords[0],coords[1],enemyGameboard);
+            let result = await currentPlayer.attack(coords[0],coords[1],enemyGameboard);
             // if result was already clicked, recurse without switching
             if (result === 'Already tried this spot.') {
               gbcontainer2.removeEventListener('click', attackHandler);
@@ -107,16 +103,15 @@ const playGame = (p1name, gb1) => {
             }
           } // end if target is cell
         } // end attackHandler
-    
         // this should only add when current player is human
         gbcontainer2.addEventListener('mouseover', aimHandler);
         gbcontainer2.addEventListener('mouseout', unAimHandler);
         gbcontainer2.addEventListener('click', attackHandler);
-        
+        // PLAYER 2 TURN
       } else if (currentPlayer.category === 'robot') {
+        console.log('currentPlayer.category is robot')
         await delay(1200);
-        gbcontainer2.classList.remove('firehere');
-        // gbcontainer1.classList.add('firehere');
+        // gbcontainer2.classList.remove('firehere');
         p2move.textContent = 'The enemy fired ...';
         // the follow await makes sure you can't fire again before the enemy finishes firing.
         await currentPlayer.attack(enemyGameboard);
@@ -124,13 +119,12 @@ const playGame = (p1name, gb1) => {
         enemyGameboard = gb2;
         await delay(400);
         movePrompt.textContent = `Your move, Admiral ${p1name}.`
-        // wait before recursing
         gbcontainer2.classList.add('crosshair');
         return gameLoop(currentPlayer, enemyGameboard);
-      }
-    }
-  }
-  // run game playing loop
+      } // end if current player is computer
+    } // end if not base case
+  } // end gameLoop
+
   gameLoop(); 
   return winner;
 }
