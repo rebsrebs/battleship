@@ -11,19 +11,6 @@
   <!-- SIDEBAR -->
   <div id="sidebar">
 
-    <!-- RULES -->
-    <div id="rulescontainer">
-      <button type="button" aria-controls="rules" id="rulesbtn">Show Rules</button>
-        <div id="rules" class="hidden">
-          <ol>
-            <li>Place your battleships in the water.</li>
-            <li>You and the computer will take turns firing at each other's water.</li>
-            <li>When a ship has been hit in each cell, it sinks.</li>
-            <li>The winner is the first to sink all of their enemy's boats.</li>
-          </ol>
-        </div>
-      </div>
-      <!-- END RULES CONTAINER--> 
 
       <!-- SCORE -->
       <div id="scorecontainer" class="invisible">
@@ -31,25 +18,42 @@
         <div id="gb1-ships" class="shipslist">
           <h3>Your Fleet</h3>
           <ul class="score">
-            <li id="gb1-carrier">Carrier</li>
-            <li id="gb1-battleship">Battleship</li>
-            <li id="gb1-destroyer">Destroyer</li>
-            <li id="gb1-submarine">Submarine</li>
-            <li id="gb1-patrolboat">Patrol Boat</li>
+            <li class="scoreli" id="gb1-carrier">Carrier</li>
+            <li class="scoreli" id="gb1-battleship">Battleship</li>
+            <li class="scoreli" id="gb1-destroyer">Destroyer</li>
+            <li class="scoreli" id="gb1-submarine">Submarine</li>
+            <li class="scoreli" id="gb1-patrolboat">Patrol Boat</li>
           </ul>
         </div>
         <!-- ENEMY'S ACTIVE SHIPS --> 
         <div id="gb2-ships" class="shipslist">
           <h3>The Enemy's Fleet</h3>
           <ul class="score">
-            <li id="gb2-carrier">Carrier</li>
-            <li id="gb2-battleship">Battleship</li>
-            <li id="gb2-destroyer">Destroyer</li>
-            <li id="gb2-submarine">Submarine</li>
-            <li id="gb2-patrolboat">Patrol Boat</li>
+            <li class="scoreli" id="gb2-carrier">Carrier</li>
+            <li class="scoreli" id="gb2-battleship">Battleship</li>
+            <li class="scoreli" id="gb2-destroyer">Destroyer</li>
+            <li class="scoreli" id="gb2-submarine">Submarine</li>
+            <li class="scoreli" id="gb2-patrolboat">Patrol Boat</li>
           </ul>
         </div>
       </div> <!-- END SCORE CONTAINER--> 
+
+    <!-- RULES -->
+    <div id="rulescontainer">
+      <!-- <button type="button" aria-controls="rules" id="rulesbtn">Show Rules</button> -->
+        <!-- <div id="rules" class="hidden"> -->
+          <div id="rules">
+          <h3 id="battleshiprulesheader">Battleship Rules</h3>
+          <ul id="battleshiprulesol">
+            <li>Place your battleships in the water.</li>
+            <li>You and the computer will take turns firing at each other's water.</li>
+            <li>When a ship has been hit in each cell, it sinks.</li>
+            <li>The winner is the first to sink all of their enemy's boats.</li>
+          </ul>
+        </div>
+      </div>
+      <!-- END RULES CONTAINER--> 
+
 
   </div>
   <!-- END SIDEBAR--> 

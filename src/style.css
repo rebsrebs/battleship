@@ -15,6 +15,7 @@
   --place-here-box-shadow: 0px 0px 30px 0px rgb(255, 68, 0);
   --fire-here-box-shadow: 0px 0px 30px 0px rgb(255, 68, 0);
   --subtle-box-shadow: -2px 2px 0px #0d012d25;
+  height: 100vh;
 }
 
 *{
@@ -24,27 +25,35 @@
 
 body {
   display: grid;
-  grid-template-columns: 300px auto;
-  grid-template-rows: auto;
+  grid-template-columns: 325px auto;
+  height: 100vh;
 }
 
 h1#maintitle {
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 }
 
 #sidebar {
   box-sizing: border-box;
   width: 100%;
   grid-column: 1 / 2;
-  padding: 20px 20px 20px 20px;
   border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
+
 
 #main {
   grid-column: 2 / 3;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* centers vertically */
+  justify-content: center; 
   align-items: center;
   background-color: var(--main-bg-color);
   font-family:Arial, Helvetica, sans-serif;
@@ -52,7 +61,6 @@ h1#maintitle {
 
 h1 {
   font-size: 60px;
-  padding: 10px;
 }
 
 button {
@@ -75,20 +83,20 @@ button:active {
   background-color: rgb(245, 176, 92);
 }
 
-#rulescontainer {
+#rulescontainer, #scorecontainer.shown {
+  width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  padding: 25px;
+  margin-left: 10px;
+  margin-bottom: 30px;
   /* background-color:aquamarine; */
 }
 
-#rules {
-  font-size: 16px;
-}
 
-li { 
-  margin: 4px;
-}
+
+
 
 /* #namestartcontainer
 #axiscontainer
@@ -195,7 +203,7 @@ input.nsformitem {
   background-color: var(--message-area-bg-color);
   width: 600px;
   height: 180px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   border: 1px solid black;
 }
 
@@ -282,29 +290,31 @@ p.griditem {
   height: 18px;
 }
 
-#scorecontainer {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .invisible {
   visibility: hidden;
 }
 
-ul.score {
+ul {
   margin-left: 15px;
 }
 
 li {
-  list-style-type: none;
-  margin: 5px 0px 5px 0px;
+  margin: 10px 0px 10px 15px;
+  font-size: 18px;
 }
 
-.shipslist {
-  margin-top: 20px;
+li.scoreli {
+  list-style-type: none;
+}
+
+
+.shipslist, #rulescontainer {
   margin-bottom: 20px;
 }
 
 .scoresunkship {
   text-decoration: line-through;
 }
+

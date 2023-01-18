@@ -7,8 +7,8 @@ const placementwrapper = id('placementwrapper');
 const placeMsg = id('placemessage');
 const gbcontainer1 = id('gbcontainer1');
 const gbcontainer2 = id('gbcontainer2');
-const rulesbtn = id('rulesbtn');
-const rules = id('rules');
+// const rulesbtn = id('rulesbtn');
+// const rules = id('rules');
 const toggleBtn = id('togglebtn');
 const directionDisplay = id('direction');
 const p1move = id('p1move');
@@ -44,16 +44,17 @@ function hide(ID) {
 
 // UI
 // RULES EVENT LISTENER
-rulesbtn.addEventListener("click", function() {
-  if (rules.classList == 'hidden') {
-    rules.classList = 'shown';
-    rulesbtn.textContent = 'Hide Rules';
-    // remove rules container from DOM?
-  } else {
-    rules.classList = 'hidden';
-    rulesbtn.textContent = 'Show Rules';
-  }
-}) // END RULES EVENT LISTENER
+// rulesbtn.addEventListener("click", function() {
+//   if (rules.classList == 'hidden') {
+//     rules.classList = 'shown';
+//     rulesbtn.textContent = 'Hide Rules';
+//     // remove rules container from DOM?
+//   } else {
+//     rules.classList = 'hidden';
+//     rulesbtn.textContent = 'Show Rules';
+//   }
+// }) 
+// END RULES EVENT LISTENER
 
 // CREATE CELLS FOR TWO DOM GAMEBOARDS - called by index.js
 const createBoards = () => {
