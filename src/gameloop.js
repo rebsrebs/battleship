@@ -93,6 +93,8 @@ const playGame = (p1name, gb1) => {
             let result = await currentPlayer.attack(coords[0],coords[1],enemyGameboard);
             // if result was already clicked, recurse without switching
             if (result === 'Already tried this spot.') {
+              target.classList.remove('cell-fire');
+              p1move.textContent = p1move.textContent + ' false alarm, please fire again.'
               gbcontainer2.removeEventListener('click', attackHandler);
               return gameLoop(currentPlayer, enemyGameboard);
             } else {
