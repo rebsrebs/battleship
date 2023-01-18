@@ -79,6 +79,7 @@ const playGame = (p1name, gb1) => {
         // define attackHandler
         var attackHandler = async function(e) {
           console.log('Human attack handler is running.')
+          gbcontainer2.removeEventListener('click', attackHandler);
           gbcontainer2.classList.remove('crosshair');
           gbcontainer2.classList.remove('firehere');
           resetMessageArea();
@@ -100,7 +101,6 @@ const playGame = (p1name, gb1) => {
             } else {
             currentPlayer = playerTwo;
             enemyGameboard = gb1;
-            gbcontainer2.removeEventListener('click', attackHandler);
             return gameLoop(currentPlayer, enemyGameboard);
             }
           } // end if target is cell
