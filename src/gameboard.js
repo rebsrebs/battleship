@@ -96,9 +96,23 @@ const gameboardFactory = (name, posessive) => {
       if (isThereAShipHere(x,y) != '') {
         let currentShip = isThereAShipHere(x,y);
         currentShip.hit();
-        targetCell.classList = 'cell cell-ship'
+        targetCell.classList = 'cell cell-hit-ship'
         if (currentShip.isSunk() == true) {
           sunk += 1;
+          // change classList of sunk ship cells to 'cell cell-sunk-ship'
+          let sunkCells = placedShips.find((item) => item.ship.name === currentShip.name).location;
+          for (let i = 0; i < sunkCells.length; i++) {
+            let xx = sunkCells[i][0];
+            let yy = sunkCells[i][1];
+            let locId = cells.indexOf((cells.find((el) => el[0] === xx && el[1] === yy)));
+            let tarCel = document.getElementById(`gb${gbNum}-${locId}`);
+            tarCel.classList = 'cell cell-sunk-ship';
+          }
+          // gbNum is the number of this gameBoard
+          // change all cells of ship to 'cell cell-sunk-ship'
+          // for every item in sunkCells, get the DOM element
+
+
           pCode.textContent += ` and sunk ${posessive} ${currentShip.name}!`
           crossOutShip(name, currentShip.name);
         } else {

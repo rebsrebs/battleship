@@ -1,7 +1,6 @@
 const humanPlayerFactory = (name) => {
-  const category = 'human';
 
-  
+  const category = 'human';
 
   const attack = (a,b,board) => {
     return board.receiveAttack(a,b);
@@ -9,6 +8,8 @@ const humanPlayerFactory = (name) => {
 
   return {name, category, attack};
 };
+
+
 
 const AIPlayerFactory = (name) => {
 
@@ -69,15 +70,27 @@ const AIPlayerFactory = (name) => {
   } // END PLACE AI SHIPS
   
 
-  // How can I make this wait before returning?
+  // AI Attack
   const attack = (board) => {
     console.log('AI is attacking')
     let possibleMoves = board.getPossible();
-    let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
-    let a = shot[0];
-    let b = shot[1];
-    return board.receiveAttack(a,b);
-  }
+
+    // this finds a ship that has been hit - but AI should not have access to the ships coordinates
+    let hitShip = board.getPlacedShips().find((entry) => entry.ship.getHits() > 0);
+    console.log(hitShip);
+    
+    // if there are any ships that are hit but not sunk
+      // try firing next to the hit square
+
+    // else
+      // random move
+      let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+      let a = shot[0];
+      let b = shot[1];
+      return board.receiveAttack(a,b);
+    
+  } // End AI Attack
+  
   return {name, category, attack, placeAIships};
 };
 

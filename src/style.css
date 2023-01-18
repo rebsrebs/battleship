@@ -4,6 +4,8 @@
   --cell-hover-bg-color: rgba(9, 116, 140, 0.7);
   --cell-place-bg-color: rgb(9, 116, 140);
   --cell-ship-bg-color: red;
+  --cell-hit-ship-bg-color: red;
+  --cell-sunk-ship-bg-color: rgb(255, 0, 174);
   --cell-miss-bg-color: gray;
   --cell-fire-bg-color: rgba(9, 116, 140, 0.4);
   --gb-bg-color:white;
@@ -175,8 +177,12 @@ input.nsformitem {
   background-color: var(--cell-place-bg-color);
 }
 
-.cell-ship {
-  background-color: var(--cell-ship-bg-color);
+.cell-hit-ship {
+  background-color: var(--cell-hit-ship-bg-color);
+}
+
+.cell-sunk-ship {
+  background-color: var(--cell-sunk-ship-bg-color);
 }
 
 .cell-miss {

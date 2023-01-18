@@ -263,9 +263,7 @@ function cellMiss(targ) {
   targ.classList = 'cell cell-miss'
 }
 
-function cellShip(targ) {
-  targ.classList = 'cell cell-ship'
-}
+
 
 function resetMessageArea() {
   p1move.textContent = '';
@@ -273,4 +271,4 @@ function resetMessageArea() {
   movePrompt.textContent = '';
 }
 
-export { createBoards, placeShips, welcome, updateText, showWrapper, hide, cellMiss, cellShip, resetMessageArea, delay, crossOutShip }
+export { createBoards, placeShips, welcome, updateText, showWrapper, hide, cellMiss, resetMessageArea, delay, crossOutShip }
