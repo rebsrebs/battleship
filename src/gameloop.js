@@ -42,14 +42,14 @@ const playGame = (p1name, gb1) => {
     if (gb1.areAllSunk() == true) {
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
-      gameoverp1.textContent = 'Game over. The enemy won.'
+      gameoverp2.textContent = 'Game over. The enemy won.'
       winner = 'Player 2 wins!';
       console.log(winner);
       // return;
     } else if (gb2.areAllSunk() == true) {
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
-      gameoverp1.textContent = `Game over. Admiral ${p1name}'s fleet defeated the enemy.`
+      gameoverp2.textContent = `Game over. Admiral ${p1name}'s fleet defeated the enemy.`
       winner = 'Player 1 wins!';
       console.log(winner);
       // return;
