@@ -74,9 +74,9 @@ const AIPlayerFactory = (name) => {
   const attack = (otherBoard) => {
     console.log('AI is attacking')
     let possibleMoves = otherBoard.getPossible();
-    // find the first cell on the board that has class 'cell-hit-ship'
     let hitCell = gbcontainer1.querySelector('.cell-hit-ship');
 
+    // if there are no hit cells
     if (hitCell == null) {
       console.log('There are no hit cells, so making a random move.')
       let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
@@ -87,10 +87,109 @@ const AIPlayerFactory = (name) => {
     // if there is a hit but not sunk cell - find adjacent cell to fire on
     } else if (hitCell != null) {
       console.log('There is a hit cell.')
-      let hitCells = gbcontainer1.querySelectorAll('.cell-hit-ship');
+      let hitCells = Array.from(gbcontainer1.querySelectorAll('.cell-hit-ship'));
 
-      // LOOP THRU HIT CELLS
+      // figure out which direction hit cells are going in
+      let hitDirection = '';
+      // if there is more than one hit cell
+      if (hitCells.length > 1) {
+        console.log('there is more than one hit cell');
+        let hitCellIds = hitCells.map((item) => (item.id).slice(4))
+        console.log('hitCellIds is:')
+        console.log(hitCellIds);
+        if (Math.abs(hitCellIds[0] - hitCellIds[1]) === 1) {
+          console.log('gonna save hitDirection as horizontal');
+          hitDirection = 'horizontal';
+        } else {
+          console.log('gonna save hitDirection as vertical');
+          hitDirection = 'vertical';
+        }
+      }
+      console.log(`okay, so now hitDirection is ${hitDirection}`);
+
+      // this is ridiculous but here goes
+      if (hitDirection === 'horizontal' || hitDirection === '') {
+        console.log('hitDirection is horizontal or blank');
+        console.log(`hitDirection is ${hitDirection}`);
+
+        // LOOP THRU HIT CELLS HORIZONTALLY
+        for (let i = 0; i < hitCells.length; i++) {
+          console.log('in the first for loop - going horizontally')
+          let hitCellID = hitCells[i].id; //example gb1-74
+          let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
+          console.log(`hitCoords is:`)
+          console.log(hitCoords);
+          let hitX = Number(hitCoords[0]);
+          let hitY = Number(hitCoords[1]);
+
+          // HORIZONTAL
+          // check if you can try X + 1 - to the right
+          if (hitX + 1 < 11) {
+            console.log('hitX + 1 is < 11')
+            let adjCoords = [hitX + 1, hitY];
+            // if its a possible move
+            if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+              console.log('Adjacent cell found in possible moves.')
+              return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+            } 
+          }
+          // check if you can try X - 1 - to the left
+          if (hitX - 1 > 0) {
+            console.log('hitX - 1 is > 0')
+            let adjCoords = [hitX - 1, hitY];
+            if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+              console.log('Adjacent cell found in possible moves.')
+              return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+            } 
+          }
+        } // end for loop
+
+        // LOOP THRU HIT CELLS VERTICALLY
+        for (let i = 0; i < hitCells.length; i++) {
+          console.log('in the second for loop - going vertically')
+          let hitCellID = hitCells[i].id; //example gb1-74
+          let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
+          console.log(`hitCoords is:`)
+          console.log(hitCoords);
+          let hitX = Number(hitCoords[0]);
+          let hitY = Number(hitCoords[1]);
+
+          // VERTICAL
+          // check if you can try Y + 1 - up
+          if (hitY + 1 < 11) {
+            console.log('hitY + 1 is < 11')
+            let adjCoords = [hitX, hitY + 1];
+            if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+              console.log('Adjacent cell found in possible moves.')
+              return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+            }
+          }
+          // check if you can try Y - 1 - to the left - down
+          if (hitY - 1 > 0) {
+            console.log('hitY - 1 is > 0')
+            let adjCoords = [hitX, hitY -1];
+            if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+              console.log('Adjacent cell found in possible moves.')
+              return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+            }
+          } // end possible adjacent moves
+        } // end for loop vertically
+
+        // if there are no adjacent moves - make a random move
+        console.log('gave up on smart move, gonna do a random attack.')
+        let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+        let a = shot[0];
+        let b = shot[1];
+        return otherBoard.receiveAttack(a,b);
+
+
+      // end if hitDirection is horizontal or blank
+      } else {
+
+      // vertical for loops
+      // LOOP THRU HIT CELLS VERTICALLY
       for (let i = 0; i < hitCells.length; i++) {
+        console.log('in the second for loop - going vertically')
         let hitCellID = hitCells[i].id; //example gb1-74
         let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
         console.log(`hitCoords is:`)
@@ -98,7 +197,39 @@ const AIPlayerFactory = (name) => {
         let hitX = Number(hitCoords[0]);
         let hitY = Number(hitCoords[1]);
 
-        // check if you can try X + 1
+        // VERTICAL
+        // check if you can try Y + 1 - up
+        if (hitY + 1 < 11) {
+          console.log('hitY + 1 is < 11')
+          let adjCoords = [hitX, hitY + 1];
+          if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+            console.log('Adjacent cell found in possible moves.')
+            return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+          }
+        }
+        // check if you can try Y - 1 - to the left - down
+        if (hitY - 1 > 0) {
+          console.log('hitY - 1 is > 0')
+          let adjCoords = [hitX, hitY -1];
+          if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
+            console.log('Adjacent cell found in possible moves.')
+            return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
+          }
+        } // end possible adjacent moves
+      } // end for loop vertically
+
+      // LOOP THRU HIT CELLS HORIZONTALLY
+      for (let i = 0; i < hitCells.length; i++) {
+        console.log('in the first for loop - going horizontally')
+        let hitCellID = hitCells[i].id; //example gb1-74
+        let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
+        console.log(`hitCoords is:`)
+        console.log(hitCoords);
+        let hitX = Number(hitCoords[0]);
+        let hitY = Number(hitCoords[1]);
+
+        // HORIZONTAL
+        // check if you can try X + 1 - to the right
         if (hitX + 1 < 11) {
           console.log('hitX + 1 is < 11')
           let adjCoords = [hitX + 1, hitY];
@@ -108,7 +239,7 @@ const AIPlayerFactory = (name) => {
             return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
           } 
         }
-
+        // check if you can try X - 1 - to the left
         if (hitX - 1 > 0) {
           console.log('hitX - 1 is > 0')
           let adjCoords = [hitX - 1, hitY];
@@ -117,34 +248,16 @@ const AIPlayerFactory = (name) => {
             return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
           } 
         }
-
-        if (hitY + 1 < 11) {
-          console.log('hitY + 1 is < 11')
-          let adjCoords = [hitX, hitY + 1];
-          if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-            console.log('Adjacent cell found in possible moves.')
-            return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
-          }
-        }
-
-        if (hitY - 1 > 0) {
-          console.log('hitY - 1 is > 0')
-          let adjCoords = [hitX, hitY -1];
-          if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-            console.log('Adjacent cell found in possible moves.')
-            return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
-          }
-        } // end possible adjacent moves
       } // end for loop
 
-      // if there are no adjacent moves - make a random move
-      console.log('gave up on smart move, gonna do a random attack.')
-      let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
-      let a = shot[0];
-      let b = shot[1];
-      return otherBoard.receiveAttack(a,b);
-    } 
-      
+        // if there are no adjacent moves - make a random move
+        console.log('gave up on smart move, gonna do a random attack.')
+        let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+        let a = shot[0];
+        let b = shot[1];
+        return otherBoard.receiveAttack(a,b);
+      } // end if there are more than one hit cells
+    } // end if there are hit cells   
   } // End AI Attack
   
   return {name, category, attack, placeAIships};
