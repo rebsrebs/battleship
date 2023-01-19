@@ -97,8 +97,9 @@ const AIPlayerFactory = (name) => {
         console.log(hitCoords);
         let hitX = Number(hitCoords[0]);
         let hitY = Number(hitCoords[1]);
+
         // check if you can try X + 1
-        if (hitX + 1 < 10) {
+        if (hitX + 1 < 11) {
           console.log('hitX + 1 is < 11')
           let adjCoords = [hitX + 1, hitY];
           // if its a possible move
@@ -117,7 +118,7 @@ const AIPlayerFactory = (name) => {
           } 
         }
 
-        if (hitY + 1 < 10) {
+        if (hitY + 1 < 11) {
           console.log('hitY + 1 is < 11')
           let adjCoords = [hitX, hitY + 1];
           if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
