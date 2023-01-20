@@ -80,6 +80,23 @@ const AIPlayerFactory = (name) => {
     if (hitCell == null) {
       console.log('There are no hit cells, so making a random move.')
       let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+
+      // if I were trying to make the random move smarter
+      // get the index number out of 100 of that shot
+      let gbIdx = Number(otherBoard.getCells().indexOf(shot));
+      // get the id of that cell in the DOM
+      let gbId = `${otherBoard.name}-${gbIdx}`;
+      let gbIdxAbove = +gbIdx-10;
+      console.log(`${gbIdxAbove} is gbIdxAbove`);
+      let gbIdxBelow = +gbIdx+10;
+      console.log(`${gbIdxBelow} is gbIdxBelow`);
+      let gbIdxRight = +gbIdx+1;
+      console.log(`${gbIdxRight} is gbIdxRight`);
+      let gbIdxLeft = +gbIdx-1;
+      console.log(`${gbIdxLeft} is gbIdxLeft`);
+      
+
+
       let a = shot[0];
       let b = shot[1];
       return otherBoard.receiveAttack(a,b);
