@@ -70,36 +70,159 @@ const AIPlayerFactory = (name) => {
   } // END PLACE AI SHIPS
   
 
+
+
+
+
+
+
+
+
+
+
   // AI Attack
   const attack = (otherBoard) => {
+
     console.log('AI is attacking')
     let possibleMoves = otherBoard.getPossible();
+    let cells = otherBoard.getCells();
     let hitCell = gbcontainer1.querySelector('.cell-hit-ship');
 
     // if there are no hit cells
     if (hitCell == null) {
       console.log('There are no hit cells, so making a random move.')
+
+      // make a random move
+      // if there are less than 60 possible moves left
+        // make a totally random move
+      if (possibleMoves.length < 60) { 
       let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
-
-      // if I were trying to make the random move smarter
-      // get the index number out of 100 of that shot
-      let gbIdx = Number(otherBoard.getCells().indexOf(shot));
-      // get the id of that cell in the DOM
-      let gbId = `${otherBoard.name}-${gbIdx}`;
-      let gbIdxAbove = +gbIdx-10;
-      console.log(`${gbIdxAbove} is gbIdxAbove`);
-      let gbIdxBelow = +gbIdx+10;
-      console.log(`${gbIdxBelow} is gbIdxBelow`);
-      let gbIdxRight = +gbIdx+1;
-      console.log(`${gbIdxRight} is gbIdxRight`);
-      let gbIdxLeft = +gbIdx-1;
-      console.log(`${gbIdxLeft} is gbIdxLeft`);
-      
-
-
+      console.log(`shot is ${shot}`);
       let a = shot[0];
       let b = shot[1];
       return otherBoard.receiveAttack(a,b);
+
+      // if possible move length is above 60
+      // make an optimized random move
+      } else {
+        console.log('There are more than 60 possible moves left so we will optimize the random shot.')
+        // get the index number out of 100 of that shot
+        // let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+        // let gbIdx = Number(cells.indexOf(shot));
+        // console.log(`gbIdx is ${gbIdx}`);
+        // let gbId = `${otherBoard.name}-${gbIdx}`;
+
+        let cellAboveStatus = 'impossible'
+        let cellBelowStatus = 'impossible'
+        let cellRightStatus = 'impossible'
+        let cellLeftStatus = 'impossible'
+        // let theSituation = 'bad';
+
+        while ((cellLeftStatus === 'impossible' || cellRightStatus === 'impossible') && (cellAboveStatus === 'impossible' || cellBelowStatus === 'impossible')) {
+          console.log('STARTING WHILE LOOP TO OPTIMIZE RANDOM SHOT')
+          let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+          let gbIdx = Number(cells.indexOf(shot));
+          console.log(`shot is ${shot}`);
+
+          // ABOVE
+          let gbIdxAbove = +gbIdx-10;
+          // if above is on the board
+          if (gbIdxAbove >= 0) {
+
+            let gbIdAbove = `${otherBoard.name}-${gbIdxAbove}`
+            let cellAbove = document.getElementById(gbIdAbove);
+            // console.log(`cellAbove.classList is:`)
+            // console.log(cellAbove.classList)
+            
+            // if above has not been fired
+            if (!cellAbove.classList.contains('cell-miss') || !cellAbove.classList.contains('cell-sunk-ship') || !cellAbove.classList.contains('cell-hit-ship')) {
+              cellAboveStatus = 'possible';
+            // if above has been fired
+            } else {
+              cellAboveStatus = 'impossible';
+            }
+
+          } else {
+            cellAboveStatus = 'impossible';
+          }
+          // END ABOVE
+
+
+          // BELOW
+          let gbIdxBelow = +gbIdx+10;
+          // if below is on board
+          if (gbIdxBelow < 100) {
+            let gbIdBelow = `${otherBoard.name}-${gbIdxBelow}`
+            let cellBelow = document.getElementById(gbIdBelow);
+            // console.log(`cellBelow.classList is:`)
+            // console.log(cellBelow.classList)
+
+            if (!cellBelow.classList.contains('cell-miss') || !cellBelow.classList.contains('cell-sunk-ship') || !cellBelow.classList.contains('cell-hit-ship')) {
+              cellBelowStatus = 'possible';
+            } else {
+              cellBelowStatus = 'impossible';
+            }
+          } else {
+            cellBelowStatus = 'impossible';
+          }
+          // END BELOW
+
+          // RIGHT
+          let gbIdxRight = +gbIdx+1;
+          console.log(`${gbIdxRight} is gbIdxRight`);
+          // if right is on board
+          if (gbIdxRight < 100) {
+            // if right is in same row as shot
+            if (cells[gbIdxRight][0] === Number(shot[0])+1) {
+              let gbIdRight = `${otherBoard.name}-${gbIdxRight}`
+              let cellRight = document.getElementById(gbIdRight);
+              // if right has not been fired
+              if (!cellRight.classList.contains('cell-miss') || !cellRight.classList.contains('cell-sunk-ship') || !cellRight.classList.contains('cell-hit-ship')) {
+                cellRightStatus = 'possible';
+              } else {
+                cellRightStatus = 'impossible';
+              }
+            } else {
+              cellRightStatus = 'impossible';
+            }
+          }
+          // END RIGHT
+
+          // LEFT
+          let gbIdxLeft = +gbIdx-1;
+          console.log(`${gbIdxLeft} is gbIdxLeft`);
+          if (gbIdxLeft >= 0) {
+            // if left is in same row
+            if (cells[gbIdxLeft][0] === Number(shot[0])-1) {
+              let gbIdLeft = `${otherBoard.name}-${gbIdxLeft}`
+              let cellLeft = document.getElementById(gbIdLeft);
+              // if left is an unfired cell
+              if (!cellLeft.classList.contains('cell-miss') || !cellLeft.classList.contains('cell-sunk-ship') || !cellLeft.classList.contains('cell-hit-ship')) {
+                cellLeftStatus = 'possible';
+              // if left has already been fired
+              } else {
+                cellLeftStatus = 'impossible';
+              }
+            // if left is not in same row
+            } else {
+              cellLeftStatus = 'impossible';
+            } // end if left is in same row or not
+          } // end if to the left is on board
+
+          var a = shot[0];
+          var b = shot[1];
+
+          console.log(`cellAboveStatus is ${cellAboveStatus}`)
+          console.log(`cellBelowStatus is ${cellBelowStatus}`)
+          console.log(`cellRightStatus is ${cellRightStatus}`)
+          console.log(`cellLeftStatus is ${cellLeftStatus}`)
+
+        } //END WHILE LOOP
+
+          
+          return otherBoard.receiveAttack(a,b);
+
+      } // END IF THERE ARE MORE THAN 60 POSSIBLE MOVES LEFT
 
     // if there is a hit but not sunk cell - find adjacent cell to fire on
     } else if (hitCell != null) {
@@ -108,6 +231,7 @@ const AIPlayerFactory = (name) => {
 
       // figure out which direction hit cells are going in
       let hitDirection = '';
+
       // if there is more than one hit cell
       if (hitCells.length > 1) {
         console.log('there is more than one hit cell');
@@ -121,7 +245,7 @@ const AIPlayerFactory = (name) => {
           console.log('gonna save hitDirection as vertical');
           hitDirection = 'vertical';
         }
-      }
+      } // end if there are more than one hits
       console.log(`okay, so now hitDirection is ${hitDirection}`);
 
       // this is ridiculous but here goes
@@ -273,7 +397,9 @@ const AIPlayerFactory = (name) => {
         let a = shot[0];
         let b = shot[1];
         return otherBoard.receiveAttack(a,b);
-      } // end if there are more than one hit cells
+      } 
+
+
     } // end if there are hit cells   
   } // End AI Attack
   
