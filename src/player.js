@@ -110,7 +110,7 @@ const AIPlayerFactory = (name) => {
       console.log(`tarCelNum is ${tarCelNum}`)
       let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
       tarCel.classList = 'cell cell-fire';
-      // await delay(100);
+      // await delay(25);
 
       return otherBoard.receiveAttack(a,b);
 
@@ -237,7 +237,7 @@ const AIPlayerFactory = (name) => {
       console.log(`tarCelNum is ${tarCelNum}`)
       let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
       tarCel.classList = 'cell cell-fire';
-      // await delay(100);
+      // await delay(25);
 
           
           return otherBoard.receiveAttack(a,b);
@@ -291,6 +291,14 @@ const AIPlayerFactory = (name) => {
             // if its a possible move
             if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
               console.log('Adjacent cell found in possible moves.')
+
+                // change cell to hover classList
+                console.log('gonna change that chosen cell!')
+                let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
+                console.log(`tarCelNum is ${tarCelNum}`)
+                let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
+                tarCel.classList = 'cell cell-fire';
+
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             } 
           }
@@ -300,6 +308,14 @@ const AIPlayerFactory = (name) => {
             let adjCoords = [hitX - 1, hitY];
             if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
               console.log('Adjacent cell found in possible moves.')
+
+              // change cell to hover classList
+              console.log('gonna change that chosen cell!')
+              let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
+              console.log(`tarCelNum is ${tarCelNum}`)
+              let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
+              tarCel.classList = 'cell cell-fire';
+
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             } 
           }
@@ -322,6 +338,13 @@ const AIPlayerFactory = (name) => {
             let adjCoords = [hitX, hitY + 1];
             if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
               console.log('Adjacent cell found in possible moves.')
+
+              // change cell to hover classList
+              console.log('gonna change that chosen cell!')
+              let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
+              console.log(`tarCelNum is ${tarCelNum}`)
+              let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
+              tarCel.classList = 'cell cell-fire';
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             }
           }
@@ -331,6 +354,12 @@ const AIPlayerFactory = (name) => {
             let adjCoords = [hitX, hitY -1];
             if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
               console.log('Adjacent cell found in possible moves.')
+              // change cell to hover classList
+              console.log('gonna change that chosen cell!')
+              let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
+              console.log(`tarCelNum is ${tarCelNum}`)
+              let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
+              tarCel.classList = 'cell cell-fire';
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             }
           } // end possible adjacent moves
@@ -341,6 +370,13 @@ const AIPlayerFactory = (name) => {
         let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
         let a = shot[0];
         let b = shot[1];
+
+        let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
+      console.log(`tarCelNum is ${tarCelNum}`)
+      let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
+      tarCel.classList = 'cell cell-fire';
+      // await delay(25);
+
         return otherBoard.receiveAttack(a,b);
 
 
@@ -416,6 +452,11 @@ const AIPlayerFactory = (name) => {
         let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
         let a = shot[0];
         let b = shot[1];
+        let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
+      console.log(`tarCelNum is ${tarCelNum}`)
+      let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
+      tarCel.classList = 'cell cell-fire';
+      // await delay(25);
         return otherBoard.receiveAttack(a,b);
       } 
 
