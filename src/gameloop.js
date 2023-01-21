@@ -118,14 +118,16 @@ const playGame = (p1name, gb1) => {
         // PLAYER 2 TURN
       } else if (currentPlayer.category === 'robot') {
         console.log('currentPlayer.category is robot')
-        await delay(1-00);
+        // delay before saying the enemy fired
+        await delay(500);
         // gbcontainer2.classList.remove('firehere');
         p2move.textContent = 'The enemy fired ...';
         // the follow await makes sure you can't fire again before the enemy finishes firing.
         await currentPlayer.attack(enemyGameboard);
         currentPlayer = playerOne;
         enemyGameboard = gb2;
-        await delay(200);
+        // delay befor saying your move admiral
+        await delay(500);
         movePrompt.textContent = `Your move, Admiral ${p1name}.`
         gbcontainer2.classList.add('crosshair');
         return gameLoop(currentPlayer, enemyGameboard);
