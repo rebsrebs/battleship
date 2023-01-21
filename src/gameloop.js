@@ -40,6 +40,7 @@ const playGame = (p1name, gb1) => {
     console.log('gameLoop is running.')
     // BASE CASES
     if (gb1.areAllSunk() == true) {
+      gbcontainer2.classList.remove('crosshair');
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
       gameoverp2.textContent = 'Game over. The enemy won.'
@@ -47,6 +48,7 @@ const playGame = (p1name, gb1) => {
       console.log(winner);
       // return;
     } else if (gb2.areAllSunk() == true) {
+      gbcontainer2.classList.remove('crosshair');
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
       gameoverp2.textContent = `Game over. Admiral ${p1name}'s fleet defeated the enemy.`
@@ -80,6 +82,8 @@ const playGame = (p1name, gb1) => {
         var attackHandler = async function(e) {
           console.log('Human attack handler is running.')
           gbcontainer2.removeEventListener('click', attackHandler);
+          gbcontainer2.removeEventListener('mouseover', aimHandler);
+        gbcontainer2.removeEventListener('mouseout', unAimHandler);
           gbcontainer2.classList.remove('crosshair');
           gbcontainer2.classList.remove('firehere');
           resetMessageArea();
@@ -97,6 +101,8 @@ const playGame = (p1name, gb1) => {
               target.classList.remove('cell-fire');
               p1move.textContent = p1move.textContent + ' false alarm, please fire again.'
               gbcontainer2.removeEventListener('click', attackHandler);
+              gbcontainer2.removeEventListener('mouseover', aimHandler);
+              gbcontainer2.removeEventListener('mouseout', unAimHandler);
               return gameLoop(currentPlayer, enemyGameboard);
             } else {
             currentPlayer = playerTwo;
