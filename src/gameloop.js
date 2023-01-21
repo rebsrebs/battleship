@@ -103,6 +103,7 @@ const playGame = (p1name, gb1) => {
               gbcontainer2.removeEventListener('click', attackHandler);
               gbcontainer2.removeEventListener('mouseover', aimHandler);
               gbcontainer2.removeEventListener('mouseout', unAimHandler);
+              gbcontainer2.classList.add('crosshair');
               return gameLoop(currentPlayer, enemyGameboard);
             } else {
             currentPlayer = playerTwo;
