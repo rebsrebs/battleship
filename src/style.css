@@ -190,9 +190,10 @@ input.nsformitem {
 }
 
 .cell-fire {
-  /* background-color: var(--cell-fire-bg-color); */
+  background-color: var(--cell-fire-bg-color);
   transition: transform .2s;  /*Animation */
   transform: scale(1.1);
+  /* border: 1px solid white; */
 }
 
 .cell-aim {

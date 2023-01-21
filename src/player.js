@@ -1,3 +1,6 @@
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+
 const humanPlayerFactory = (name) => {
 
   const category = 'human';
@@ -81,7 +84,7 @@ const AIPlayerFactory = (name) => {
 
 
   // AI Attack
-  const attack = (otherBoard) => {
+  const attack = async (otherBoard) => {
 
     console.log('AI is attacking')
     let possibleMoves = otherBoard.getPossible();
@@ -100,6 +103,15 @@ const AIPlayerFactory = (name) => {
       console.log(`shot is ${shot}`);
       let a = shot[0];
       let b = shot[1];
+      // change cell to hover classList
+      console.log('gonna change that chosen cell!')
+      
+      let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
+      console.log(`tarCelNum is ${tarCelNum}`)
+      let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
+      tarCel.classList = 'cell cell-fire';
+      // await delay(100);
+
       return otherBoard.receiveAttack(a,b);
 
       // if possible move length is above 60
@@ -218,6 +230,14 @@ const AIPlayerFactory = (name) => {
           console.log(`cellLeftStatus is ${cellLeftStatus}`)
 
         } //END WHILE LOOP
+
+        // change cell to hover classList
+      console.log('gonna change that chosen cell!')
+      let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
+      console.log(`tarCelNum is ${tarCelNum}`)
+      let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
+      tarCel.classList = 'cell cell-fire';
+      // await delay(100);
 
           
           return otherBoard.receiveAttack(a,b);
