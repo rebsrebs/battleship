@@ -21,6 +21,46 @@ const messagearea = id('messagearea');
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+
+
+// function createDraggableCarrier() {
+//   const draggableCarrier = document.createElement('div');
+//   draggableCarrier.id = 'draggablecarrier';
+//   draggableCarrier.classList = 'draggableship';
+// }
+
+// const draggableCarrier = document.getElementById('draggablecarrier');
+// draggableCarrier.addEventListener('dragstart', function(ev) {
+//   ev.dataTransfer.dropEffect = "copy";
+//   console.log('I am being dragged.')
+// })
+
+function createDraggableBattleship() {
+  const draggableBattleship = document.createElement('div');
+  draggableBattleship.id = 'draggablebattleship';
+  draggableBattleship.classList = 'draggableship';
+}
+
+function createDraggableDestroyer() {
+  const draggableDestroyer = document.createElement('div');
+  draggableDestroyer.id = 'draggabledestroyer';
+  draggableDestroyer.classList = 'draggableship';
+}
+
+function createDraggableSubmarine() {
+  const draggableSubmarine = document.createElement('div');
+  draggableSubmarine.id = 'draggablesubmarine';
+  draggableSubmarine.classList = 'draggableship';
+}
+
+function createDraggablePatrolBoat() {
+  const draggablePatrolBoat = document.createElement('div');
+  draggablePatrolBoat.id = 'draggablepatrolboat';
+  draggablePatrolBoat.classList = 'draggableship';
+}
+
+
+
 function crossOutShip(board, ship) {
   if (ship === 'patrol boat') {
     ship = 'patrolboat';

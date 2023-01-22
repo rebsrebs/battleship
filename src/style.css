@@ -5,6 +5,7 @@
   --cell-place-bg-color: rgb(9, 116, 140);
   --cell-ship-bg-color: red;
   --cell-hit-ship-bg-color: red;
+  /* I love this below color pink */
   --cell-sunk-ship-bg-color: rgb(255, 0, 174);
   --cell-miss-bg-color: gray;
   --cell-fire-bg-color: rgba(9, 116, 140, 0.4);
@@ -324,4 +325,79 @@ li.scoreli {
 .scoresunkship {
   text-decoration: line-through;
 }
+
+
+#draganddropcontainer {
+  display: grid;
+  grid-template-rows: repeat(8, 80px);
+  grid-template-columns: auto;
+  align-content: left;
+  justify-content: left;
+  gap: 10px;
+}
+
+#draggablecarrier {
+  grid-template-columns: repeat(5, 40px);
+  width: 200px;
+}
+
+#draggablebattleship {
+  grid-template-columns: repeat(4, 40px);
+  width: 160px;
+}
+
+#draggabledestroyer, #draggablesubmarine {
+  grid-template-columns: repeat(3, 40px);
+  width: 120px;
+}
+
+#draggablepatrolboat {
+  grid-template-columns: repeat(2, 40px);
+  width: 80px;
+}
+
+.draggableship {
+  display: grid;
+  height: 40px;
+  background-color:rgb(255, 0, 174);
+  border: 1px solid black;
+}
+
+.draggablecell {
+  border: 1px solid black;
+}
+
+.draggableshipname {
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.draggableshipcontainer {
+  display: grid;
+  grid-template-columns: 40px auto;
+  grid-template-rows: 20px 40px;
+}
+
+.topright {
+  grid-column: 2 / 3;
+  grid-row: 1 /2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.bottomleft { 
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.bottomright {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+
 

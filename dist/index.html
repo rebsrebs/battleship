@@ -11,14 +11,90 @@
   <!-- SIDEBAR -->
   <div id="sidebar">
 
+    <!-- DRAG AND DROP CONTAINER for all of the ships-->
+    <div id="draganddropcontainer">
+
+      <!-- draggable carrier container -->
+       <div class="draggableshipcontainer" id="draggableshipcontainer1">
+
+        <!-- ship name -->
+        <p class="draggableshipname topright">Carrier</p>
+
+        <!-- ship shape -->
+        <div id="draggablecarrier" class="draggableship bottomright" draggable="true" data-direction="horizontal" data-draggable-id="carrier">
+          <div class="draggablecell"></div>
+          <div class="draggablecell"></div>
+          <div class="draggablecell"></div>
+          <div class="draggablecell"></div>
+          <div class="draggablecell"></div>
+        </div>
+
+        <!-- rotate icon -->
+        <img src="../src/images/rotate-cw.svg" alt="rotate icon" class="bottomleft">
+
+      </div> <!-- end carrier draggableshipcontainer -->
+
+
+
+      <div class="draggableshipcontainer">
+        <p class="draggableshipname topright">Battleship</p>
+      <div id="draggablebattleship" class="draggableship bottomright" draggable="true" data-direction="horizontal" data-draggable-id="battleship">
+        <div class="draggablecell"></div>
+        <div class="draggablecell"></div>
+        <div class="draggablecell"></div>
+        <div class="draggablecell"></div>
+      </div>
+      <!-- rotate icon -->
+      <img src="../src/images/rotate-cw.svg" alt="rotate icon" class="bottomleft">
+    </div>
+
+    <div class="draggableshipcontainer">
+      <p class="draggableshipname topright">Destroyer</p>
+      <div id="draggabledestroyer" class="draggableship bottomright" draggable="true" data-direction="horizontal" data-draggable-id="destroyer">
+        <div class="draggablecell"></div>
+        <div class="draggablecell"></div>
+        <div class="draggablecell"></div>
+      </div> 
+      <!-- rotate icon -->
+      <img src="../src/images/rotate-cw.svg" alt="rotate icon" class="bottomleft">
+    </div>
+
+      <div class="draggableshipcontainer">
+        <p class="draggableshipname topright">Submarine</p>
+        <div id="draggablesubmarine" class="draggableship bottomright" draggable="true" data-direction="horizontal" data-draggable-id="submarine">
+          <div class="draggablecell"></div>
+          <div class="draggablecell"></div>
+          <div class="draggablecell"></div>
+        </div> 
+        <!-- rotate icon -->
+        <img src="../src/images/rotate-cw.svg" alt="rotate icon" class="bottomleft">
+      </div>
+
+      <div class="draggableshipcontainer">
+        <p class="draggableshipname topright">Patrol Boat</p>
+        <div id="draggablepatrolboat" class="draggableship bottomright" draggable="true" data-direction="horizontal" data-draggable-id="patrolboat">
+          <div class="draggablecell"></div>
+          <div class="draggablecell"></div>
+        </div>
+        <!-- rotate icon -->
+        <img src="../src/images/rotate-cw.svg" alt="rotate icon" class="bottomleft">
+      </div>
+
+
+    </div>
+    <!-- END DRAG AND DROP CONTAINER -->
+
 
       <!-- SCORE -->
-      <div id="scorecontainer" class="invisible">
+      <div id="scorecontainer" class="hidden">
+        <!-- <div id="scorecontainer" class="invisible"> -->
         <!-- YOUR ACTIVE SHIPS --> 
         <div id="gb1-ships" class="shipslist">
           <h3>Your Fleet</h3>
           <ul class="score">
-            <li class="scoreli" id="gb1-carrier">Carrier</li>
+            <li class="scoreli" id="gb1-carrier">
+              Carrier
+            </li>
             <li class="scoreli" id="gb1-battleship">Battleship</li>
             <li class="scoreli" id="gb1-destroyer">Destroyer</li>
             <li class="scoreli" id="gb1-submarine">Submarine</li>
