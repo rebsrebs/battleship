@@ -24,6 +24,7 @@
 *{
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 body {
@@ -329,7 +330,7 @@ li.scoreli {
 
 #draganddropcontainer {
   display: grid;
-  grid-template-rows: repeat(8, 80px);
+  grid-template-rows: auto repeat(8, auto);
   grid-template-columns: auto;
   align-content: left;
   justify-content: left;
@@ -337,34 +338,35 @@ li.scoreli {
 }
 
 #draggablecarrier {
-  grid-template-columns: repeat(5, 40px);
-  width: 200px;
+  flex-direction: column;
+  width: fit-content;
 }
 
 #draggablebattleship {
-  grid-template-columns: repeat(4, 40px);
-  width: 160px;
+  flex-direction: row;
+  width: fit-content;
 }
 
 #draggabledestroyer, #draggablesubmarine {
-  grid-template-columns: repeat(3, 40px);
-  width: 120px;
+  flex-direction: row;
+  width: fit-content;
 }
 
 #draggablepatrolboat {
-  grid-template-columns: repeat(2, 40px);
-  width: 80px;
+  flex-direction: row;
+  width: fit-content;
 }
 
 .draggableship {
-  display: grid;
-  height: 40px;
+  display: flex;
   background-color:rgb(255, 0, 174);
   border: 1px solid black;
 }
 
 .draggablecell {
   border: 1px solid black;
+  height: 40px;
+  width: 40px;
 }
 
 .draggableshipname {
@@ -375,7 +377,9 @@ li.scoreli {
 .draggableshipcontainer {
   display: grid;
   grid-template-columns: 40px auto;
-  grid-template-rows: 20px 40px;
+  grid-template-rows: 20px auto;
+  margin-bottom: 20px;
+  gap: 5px;
 }
 
 .topright {
@@ -388,7 +392,7 @@ li.scoreli {
 
 .bottomleft { 
   display: flex;
-  align-self: center;
+  padding-top: 8px;
   justify-self: center;
   grid-column: 1 / 2;
   grid-row: 2 / 3;
@@ -399,5 +403,18 @@ li.scoreli {
   grid-row: 2 / 3;
 }
 
+#draginstructions {
+  font-size:22px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
 
+button.rotatebtn {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  height: fit-content;
+  width: fit-content;
+}
 
