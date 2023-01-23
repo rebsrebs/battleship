@@ -56,6 +56,7 @@ const createBoards = () => {
     var cell = document.createElement('div');
     cell.className = (`cell cell-plain`);
     cell.id = (`gb1-${i}`);
+    cell.setAttribute("tabindex","0");
     gbcontainer1.appendChild(cell);
   }
 
@@ -107,6 +108,9 @@ function placeShips (name, gameboard, shipIdx = 0) {
     return;
   // NOT BASE CASE
   } else {
+    gbcontainer1.setAttribute("tabindex","0");
+    // let gb1cells = gbcontainer1.querySelectorAll(".cell");
+
     let currentShip = gameboard.getPlacedShips()[shipIdx];
     placeMsg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
 

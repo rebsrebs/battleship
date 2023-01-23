@@ -20,6 +20,8 @@ const p2move = id('p2move');
 const movePrompt = id('moveprompt')
 const scoreContainer = id('scorecontainer');
 
+
+
 const playGame = (p1name, gb1) => {
   console.log('gameloop is running.')
   // set up players
@@ -34,6 +36,18 @@ const playGame = (p1name, gb1) => {
   movePrompt.textContent = `Your move, Admiral ${p1name}.`
   gbcontainer2.classList.add('crosshair');
   var winner = '';
+
+  // remove tabbability from friendly waters
+  gbcontainer1.removeAttribute("tabindex");
+  const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
+  gb1cells.forEach(e => e.removeAttribute('tabindex'));
+
+  // make enemy cells tabbale
+  // should this only happen when it's also clickable? like when it is the humans turn?
+  gbcontainer2.setAttribute("tabindex","0");
+  const gb2cells = Array.from(gbcontainer2.querySelectorAll(".cell"));
+  gb2cells.forEach(e => e.setAttribute('tabindex','0'));
+
 
   // define gameplaying function
   const gameLoop = async(currentPlayer = playerOne, enemyGameboard = gb2) => {
