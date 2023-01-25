@@ -1,4 +1,4 @@
-const delay = ms => new Promise(res => setTimeout(res, ms));
+// const delay = ms => new Promise(res => setTimeout(res, ms));
 
 
 const humanPlayerFactory = (name) => {
@@ -6,6 +6,7 @@ const humanPlayerFactory = (name) => {
   const category = 'human';
 
   const attack = (a,b,board) => {
+    console.log('human player is attacking and about to call the enemy boards receive attack method.')
     return board.receiveAttack(a,b);
   }
 
@@ -84,10 +85,13 @@ const AIPlayerFactory = (name) => {
 
 
   // AI Attack
-  const attack = async (otherBoard) => {
+  const attack = (otherBoard) => {
 
     console.log('AI is attacking')
+    // something weird here?? // this is getting called prematurely
     let possibleMoves = otherBoard.getPossible();
+    console.log('possibleMoves is:')
+    console.log(possibleMoves)
     let cells = otherBoard.getCells();
     let hitCell = gbcontainer1.querySelector('.cell-hit-ship');
 
@@ -104,13 +108,14 @@ const AIPlayerFactory = (name) => {
       let a = shot[0];
       let b = shot[1];
       // change cell to hover classList
-      console.log('gonna change that chosen cell!')
+      console.log('gonna change that chosen cells classlist!')
       
       let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
       console.log(`tarCelNum is ${tarCelNum}`)
       let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
       tarCel.classList = 'cell cell-fire';
-      // await delay(25);
+      console.log('just changed tarCel classList')
+      console.log(`about to call otherboard receiveAttack for ${a}, ${b}`)
 
       return otherBoard.receiveAttack(a,b);
 
@@ -118,17 +123,11 @@ const AIPlayerFactory = (name) => {
       // make an optimized random move
       } else {
         console.log('There are more than 60 possible moves left so we will optimize the random shot.')
-        // get the index number out of 100 of that shot
-        // let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
-        // let gbIdx = Number(cells.indexOf(shot));
-        // console.log(`gbIdx is ${gbIdx}`);
-        // let gbId = `${otherBoard.name}-${gbIdx}`;
 
         let cellAboveStatus = 'impossible'
         let cellBelowStatus = 'impossible'
         let cellRightStatus = 'impossible'
         let cellLeftStatus = 'impossible'
-        // let theSituation = 'bad';
 
         while ((cellLeftStatus === 'impossible' || cellRightStatus === 'impossible') && (cellAboveStatus === 'impossible' || cellBelowStatus === 'impossible')) {
           console.log('STARTING WHILE LOOP TO OPTIMIZE RANDOM SHOT')
@@ -239,7 +238,7 @@ const AIPlayerFactory = (name) => {
       tarCel.classList = 'cell cell-fire';
       // await delay(25);
 
-          
+          console.log(`about to return otherboard.receiveAttack(${a},${b})`)
           return otherBoard.receiveAttack(a,b);
 
       } // END IF THERE ARE MORE THAN 60 POSSIBLE MOVES LEFT
@@ -295,10 +294,13 @@ const AIPlayerFactory = (name) => {
                 // change cell to hover classList
                 console.log('gonna change that chosen cell!')
                 let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
-                console.log(`tarCelNum is ${tarCelNum}`)
+                // console.log(`tarCelNum is ${tarCelNum}`)
                 let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
                 tarCel.classList = 'cell cell-fire';
 
+
+
+                console.log(`About to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             } 
           }
@@ -313,6 +315,7 @@ const AIPlayerFactory = (name) => {
               console.log('gonna change that chosen cell!')
               let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
               console.log(`tarCelNum is ${tarCelNum}`)
+              // something going wrong here
               let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
               tarCel.classList = 'cell cell-fire';
 
