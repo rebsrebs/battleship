@@ -47,8 +47,8 @@ const playGame = (p1name, gb1) => {
       ev.preventDefault()
     }
   }));
-  gbcontainer2.keyup = null;
-  gbcontainer2.keydown = null;
+  // gbcontainer2.keyup = null;
+  // gbcontainer2.keydown = null;
 
 
   // define gameplaying function
@@ -202,35 +202,19 @@ const playGame = (p1name, gb1) => {
         gbcontainer2.addEventListener('mouseout', unAimHandler);
         gbcontainer2.addEventListener('click', attackHandler);
 
-        // add keyup handlers for human's turn
-        gb2cells.forEach(element => element.addEventListener('keyup', (ev) => {
-          
-          ev.preventDefault();
-          
-          // trying a bandaid with the line below - this works!!
-          currentPlayer = playerOne;
-          
-          if (ev.key === 'Enter') {
+        // define keyup handler for human's turn
+        function handleEnter(event) {
+          event.preventDefault;
+          if (event.key === 'Enter') {
+            event.target.removeEventListener('keyup',handleEnter)
             console.log('Enter was pressed.')
-            console.log(`is event cancelable? ${ev.cancelable}`);
-            delay(500);
-          gb2cells.forEach(e => e.setAttribute("disabled","true"));
-          gb2cells.forEach(e => e.keyup = null);
-          gb2cells.forEach(e => e.removeAttribute('tabindex'));
-            console.log(`ev.key is ${ev.key}`)
-            console.log(`ev.target.id is ${ev.target.id}`);
-            // does adding return here stop the loop??
-            return attackHandler(ev);
+            return event.target.click();
           }
-        }))
+        }
+        
+        // add handleEnter listener
+        gb2cells.forEach(element => element.addEventListener('keyup', handleEnter))
 
-        // gbcontainer2.addEventListener('keyup', async function(ev) {
-        //   if (ev.key === 'Enter') {
-        //     // if these were buttons ...
-        //     // document.getElementById("myBtn").click();
-        //     await attackHandler();
-        //   }
-        // })
 
 
 
