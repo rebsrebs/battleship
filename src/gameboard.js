@@ -81,9 +81,9 @@ const gameboardFactory = (name, posessive) => {
     console.log('Finished delay.')
     // make variable of DOM element of attacked spot
     let targetCellNum = cells.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
-    console.log(`targetCellNum is ${targetCellNum}`)
+    // console.log(`targetCellNum is ${targetCellNum}`)
     let targetCell = document.getElementById(`${name}-${targetCellNum}`);
-    console.log(`targetCell.id is ${targetCell.id}`)
+    // console.log(`targetCell.id is ${targetCell.id}`)
     // remove attacked spot from possible moves array
     let noLongerPossible = possible.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
     // console.log('noLongerPossible is the index of this shot in the possible array:')
@@ -94,6 +94,7 @@ const gameboardFactory = (name, posessive) => {
     // Check if this shot was already fired
     var alreadyFired = firedShots.find(arr=> arr[0] ===x && arr[1] ===y);
     if (alreadyFired != undefined) {
+      console.log('receiveAttack wrapping up with an already tried spot.')
       return 'Already tried this spot.'
     // if shot has not yet been fired in this game
     } else {
@@ -131,12 +132,14 @@ const gameboardFactory = (name, posessive) => {
           pCode.textContent += ` and hit ${posessive} ${currentShip.name}.`
         }
         // could i return all sunk info here?
+        console.log('receiveAttack wrapping up with a hit.')
         return 'hit!';
       // IF MISS
       } else {
         missed.push(firedShot);
         pCode.textContent += ` and missed.`
         targetCell.classList = 'cell cell-miss'
+        console.log('receiveAttack wrapping up with a miss.')
         return 'miss!';
       }
     } // end if shot was not previously fired

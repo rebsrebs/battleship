@@ -53,7 +53,9 @@ function hide(ID) {
 // CREATE CELLS FOR TWO DOM GAMEBOARDS - called by index.js
 const createBoards = () => {
   for (let i = 0; i < 100; i++) {
-    var cell = document.createElement('div');
+    var cell = document.createElement('button');
+    cell.setAttribute("type", "button")
+    // cell.disabled = true;
     cell.className = (`cell cell-plain`);
     cell.id = (`gb1-${i}`);
     cell.setAttribute("tabindex","0");
@@ -61,7 +63,8 @@ const createBoards = () => {
   }
 
   for (let i = 0; i < 100; i++) {
-    var cell = document.createElement('div');
+    var cell = document.createElement('button');
+    cell.setAttribute("type", "button")
     cell.className = (`cell cell-plain`)
     cell.id = (`gb2-${i}`);
     gbcontainer2.appendChild(cell);
@@ -101,7 +104,7 @@ toggleBtn.addEventListener('click', function() {
 function placeShips (name, gameboard, shipIdx = 0) {
   // BASE CASE - if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
-    console.log('base case - ships placed');
+    console.log('base case - human ships placed');
     placementwrapper.classList = 'hidden';
     gbcontainer1.classList.remove('placeshipshere');
     playGame(name, gameboard)

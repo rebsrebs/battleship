@@ -19,7 +19,7 @@ const scoreContainer = id('scorecontainer');
 
 // Outer function that launches the game
 const playGame = (p1name, gb1) => {
-  console.log('gameloop is running.')
+  console.log('playGame function has started.')
   // set up players
   let playerOne = humanPlayerFactory(p1name);
   let playerTwo = AIPlayerFactory('The Enemy');
@@ -37,11 +37,18 @@ const playGame = (p1name, gb1) => {
   gbcontainer1.removeAttribute("tabindex");
   const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
   gb1cells.forEach(e => e.removeAttribute('tabindex'));
+  gb1cells.forEach(e => e.setAttribute("disabled","true"));
 
 
   gbcontainer2.setAttribute("tabindex","0");
   const gb2cells = Array.from(gbcontainer2.querySelectorAll(".cell"));
-  
+  gb2cells.forEach(element => element.addEventListener('keydown', function(ev) {
+    if (ev.key === "Enter") {
+      ev.preventDefault()
+    }
+  }));
+  gbcontainer2.keyup = null;
+  gbcontainer2.keydown = null;
 
 
   // define gameplaying function
@@ -83,11 +90,13 @@ const playGame = (p1name, gb1) => {
         console.log('currentPlayer.category is human');
         console.log(`currentPlayer.name is ${currentPlayer.name}`)
         // make enemy gameboard look active
+
         gbcontainer2.classList.add('crosshair');
         gbcontainer2.classList.add('firehere');
         // make gb2 cells tabbable
         console.log('about to make the gb2 cells tabbable')
         gb2cells.forEach(e => e.setAttribute('tabindex','0'));
+        // gb2cells.forEach(e => e.setAttribute("disabled","false"));
 
         console.log('about to define the aimhandler')
         // define aimHandler - highlights cells you hover over before attacking
@@ -159,7 +168,7 @@ const playGame = (p1name, gb1) => {
             console.log(`STEP 10: got the coords, about to attack and the currentPlayer should be the human but is actually ${currentPlayer.name}`)
 
             // Attack!!!!!!!!!!!
-            // does this work?
+            // does this work? why is this happening twice on keyup?
             let result = await currentPlayer.attack(coords[0],coords[1],enemyGameboard);
             console.log(`STEP 11: Got the result from attacking and it is ${result}`)
 
@@ -194,15 +203,24 @@ const playGame = (p1name, gb1) => {
         gbcontainer2.addEventListener('click', attackHandler);
 
         // add keyup handlers for human's turn
-        gb2cells.forEach(element => element.addEventListener('keyup', function(ev) {
+        gb2cells.forEach(element => element.addEventListener('keyup', (ev) => {
+          
           ev.preventDefault();
+          
           // trying a bandaid with the line below - this works!!
           currentPlayer = playerOne;
+          
           if (ev.key === 'Enter') {
-            ev.target.keyup = null;
+            console.log('Enter was pressed.')
+            console.log(`is event cancelable? ${ev.cancelable}`);
+            delay(500);
+          gb2cells.forEach(e => e.setAttribute("disabled","true"));
+          gb2cells.forEach(e => e.keyup = null);
+          gb2cells.forEach(e => e.removeAttribute('tabindex'));
             console.log(`ev.key is ${ev.key}`)
             console.log(`ev.target.id is ${ev.target.id}`);
-            attackHandler(ev);
+            // does adding return here stop the loop??
+            return attackHandler(ev);
           }
         }))
 

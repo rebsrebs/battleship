@@ -27,7 +27,7 @@ const AIPlayerFactory = (name) => {
       return; 
     // NOT BASE CASE
     } else {
-      console.log('Not base case. Still placing AI ships');
+      // console.log('Not base case. Still placing AI ships');
       let presentShip = board.getPlacedShips()[shipIdx];
       var choice = Math.round(Math.random());
       if (choice === 0) {
@@ -40,7 +40,7 @@ const AIPlayerFactory = (name) => {
       let coords = [...(board.getCells()[randomIndex])];
       // if it fits
       if (coords[choice] + shipLength <= 11 ) {
-        console.log('coords[choice] + shipLength was <= 11, the ship fits!')
+        // console.log('coords[choice] + shipLength was <= 11, the ship fits!')
         var proposedShipLoc = [];
         for (let i = 0; i < shipLength; i++) {
           if (axis === 'horizontal') {
@@ -54,12 +54,12 @@ const AIPlayerFactory = (name) => {
         for (let i=0; i < shipLength; i++) {
           let tempLoc = [...(proposedShipLoc[i])];
           if (board.isThereAShipHere(tempLoc[0], tempLoc[1]) != '') {
-            console.log ('SHIP IN THE WAY');
+            // console.log ('SHIP IN THE WAY');
             presentShip.location = [];
             return placeAIships(board, shipIdx);
           } else {
-            console.log('Apparently there is no ship in the way.')
-            console.log('About to push tempLoc to presentShip location:');
+            // console.log('Apparently there is no ship in the way.')
+            // console.log('About to push tempLoc to presentShip location:');
             presentShip.location.push(tempLoc); 
           }
         } // end for loop for checking if ships are in the way
@@ -67,7 +67,7 @@ const AIPlayerFactory = (name) => {
         return placeAIships(board, shipIdx);
       } // end if it fits 
       else {
-        console.log('The ship did not fit, running recursively again without increasing shipIdx')
+        // console.log('The ship did not fit, running recursively again without increasing shipIdx')
         return placeAIships(board, shipIdx);
       }
     } // end not base case
@@ -90,39 +90,40 @@ const AIPlayerFactory = (name) => {
     console.log('AI is attacking')
     // something weird here?? // this is getting called prematurely
     let possibleMoves = otherBoard.getPossible();
-    console.log('possibleMoves is:')
-    console.log(possibleMoves)
+    // console.log('possibleMoves is:')
+    // console.log(possibleMoves)
     let cells = otherBoard.getCells();
     let hitCell = gbcontainer1.querySelector('.cell-hit-ship');
 
     // if there are no hit cells
     if (hitCell == null) {
-      console.log('There are no hit cells, so making a random move.')
+      // console.log('There are no hit cells, so making a random move.')
 
       // make a random move
       // if there are less than 60 possible moves left
         // make a totally random move
       if (possibleMoves.length < 60) { 
       let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
-      console.log(`shot is ${shot}`);
+      // console.log(`shot is ${shot}`);
       let a = shot[0];
       let b = shot[1];
       // change cell to hover classList
-      console.log('gonna change that chosen cells classlist!')
+      // console.log('gonna change that chosen cells classlist!')
       
       let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
-      console.log(`tarCelNum is ${tarCelNum}`)
+      // console.log(`tarCelNum is ${tarCelNum}`)
       let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
       tarCel.classList = 'cell cell-fire';
-      console.log('just changed tarCel classList')
-      console.log(`about to call otherboard receiveAttack for ${a}, ${b}`)
+      // console.log('just changed tarCel classList')
+      // console.log(`about to call otherboard receiveAttack for ${a}, ${b}`)
 
+      console.log('AI attack wrapping up, about to call gb1 receieveattack method')
       return otherBoard.receiveAttack(a,b);
 
       // if possible move length is above 60
       // make an optimized random move
       } else {
-        console.log('There are more than 60 possible moves left so we will optimize the random shot.')
+        // console.log('There are more than 60 possible moves left so we will optimize the random shot.')
 
         let cellAboveStatus = 'impossible'
         let cellBelowStatus = 'impossible'
@@ -130,10 +131,10 @@ const AIPlayerFactory = (name) => {
         let cellLeftStatus = 'impossible'
 
         while ((cellLeftStatus === 'impossible' || cellRightStatus === 'impossible') && (cellAboveStatus === 'impossible' || cellBelowStatus === 'impossible')) {
-          console.log('STARTING WHILE LOOP TO OPTIMIZE RANDOM SHOT')
+          // console.log('STARTING WHILE LOOP TO OPTIMIZE RANDOM SHOT')
           let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
           let gbIdx = Number(cells.indexOf(shot));
-          console.log(`shot is ${shot}`);
+          // console.log(`shot is ${shot}`);
 
           // ABOVE
           let gbIdxAbove = +gbIdx-10;
@@ -201,7 +202,7 @@ const AIPlayerFactory = (name) => {
 
           // LEFT
           let gbIdxLeft = +gbIdx-1;
-          console.log(`${gbIdxLeft} is gbIdxLeft`);
+          // console.log(`${gbIdxLeft} is gbIdxLeft`);
           if (gbIdxLeft >= 0) {
             // if left is in same row
             if (cells[gbIdxLeft][0] === Number(shot[0])-1) {
@@ -223,29 +224,29 @@ const AIPlayerFactory = (name) => {
           var a = shot[0];
           var b = shot[1];
 
-          console.log(`cellAboveStatus is ${cellAboveStatus}`)
-          console.log(`cellBelowStatus is ${cellBelowStatus}`)
-          console.log(`cellRightStatus is ${cellRightStatus}`)
-          console.log(`cellLeftStatus is ${cellLeftStatus}`)
+          // console.log(`cellAboveStatus is ${cellAboveStatus}`)
+          // console.log(`cellBelowStatus is ${cellBelowStatus}`)
+          // console.log(`cellRightStatus is ${cellRightStatus}`)
+          // console.log(`cellLeftStatus is ${cellLeftStatus}`)
 
         } //END WHILE LOOP
 
         // change cell to hover classList
-      console.log('gonna change that chosen cell!')
+      // console.log('gonna change that chosen cell!')
       let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
       console.log(`tarCelNum is ${tarCelNum}`)
       let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
       tarCel.classList = 'cell cell-fire';
       // await delay(25);
 
-          console.log(`about to return otherboard.receiveAttack(${a},${b})`)
+          console.log(`AI attack wrapping up, about to return otherboard.receiveAttack(${a},${b})`)
           return otherBoard.receiveAttack(a,b);
 
       } // END IF THERE ARE MORE THAN 60 POSSIBLE MOVES LEFT
 
     // if there is a hit but not sunk cell - find adjacent cell to fire on
     } else if (hitCell != null) {
-      console.log('There is a hit cell.')
+      // console.log('There is a hit cell.')
       let hitCells = Array.from(gbcontainer1.querySelectorAll('.cell-hit-ship'));
 
       // figure out which direction hit cells are going in
@@ -253,46 +254,46 @@ const AIPlayerFactory = (name) => {
 
       // if there is more than one hit cell
       if (hitCells.length > 1) {
-        console.log('there is more than one hit cell');
+        // console.log('there is more than one hit cell');
         let hitCellIds = hitCells.map((item) => (item.id).slice(4))
-        console.log('hitCellIds is:')
-        console.log(hitCellIds);
+        // console.log('hitCellIds is:')
+        // console.log(hitCellIds);
         if (Math.abs(hitCellIds[0] - hitCellIds[1]) === 1) {
-          console.log('gonna save hitDirection as horizontal');
+          // console.log('gonna save hitDirection as horizontal');
           hitDirection = 'horizontal';
         } else {
-          console.log('gonna save hitDirection as vertical');
+          // console.log('gonna save hitDirection as vertical');
           hitDirection = 'vertical';
         }
       } // end if there are more than one hits
-      console.log(`okay, so now hitDirection is ${hitDirection}`);
+      // console.log(`okay, so now hitDirection is ${hitDirection}`);
 
       // this is ridiculous but here goes
       if (hitDirection === 'horizontal' || hitDirection === '') {
-        console.log('hitDirection is horizontal or blank');
-        console.log(`hitDirection is ${hitDirection}`);
+        // console.log('hitDirection is horizontal or blank');
+        // console.log(`hitDirection is ${hitDirection}`);
 
         // LOOP THRU HIT CELLS HORIZONTALLY
         for (let i = 0; i < hitCells.length; i++) {
-          console.log('in the first for loop - going horizontally')
+          // console.log('in the first for loop - going horizontally')
           let hitCellID = hitCells[i].id; //example gb1-74
           let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
-          console.log(`hitCoords is:`)
-          console.log(hitCoords);
+          // console.log(`hitCoords is:`)
+          // console.log(hitCoords);
           let hitX = Number(hitCoords[0]);
           let hitY = Number(hitCoords[1]);
 
           // HORIZONTAL
           // check if you can try X + 1 - to the right
           if (hitX + 1 < 11) {
-            console.log('hitX + 1 is < 11')
+            // console.log('hitX + 1 is < 11')
             let adjCoords = [hitX + 1, hitY];
             // if its a possible move
             if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-              console.log('Adjacent cell found in possible moves.')
+              // console.log('Adjacent cell found in possible moves.')
 
                 // change cell to hover classList
-                console.log('gonna change that chosen cell!')
+                // console.log('gonna change that chosen cell!')
                 let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
                 // console.log(`tarCelNum is ${tarCelNum}`)
                 let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
@@ -300,25 +301,26 @@ const AIPlayerFactory = (name) => {
 
 
 
-                console.log(`About to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
+                console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             } 
           }
           // check if you can try X - 1 - to the left
           if (hitX - 1 > 0) {
-            console.log('hitX - 1 is > 0')
+            // console.log('hitX - 1 is > 0')
             let adjCoords = [hitX - 1, hitY];
             if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-              console.log('Adjacent cell found in possible moves.')
+              // console.log('Adjacent cell found in possible moves.')
 
               // change cell to hover classList
-              console.log('gonna change that chosen cell!')
+              // console.log('gonna change that chosen cell!')
               let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
-              console.log(`tarCelNum is ${tarCelNum}`)
+              // console.log(`tarCelNum is ${tarCelNum}`)
               // something going wrong here
               let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
               tarCel.classList = 'cell cell-fire';
 
+              console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             } 
           }
@@ -326,60 +328,63 @@ const AIPlayerFactory = (name) => {
 
         // LOOP THRU HIT CELLS VERTICALLY
         for (let i = 0; i < hitCells.length; i++) {
-          console.log('in the second for loop - going vertically')
+          // console.log('in the second for loop - going vertically')
           let hitCellID = hitCells[i].id; //example gb1-74
           let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
-          console.log(`hitCoords is:`)
-          console.log(hitCoords);
+          // console.log(`hitCoords is:`)
+          // console.log(hitCoords);
           let hitX = Number(hitCoords[0]);
           let hitY = Number(hitCoords[1]);
 
           // VERTICAL
           // check if you can try Y + 1 - up
           if (hitY + 1 < 11) {
-            console.log('hitY + 1 is < 11')
+            // console.log('hitY + 1 is < 11')
             let adjCoords = [hitX, hitY + 1];
             if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-              console.log('Adjacent cell found in possible moves.')
+              // console.log('Adjacent cell found in possible moves.')
 
               // change cell to hover classList
-              console.log('gonna change that chosen cell!')
+              // console.log('gonna change that chosen cell!')
               let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
-              console.log(`tarCelNum is ${tarCelNum}`)
+              // console.log(`tarCelNum is ${tarCelNum}`)
               let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
               tarCel.classList = 'cell cell-fire';
+              console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             }
           }
           // check if you can try Y - 1 - to the left - down
           if (hitY - 1 > 0) {
-            console.log('hitY - 1 is > 0')
+            // console.log('hitY - 1 is > 0')
             let adjCoords = [hitX, hitY -1];
             if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-              console.log('Adjacent cell found in possible moves.')
+              // console.log('Adjacent cell found in possible moves.')
               // change cell to hover classList
-              console.log('gonna change that chosen cell!')
+              // console.log('gonna change that chosen cell!')
               let tarCelNum = cells.indexOf((cells.find((el) => el[0] === adjCoords[0] && el[1] === adjCoords[1])));
-              console.log(`tarCelNum is ${tarCelNum}`)
+              // console.log(`tarCelNum is ${tarCelNum}`)
               let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
               tarCel.classList = 'cell cell-fire';
+              console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
               return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
             }
           } // end possible adjacent moves
         } // end for loop vertically
 
         // if there are no adjacent moves - make a random move
-        console.log('gave up on smart move, gonna do a random attack.')
+        // console.log('gave up on smart move, gonna do a random attack.')
         let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
         let a = shot[0];
         let b = shot[1];
 
         let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
-      console.log(`tarCelNum is ${tarCelNum}`)
+      // console.log(`tarCelNum is ${tarCelNum}`)
       let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
       tarCel.classList = 'cell cell-fire';
       // await delay(25);
 
+      console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${a}, ${b})`)
         return otherBoard.receiveAttack(a,b);
 
 
@@ -389,30 +394,30 @@ const AIPlayerFactory = (name) => {
       // vertical for loops
       // LOOP THRU HIT CELLS VERTICALLY
       for (let i = 0; i < hitCells.length; i++) {
-        console.log('in the second for loop - going vertically')
+        // console.log('in the second for loop - going vertically')
         let hitCellID = hitCells[i].id; //example gb1-74
         let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
-        console.log(`hitCoords is:`)
-        console.log(hitCoords);
+        // console.log(`hitCoords is:`)
+        // console.log(hitCoords);
         let hitX = Number(hitCoords[0]);
         let hitY = Number(hitCoords[1]);
 
         // VERTICAL
         // check if you can try Y + 1 - up
         if (hitY + 1 < 11) {
-          console.log('hitY + 1 is < 11')
+          // console.log('hitY + 1 is < 11')
           let adjCoords = [hitX, hitY + 1];
           if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-            console.log('Adjacent cell found in possible moves.')
+            console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
             return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
           }
         }
         // check if you can try Y - 1 - to the left - down
         if (hitY - 1 > 0) {
-          console.log('hitY - 1 is > 0')
+          // console.log('hitY - 1 is > 0')
           let adjCoords = [hitX, hitY -1];
           if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-            console.log('Adjacent cell found in possible moves.')
+            console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
             return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
           }
         } // end possible adjacent moves
@@ -420,46 +425,47 @@ const AIPlayerFactory = (name) => {
 
       // LOOP THRU HIT CELLS HORIZONTALLY
       for (let i = 0; i < hitCells.length; i++) {
-        console.log('in the first for loop - going horizontally')
+        // console.log('in the first for loop - going horizontally')
         let hitCellID = hitCells[i].id; //example gb1-74
         let hitCoords = otherBoard.getCells()[hitCellID.slice(4)]; // example [1,2]
-        console.log(`hitCoords is:`)
-        console.log(hitCoords);
+        // console.log(`hitCoords is:`)
+        // console.log(hitCoords);
         let hitX = Number(hitCoords[0]);
         let hitY = Number(hitCoords[1]);
 
         // HORIZONTAL
         // check if you can try X + 1 - to the right
         if (hitX + 1 < 11) {
-          console.log('hitX + 1 is < 11')
+          // console.log('hitX + 1 is < 11')
           let adjCoords = [hitX + 1, hitY];
           // if its a possible move
           if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-            console.log('Adjacent cell found in possible moves.')
+            console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
             return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
           } 
         }
         // check if you can try X - 1 - to the left
         if (hitX - 1 > 0) {
-          console.log('hitX - 1 is > 0')
+          // console.log('hitX - 1 is > 0')
           let adjCoords = [hitX - 1, hitY];
           if (possibleMoves.some((item) => (item[0] === adjCoords[0] && item[1] === adjCoords[1])) == true) {
-            console.log('Adjacent cell found in possible moves.')
+            console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${adjCoords[0]}, ${adjCoords[1]})`)
             return otherBoard.receiveAttack(adjCoords[0],adjCoords[1]);
           } 
         }
       } // end for loop
 
         // if there are no adjacent moves - make a random move
-        console.log('gave up on smart move, gonna do a random attack.')
+        // console.log('gave up on smart move, gonna do a random attack.')
         let shot = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
         let a = shot[0];
         let b = shot[1];
         let tarCelNum = cells.indexOf((cells.find((el) => el[0] === a && el[1] === b)));
-      console.log(`tarCelNum is ${tarCelNum}`)
+      // console.log(`tarCelNum is ${tarCelNum}`)
       let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
       tarCel.classList = 'cell cell-fire';
       // await delay(25);
+      console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${a}, ${b})`)
         return otherBoard.receiveAttack(a,b);
       } 
 
