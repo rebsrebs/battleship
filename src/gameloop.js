@@ -66,6 +66,7 @@ const playGame = (p1name, gb1) => {
 
     // BASE CASES
     if (gb1.areAllSunk() == true) {
+      await delay(1000);
       gbcontainer2.classList.remove('crosshair');
       gbcontainer2.removeAttribute('tabindex');
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
@@ -77,6 +78,7 @@ const playGame = (p1name, gb1) => {
       console.log(winner);
       // return;
     } else if (gb2.areAllSunk() == true) {
+      await delay(1000);
       gbcontainer2.classList.remove('crosshair');
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
