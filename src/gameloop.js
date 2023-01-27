@@ -16,6 +16,7 @@ const p1move = id('p1move');
 const p2move = id('p2move');
 const movePrompt = id('moveprompt')
 const scoreContainer = id('scorecontainer');
+const playAgainBtn = id('playagainbtn');
 
 // Outer function that launches the game
 const playGame = (p1name, gb1) => {
@@ -71,7 +72,7 @@ const playGame = (p1name, gb1) => {
 
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
-      gameoverp2.textContent = 'Game over. The enemy won.'
+      gameoverp2.textContent = 'The enemy won!'
       winner = 'Player 2 wins!';
       console.log(winner);
       // return;
@@ -81,7 +82,7 @@ const playGame = (p1name, gb1) => {
       gameOverWrapper.classList = 'shown wrappergrid';
       gbcontainer2.removeAttribute('tabindex');
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
-      gameoverp2.textContent = `Game over. Admiral ${p1name}'s fleet defeated the enemy.`
+      gameoverp2.textContent = `Admiral ${p1name}'s fleet defeated the enemy!`
       winner = 'Player 1 wins!';
       console.log(winner);
       // return;

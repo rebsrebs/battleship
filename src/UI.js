@@ -15,6 +15,7 @@ const p1move = id('p1move');
 const p2move = id('p2move');
 const movePrompt = id('moveprompt');
 const messagearea = id('messagearea');
+const playAgainBtn = id('playagainbtn');
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -262,6 +263,12 @@ function resetMessageArea() {
   p2move.textContent = '';
   movePrompt.textContent = '';
 }
+
+function playAgainHandler() {
+  console.log('Play again button was clicked.')
+}
+
+playAgainBtn.addEventListener('click', playAgainHandler);
 
 
 
