@@ -282,9 +282,7 @@ p.griditem {
   justify-content: left;
 }
 
-.crosshair {
-  cursor: crosshair;
-}
+
 
 .placeshipshere {
   box-shadow: var(--place-here-box-shadow);
@@ -327,9 +325,15 @@ li.scoreli {
   text-decoration: line-through;
 }
 
-button.cell {
+
+/* button.cell {
   padding: 0;
   margin: 0;
+} */
 
+.crosshair {
+  cursor: crosshair !important;
 }
+
+
 

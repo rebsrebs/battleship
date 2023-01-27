@@ -33,23 +33,29 @@ const playGame = (p1name, gb1) => {
   movePrompt.textContent = `Your move, Admiral ${p1name}.`
   var winner = '';
 
-  // remove tabbability from friendly waters
-  gbcontainer1.removeAttribute("tabindex");
+  // make variables of cells
   const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
-  gb1cells.forEach(e => e.removeAttribute('tabindex'));
-  gb1cells.forEach(e => e.setAttribute("disabled","true"));
-
-
-  gbcontainer2.setAttribute("tabindex","0");
   const gb2cells = Array.from(gbcontainer2.querySelectorAll(".cell"));
+
+  // KEYBOARD STUFF
+  // remove tabbability and disable friendly waters
+  gbcontainer1.removeAttribute("tabindex");
+  gb1cells.forEach(e => e.removeAttribute("tabindex"));
+  gb1cells.forEach(e => e.setAttribute("disabled","true"));
+  // make gb2 tabbable
+  gbcontainer2.setAttribute("tabindex","0");
+  // prevent default on gb2 keydown
+  gbcontainer2.addEventListener('keydown', function(ev){
+    if (ev.key === "Enter") {
+      ev.preventDefault()
+    }
+  })
+  // prevent default on gb2 cells
   gb2cells.forEach(element => element.addEventListener('keydown', function(ev) {
     if (ev.key === "Enter") {
       ev.preventDefault()
     }
   }));
-  // gbcontainer2.keyup = null;
-  // gbcontainer2.keydown = null;
-
 
   // define gameplaying function
   const gameLoop = async(currentPlayer = playerOne, enemyGameboard = gb2) => {
@@ -80,25 +86,25 @@ const playGame = (p1name, gb1) => {
       console.log(winner);
       // return;
 
+
+
+
     } else {
       // NOT BASE CASE
       console.log('not the base case.')
 
-
       // IF HUMANS TURN
       if (currentPlayer.category === 'human') {
-        console.log('currentPlayer.category is human');
-        console.log(`currentPlayer.name is ${currentPlayer.name}`)
+        console.log(`currentPlayer.name is human named ${currentPlayer.name}`)
         // make enemy gameboard look active
-
         gbcontainer2.classList.add('crosshair');
         gbcontainer2.classList.add('firehere');
-        // make gb2 cells tabbable
-        console.log('about to make the gb2 cells tabbable')
-        gb2cells.forEach(e => e.setAttribute('tabindex','0'));
-        // gb2cells.forEach(e => e.setAttribute("disabled","false"));
 
-        console.log('about to define the aimhandler')
+        // KEYBOARD STUFF
+        // make gb2 cells tabbable
+        gb2cells.forEach(e => e.setAttribute('tabindex','0'));
+
+
         // define aimHandler - highlights cells you hover over before attacking
         var aimHandler = function(e) {
           let target = e.target;
@@ -106,8 +112,6 @@ const playGame = (p1name, gb1) => {
             target.classList.add('cell-aim');
           }
         }
-
-        console.log('about to define the unaim handler')
         // define unAimHandler - removes highlight
         var unAimHandler = function(e) {
           let target = e.target;
@@ -115,46 +119,33 @@ const playGame = (p1name, gb1) => {
             target.classList.remove('cell-aim');
           }
         }
-
-        console.log('about to define the attack handler')
         // DEFINE ATTACK HANDLER
         var attackHandler = async function(e) {
           console.log('HUMAN ATTACK HANDLER IS RUNNING')
           console.log(`currentPlayer.name is ${currentPlayer.name}`)
 
-          console.log('STEP 1: about to disable tabbing for gb2cells')
-          console.log(`currentPlayer.name is ${currentPlayer.name}`)
+          // KEYBOARD STUFF
           // remove tabbing of gb2cells right after attack is launched
           gb2cells.forEach(el => el.onkeyup = null);
 
-          console.log('STEP 2: about to remove mouse click and movement listeners from gb2')
-          // remove mouse click and moving handlers from gameboard2 right after attack
+          // remove mouse click and moving handlers from gb2
           gbcontainer2.removeEventListener('click', attackHandler);
           gbcontainer2.removeEventListener('mouseover', aimHandler);
           gbcontainer2.removeEventListener('mouseout', unAimHandler);
-
-          console.log('STEP 3: about to remove active styles from gb2')
-          console.log(`currentPlayer.name is ${currentPlayer.name}`)
           // remove active styles from gameboard2 right after attack
           gbcontainer2.classList.remove('crosshair');
           gbcontainer2.classList.remove('firehere');
 
-          console.log('STEP 4: about to reset message area')
           resetMessageArea();
-          console.log(`currentPlayer.name is ${currentPlayer.name}`)
-
-          console.log('STEP 5: about to put you fired in the message area')
+          
           // Fill in beginning of message area
           p1move.textContent = 'You fired ...'
 
-          
           // Get data for attack
-          console.log('STEP 6: about to get target event and id')
           let target = e.target;
           console.log(`target.id is ${target.id}`)
           console.log(`currentPlayer.name is ${currentPlayer.name}`)
 
-          console.log('STEP 7: about to check if target classlist contained cell')
           if (target.classList.contains('cell')) {
             console.log('STEP 8: target classlist DID have cell, about to add cell-fire to classlist')
             // style fired upon cell - scales up and makes dark blue
@@ -181,10 +172,12 @@ const playGame = (p1name, gb1) => {
               gbcontainer2.removeEventListener('click', attackHandler);
               gbcontainer2.removeEventListener('mouseover', aimHandler);
               gbcontainer2.removeEventListener('mouseout', unAimHandler);
+
+              // KEYBOARD STUFF
               // remove tabbability of gb2 cells
               gb2cells.forEach(e => e.removeAttribute('tabindex'));
-              // haven't tested this below yet  - remove keyup trigger for gb2 cells
               gb2cells.forEach(e => e.keyup = null);
+              
               gbcontainer2.classList.add('crosshair');
               return gameLoop(currentPlayer, enemyGameboard);
             } else {
@@ -202,6 +195,7 @@ const playGame = (p1name, gb1) => {
         gbcontainer2.addEventListener('mouseout', unAimHandler);
         gbcontainer2.addEventListener('click', attackHandler);
 
+        // KEYBOARD STUFF
         // define keyup handler for human's turn
         function handleEnter(event) {
           event.preventDefault;
@@ -211,7 +205,7 @@ const playGame = (p1name, gb1) => {
             return event.target.click();
           }
         }
-        
+
         // add handleEnter listener
         gb2cells.forEach(element => element.addEventListener('keyup', handleEnter))
 

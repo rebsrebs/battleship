@@ -16,16 +16,7 @@ const p2move = id('p2move');
 const movePrompt = id('moveprompt');
 const messagearea = id('messagearea');
 
-
-
-
 const delay = ms => new Promise(res => setTimeout(res, ms));
-
-
-
-
-
-
 
 function crossOutShip(board, ship) {
   if (ship === 'patrol boat') {
@@ -53,9 +44,9 @@ function hide(ID) {
 // CREATE CELLS FOR TWO DOM GAMEBOARDS - called by index.js
 const createBoards = () => {
   for (let i = 0; i < 100; i++) {
-    var cell = document.createElement('button');
-    cell.setAttribute("type", "button")
-    // cell.disabled = true;
+    // var cell = document.createElement('button');
+    var cell = document.createElement('div');
+    // cell.setAttribute("type", "button")
     cell.className = (`cell cell-plain`);
     cell.id = (`gb1-${i}`);
     cell.setAttribute("tabindex","0");
@@ -63,8 +54,9 @@ const createBoards = () => {
   }
 
   for (let i = 0; i < 100; i++) {
-    var cell = document.createElement('button');
-    cell.setAttribute("type", "button")
+    // var cell = document.createElement('button');
+    var cell = document.createElement('div');
+    // cell.setAttribute("type", "button")
     cell.className = (`cell cell-plain`)
     cell.id = (`gb2-${i}`);
     gbcontainer2.appendChild(cell);
@@ -111,8 +103,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
     return;
   // NOT BASE CASE
   } else {
-    gbcontainer1.setAttribute("tabindex","0");
-    // let gb1cells = gbcontainer1.querySelectorAll(".cell");
+    
 
     let currentShip = gameboard.getPlacedShips()[shipIdx];
     placeMsg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
