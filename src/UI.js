@@ -224,6 +224,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
     var clickHandler = function(e) {
       //KEYBOARD STUFF
       gb1cells.forEach(el => el.onkeyup = null);
+      gb1cells.forEach(el => el.focusin = null);
+      gb1cells.forEach(el => el.focusout = null);
 
     let target = e.target;
       if (target.classList.contains('cell')) {
@@ -308,6 +310,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
         // add handleEnter listener
         gb1cells.forEach(element => element.addEventListener('keyup', handleEnter))
+        gb1cells.forEach(element => element.addEventListener('focusin', hoverHandler));
+        gb1cells.forEach(element => element.addEventListener('focusout', unhoverHandler));
 
 
   }  // end not base case
