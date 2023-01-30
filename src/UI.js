@@ -16,8 +16,32 @@ const p2move = id('p2move');
 const movePrompt = id('moveprompt');
 const messagearea = id('messagearea');
 const playAgainBtn = id('playagainbtn');
+const colorKeyExpandIcon = id('colorkeyexpandicon');
+const rulesExpandIcon = id('rulesexpandicon');
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
+
+function showHide(e) {
+  let ariaExpValue = e.target.getAttribute("aria-expanded");
+  let ariaCtrlValue = e.target.getAttribute("aria-controls");
+  let controlled = document.getElementById(ariaCtrlValue);
+ 
+  if (ariaExpValue === 'false') {
+    e.target.setAttribute("aria-expanded","true");
+    e.target.setAttribute("src", "../src/images/minus-square.svg")
+    e.target.setAttribute("title","hide");
+    controlled.classList = 'shown';
+  } else {
+    e.target.setAttribute("aria-expanded", "false");
+    e.target.setAttribute("src", "../src/images/plus-square.svg")
+    e.target.setAttribute("title","expand");
+    controlled.classList = 'hidden';
+  }
+}
+
+colorKeyExpandIcon.addEventListener('click', showHide);
+rulesExpandIcon.addEventListener('click', showHide);
+
 
 function crossOutShip(board, ship) {
   if (ship === 'patrol boat') {

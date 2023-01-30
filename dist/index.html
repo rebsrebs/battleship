@@ -49,36 +49,12 @@
         </div>
       </div> <!-- END SCORE CONTAINER--> 
 
-       <!-- KEY CONTAINER -->
-       <div id="colorkeycontainer">
-
-        <div id="colorkeyheader" class="sidebarheaderexpands">
-          <h3>Color Key</h3>
-          <img src="../src/images/minus-square.svg" alt="expand icon" id="colorkeyexpandicon" class="expandicon">
-        </div>
-        
-        <dl id="colorkey">
-          <dt class="keysquare" id="watersqkey"></dt>
-          <dd class="keydef">Water</dd>
-          <dt class="keysquare" id="yourshipsqkey"></dt>
-          <dd class="keydef">Your ship</dd>
-          <dt class="keysquare" id="misssqkey"></dt>
-          <dd class="keydef">Miss</dd>
-          <dt class="keysquare" id="hitshipsqkey"></dt>
-          <dd class="keydef">Hit ship</dd>
-          <dt class="keysquare" id="sunkshipsqkey"></dt>
-          <dd class="keydef">Sunk ship</dd>
-        </dl>
-
-      </div>
-      <!-- END KEY CONTAINER -->
-
     <!-- RULES -->
     <div id="rulescontainer">
 
       <div id="rulesheader" class="sidebarheaderexpands">
         <h3 id="battleshiprulesheader">Rules</h3>
-        <img src="../src/images/minus-square.svg" alt="expand icon" id="rulesexpandicon" class="expandicon">
+        <img src="../src/images/minus-square.svg" alt="expand icon" id="rulesexpandicon" class="expandicon" aria-expanded="true" aria-controls="rules">
       </div>
 
       <div id="rules">
@@ -93,7 +69,29 @@
     </div>
     <!-- END RULES CONTAINER--> 
 
-     
+     <!-- KEY CONTAINER -->
+     <div id="colorkeycontainer">
+
+      <div id="colorkeyheader" class="sidebarheaderexpands">
+        <h3>Color Key</h3>
+        <img src="../src/images/plus-square.svg" title="expand" alt="expand icon" id="colorkeyexpandicon" class="expandicon" aria-expanded="false" aria-controls="colorkey">
+      </div>
+      
+      <dl id="colorkey" class="hidden">
+        <dt class="keysquare" id="watersqkey"></dt>
+        <dd class="keydef">Water</dd>
+        <dt class="keysquare" id="yourshipsqkey"></dt>
+        <dd class="keydef">Your ship</dd>
+        <dt class="keysquare" id="misssqkey"></dt>
+        <dd class="keydef">Miss</dd>
+        <dt class="keysquare" id="hitshipsqkey"></dt>
+        <dd class="keydef">Hit ship</dd>
+        <dt class="keysquare" id="sunkshipsqkey"></dt>
+        <dd class="keydef">Sunk ship</dd>
+      </dl>
+
+    </div>
+    <!-- END KEY CONTAINER -->
 
 
   </div>
