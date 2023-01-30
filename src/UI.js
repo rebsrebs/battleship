@@ -74,7 +74,8 @@ function welcome() {
     const p1name = id('p1name').value;
     welcomeform.classList = 'hidden';
     welcomeform.remove();
-    placementwrapper.classList = 'shown wrappergrid';
+    // placementwrapper.classList = 'shown wrappergrid';
+    placementwrapper.classList = 'shown flexing';
     // create human's gameboard object
     let gb1 = gameboardFactory('gb1', 'your');
     gbcontainer1.classList.add('placeshipshere');

@@ -5,8 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Bungee">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
 
@@ -106,8 +112,8 @@
 
 
 
-      <!-- WELCOME FORM WRAPPER GRID -->
-      <form class = "shown wrappergrid" action="" id="welcomeform">
+      <!-- WELCOME FORM -->
+      <form class = "shown" action="" id="welcomeform">
         <!-- ROW 1 -->
         <label for="p1name" class="nsformitem message griditemtop griditem">Please enter your name:</label>
         <!-- ROW 2 -->
@@ -117,17 +123,30 @@
       </form>
       <!-- END WELCOME FORM WRAPPER -->
 
+
+      
+
       <!-- PLACEMENT WRAPPER -->
       <div id="placementwrapper" class="hidden">
+
         <!-- ROW 1 -->
-        <p id="placemessage" class = "message griditem griditemtop"></p>
+        <div class="flexthird">
+          <p id="placemessage" class = "message"></p>
+        </div>
+
         <!-- ROW 2 -->
-        <button class = "griditem griditemmiddle regular" id="togglebtn" aria-controls = "direction">
-          Toggle Ship Direction
-          <img src="src/images/refresh-cw..svg" alt="toggle icon" id="toggleicon">
-        </button>   
+        <div class="flexthird">
+          <button class = "regular" id="togglebtn" aria-controls = "direction">
+            Toggle Ship Direction
+            <img src="src/images/refresh-cw..svg" alt="toggle icon" id="toggleicon">
+          </button>
+        </div>
+
         <!-- ROW 3 -->
-        <p class = "griditem griditembottom" id="direction" data-status="horizontal">Horizontal</p>
+        <div class="flexthird">
+          <p id="direction" class="smallfacts" data-status="horizontal">Horizontal</p>
+        </div>
+
       </div>
       <!-- END PLACEMENT WRAPPER -->
 
