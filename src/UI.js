@@ -108,7 +108,10 @@ function welcome() {
   });
 }
 
-toggleBtn.addEventListener('click', function() {
+
+toggleBtn.addEventListener('click', toggleShipAxis);
+
+function toggleShipAxis() {
   if (directionDisplay.getAttribute("data-status") === 'horizontal') {
     directionDisplay.setAttribute("data-status", "vertical");
     directionDisplay.textContent="vertical";
@@ -116,7 +119,7 @@ toggleBtn.addEventListener('click', function() {
     directionDisplay.setAttribute("data-status", "horizontal");
     directionDisplay.textContent="horizontal";
   }
-})
+}
 
 
 // PLACE SHIPS RECURSIVE FUNCTION
@@ -144,6 +147,13 @@ function placeShips (name, gameboard, shipIdx = 0) {
         ev.preventDefault()
       }
     }))
+
+    document.addEventListener('keyup', function(e) {
+      if (e.key === 'a') {
+        console.log('a was pressed');
+        toggleShipAxis();
+      }
+    })
     
     
 
@@ -224,8 +234,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
     var clickHandler = function(e) {
       //KEYBOARD STUFF
       gb1cells.forEach(el => el.onkeyup = null);
-      gb1cells.forEach(el => el.focusin = null);
-      gb1cells.forEach(el => el.focusout = null);
+      // gb1cells.forEach(el => el.focusin = null);
+      // gb1cells.forEach(el => el.focusout = null);
 
     let target = e.target;
       if (target.classList.contains('cell')) {
@@ -310,8 +320,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
         // add handleEnter listener
         gb1cells.forEach(element => element.addEventListener('keyup', handleEnter))
-        gb1cells.forEach(element => element.addEventListener('focusin', hoverHandler));
-        gb1cells.forEach(element => element.addEventListener('focusout', unhoverHandler));
+        // gb1cells.forEach(element => element.addEventListener('focusin', hoverHandler));
+        // gb1cells.forEach(element => element.addEventListener('focusout', unhoverHandler));
 
 
   }  // end not base case
@@ -320,8 +330,6 @@ function placeShips (name, gameboard, shipIdx = 0) {
 function cellMiss(targ) {
   targ.classList = 'cell cell-miss'
 }
-
-
 
 function resetMessageArea() {
   p1move.textContent = '';
@@ -334,11 +342,5 @@ function playAgainHandler() {
 }
 
 playAgainBtn.addEventListener('click', playAgainHandler);
-
-
-
-
-
-
 
 export { createBoards, placeShips, welcome, updateText, showWrapper, hide, cellMiss, resetMessageArea, delay, crossOutShip }
