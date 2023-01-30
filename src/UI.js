@@ -7,8 +7,6 @@ const placementwrapper = id('placementwrapper');
 const placeMsg = id('placemessage');
 const gbcontainer1 = id('gbcontainer1');
 const gbcontainer2 = id('gbcontainer2');
-// const rulesbtn = id('rulesbtn');
-// const rules = id('rules');
 const toggleBtn = id('togglebtn');
 const directionDisplay = id('axis');
 const p1move = id('p1move');
@@ -18,15 +16,18 @@ const messagearea = id('messagearea');
 const playAgainBtn = id('playagainbtn');
 const colorKeyExpandIcon = id('colorkeyexpandicon');
 const rulesExpandIcon = id('rulesexpandicon');
+const gameOverWrapper = id('gameoverwrapper');
 
+const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
+const gb2cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+// expand or hide element using aria controls
 function showHide(e) {
   let ariaExpValue = e.target.getAttribute("aria-expanded");
   let ariaCtrlValue = e.target.getAttribute("aria-controls");
   let controlled = document.getElementById(ariaCtrlValue);
- 
   if (ariaExpValue === 'false') {
     e.target.setAttribute("aria-expanded","true");
     e.target.setAttribute("src", "../src/images/minus-square.svg")
@@ -43,28 +44,13 @@ function showHide(e) {
 colorKeyExpandIcon.addEventListener('click', showHide);
 rulesExpandIcon.addEventListener('click', showHide);
 
-
+// cross out ship on scoreboard - use when sunk
 function crossOutShip(board, ship) {
   if (ship === 'patrol boat') {
     ship = 'patrolboat';
   }
   const targ = document.getElementById(`${board}-${ship}`);
   targ.classList.add('scoresunkship');
-}
-
-function updateText(ID, string) {
-  const domElement = document.getElementById(ID);
-  domElement.textContent = string;
-}
-
-function showWrapper(ID) {
-  const domElement = document.getElementById(ID);
-  domElement.classList = 'shown wrappergrid';
-}
-
-function hide(ID) {
-  const domElement = document.getElementById(ID);
-  domElement.classList = 'hidden';
 }
 
 // CREATE CELLS FOR TWO DOM GAMEBOARDS - called by index.js
@@ -91,7 +77,7 @@ const createBoards = () => {
 
 // WELCOME FUNCTION
 // When you submit your name, hide the welcome form, show the placement wrapper,
-// create the gameboards pbjects
+// create the gameboards 0bjects
 function welcome() {
   const nameBtn = id('namebtn');
   nameBtn.addEventListener('click', function(){
@@ -108,7 +94,6 @@ function welcome() {
   });
 }
 
-
 toggleBtn.addEventListener('click', toggleShipAxis);
 
 function toggleShipAxis() {
@@ -120,7 +105,6 @@ function toggleShipAxis() {
     directionDisplay.textContent="horizontal";
   }
 }
-
 
 // PLACE SHIPS RECURSIVE FUNCTION
 function placeShips (name, gameboard, shipIdx = 0) {
@@ -134,8 +118,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
   // NOT BASE CASE
   } else {
     // KEYBOARD STUFF
-    // make variables of cells and prevent default
-    const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
+    
     gbcontainer1.setAttribute("tabindex","0");
     gbcontainer1.addEventListener('keydown', function(ev){
       if (ev.key === "Enter") {
@@ -147,15 +130,13 @@ function placeShips (name, gameboard, shipIdx = 0) {
         ev.preventDefault()
       }
     }))
-
     document.addEventListener('keyup', function(e) {
       if (e.key === 'a') {
         console.log('a was pressed');
         toggleShipAxis();
       }
     })
-    
-    
+    // end keyboard stuff
 
     let currentShip = gameboard.getPlacedShips()[shipIdx];
     placeMsg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
@@ -181,14 +162,12 @@ function placeShips (name, gameboard, shipIdx = 0) {
             if (dir === 'horizontal') {
               let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)}`)
               if (!currentCell.classList.contains('cell-placed')) {
-                // console.log('no ship class')
-              currentCell.classList = 'cell cell-hover'
+                currentCell.classList = 'cell cell-hover'
               }
             } else if (dir === 'vertical') {
-              let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)*10}`)
-              if (!currentCell.classList.contains('cell-placed')) {
-                // console.log('no ship class')
-                currentCell.classList = 'cell cell-hover'
+                let currentCell = document.getElementById(`${gameboard.name}-${Number(locatorIdx) + Number(i)*10}`)
+                if (!currentCell.classList.contains('cell-placed')) {
+                  currentCell.classList = 'cell cell-hover'
                 }
             }
           } // end for loop
@@ -236,6 +215,7 @@ function placeShips (name, gameboard, shipIdx = 0) {
       gb1cells.forEach(el => el.onkeyup = null);
       // gb1cells.forEach(el => el.focusin = null);
       // gb1cells.forEach(el => el.focusout = null);
+      // end keyboard stuff
 
     let target = e.target;
       if (target.classList.contains('cell')) {
@@ -302,34 +282,28 @@ function placeShips (name, gameboard, shipIdx = 0) {
         }
       } // end if target contains 'cell' class
     } // end clickhandler
+
     gbcontainer1.addEventListener('click', clickHandler)
     gbcontainer1.addEventListener('mouseout', unhoverHandler);
     gbcontainer1.addEventListener('mouseover', hoverHandler);
 
     // KEYBOARD STUFF
-    // KEYBOARD STUFF
-        // define keyup handler for human's turn
-        function handleEnter(event) {
-          event.preventDefault;
-          if (event.key === 'Enter') {
-            event.target.removeEventListener('keyup',handleEnter)
-            console.log('Enter was pressed.')
-            return event.target.click();
-          }
-        }
-
-        // add handleEnter listener
-        gb1cells.forEach(element => element.addEventListener('keyup', handleEnter))
-        // gb1cells.forEach(element => element.addEventListener('focusin', hoverHandler));
-        // gb1cells.forEach(element => element.addEventListener('focusout', unhoverHandler));
-
+    function handleEnter(event) {
+      event.preventDefault;
+      if (event.key === 'Enter') {
+        event.target.removeEventListener('keyup',handleEnter)
+        console.log('Enter was pressed.')
+        return event.target.click();
+      }
+    }
+    // add handleEnter listener
+    gb1cells.forEach(element => element.addEventListener('keyup', handleEnter))
+    // gb1cells.forEach(element => element.addEventListener('focusin', hoverHandler));
+    // gb1cells.forEach(element => element.addEventListener('focusout', unhoverHandler));
+    // end keyboard stuff
 
   }  // end not base case
 } // END PLACE SHIPS FUNCTION
-
-function cellMiss(targ) {
-  targ.classList = 'cell cell-miss'
-}
 
 function resetMessageArea() {
   p1move.textContent = '';
@@ -337,10 +311,20 @@ function resetMessageArea() {
   movePrompt.textContent = '';
 }
 
+// function resetDomGameboard() {
+
+// }
+
+// in progress
 function playAgainHandler() {
   console.log('Play again button was clicked.')
+  gameOverWrapper.classList = 'hidden';
+  gbcontainer1.remove();
+  gbcontainer2.remove();
+  createBoards();
+  // IN PROGRESS
 }
 
 playAgainBtn.addEventListener('click', playAgainHandler);
 
-export { createBoards, placeShips, welcome, updateText, showWrapper, hide, cellMiss, resetMessageArea, delay, crossOutShip }
+export { createBoards, placeShips, welcome, resetMessageArea, delay, crossOutShip }
