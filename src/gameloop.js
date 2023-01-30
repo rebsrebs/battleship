@@ -30,7 +30,8 @@ const playGame = (p1name, gb1) => {
   playerTwo.placeAIships(gb2);
   scoreContainer.classList = 'shown';
   // show move message area
-  moveWrapper.classList = 'shown wrappergrid';
+  moveWrapper.classList = 'shown';
+  moveWrapper.setAttribute("display","flex");
   movePrompt.textContent = `Your move, Admiral ${p1name}.`
   var winner = '';
 

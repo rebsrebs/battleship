@@ -20,6 +20,7 @@
   --fire-here-box-shadow: 0px 0px 30px 0px rgb(255, 68, 0);
   --subtle-box-shadow: -2px 2px 0px #0d012d25;
   height: 100vh;
+  /* fonts */
   --sidebar-header-text: 'IBM Plex Mono';
   --sidebar-small-text: 'IBM Plex Mono';
   --waters-header-text: 'IBM Plex Mono';
@@ -163,7 +164,7 @@ button.regular:active {
   background-color: rgb(245, 176, 92);
 }
 
-#rulescontainer, #scorecontainer.shown {
+#rulescontainer, #scorecontainer.shown, #colorkeycontainer {
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -418,22 +419,33 @@ li.scoreli {
   line-height: 30px;
 }
 
+h2 {
+  font-family: var(--waters-header-text);
+}
+
 h3 {
   font-family: var(--waters-header-text);
   font-size: 28px;
   margin-bottom: 10px;
-  /* text-transform: uppercase; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h1 {
-  font-family: 'Bungee Spice';
+  font-family: 'Bungee';
+  color: rgb(35, 35, 96);
 }
 
-#gbkey {
+#colorkey {
   display: grid;
   grid-template-rows: 40px 40px 40px 40px 40px;
   grid-template-columns: 40px auto;
   gap: 10px;
+}
+
+.keysquare {
+  border: black solid 1px;
 }
 
 .keydef {
@@ -462,7 +474,7 @@ h1 {
 }
 
 #movewrapper {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   box-sizing: border-box;
 }
@@ -490,6 +502,19 @@ h1 {
   background-color:rgb(239, 189, 199);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+
+
+.sidebarheaderexpands {
+  display: flex;
+  flex-direction: row;
+}
+
+.expandicon {
+  position: relative;
+  top: -3px;
+  left: 5px;
 }
 
 

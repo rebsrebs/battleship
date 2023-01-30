@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Bungee+Spice">
+  href="https://fonts.googleapis.com/css?family=Bungee">
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 
       <!-- SCORE -->
       <div id="scorecontainer" class="hidden">
-        <!-- <div id="scorecontainer" class="invisible"> -->
+
         <!-- YOUR ACTIVE SHIPS --> 
         <div id="gb1-ships" class="shipslist">
           <h3>Your Fleet</h3>
@@ -29,9 +29,10 @@
             <li class="scoreli" id="gb1-patrolboat">Patrol Boat</li>
           </ul>
         </div>
+
         <!-- ENEMY'S ACTIVE SHIPS --> 
         <div id="gb2-ships" class="shipslist">
-          <h3>The Enemy's Fleet</h3>
+          <h3>Enemy Fleet</h3>
           <ul class="score">
             <li class="scoreli" id="gb2-carrier">Carrier</li>
             <li class="scoreli" id="gb2-battleship">Battleship</li>
@@ -43,36 +44,48 @@
       </div> <!-- END SCORE CONTAINER--> 
 
        <!-- KEY CONTAINER -->
-       <h3>Color Key</h3>
-       <dl id="gbkey">
-        <dt class="keysquare" id="watersqkey"></dt>
-        <dd class="keydef">Water</dd>
-        <dt class="keysquare" id="yourshipsqkey"></dt>
-        <dd class="keydef">Your ship</dd>
-        <dt class="keysquare" id="misssqkey"></dt>
-        <dd class="keydef">Miss</dd>
-        <dt class="keysquare" id="hitshipsqkey"></dt>
-        <dd class="keydef">Hit ship</dd>
-        <dt class="keysquare" id="sunkshipsqkey"></dt>
-        <dd class="keydef">Sunk ship</dd>
-      </dl>
+       <div id="colorkeycontainer">
+
+        <div id="colorkeyheader" class="sidebarheaderexpands">
+          <h3>Color Key</h3>
+          <img src="../src/images/minus-square.svg" alt="expand icon" id="colorkeyexpandicon" class="expandicon">
+        </div>
+        
+        <dl id="colorkey">
+          <dt class="keysquare" id="watersqkey"></dt>
+          <dd class="keydef">Water</dd>
+          <dt class="keysquare" id="yourshipsqkey"></dt>
+          <dd class="keydef">Your ship</dd>
+          <dt class="keysquare" id="misssqkey"></dt>
+          <dd class="keydef">Miss</dd>
+          <dt class="keysquare" id="hitshipsqkey"></dt>
+          <dd class="keydef">Hit ship</dd>
+          <dt class="keysquare" id="sunkshipsqkey"></dt>
+          <dd class="keydef">Sunk ship</dd>
+        </dl>
+
+      </div>
       <!-- END KEY CONTAINER -->
 
     <!-- RULES -->
     <div id="rulescontainer">
-      <!-- <button type="button" aria-controls="rules" id="rulesbtn">Show Rules</button> -->
-        <!-- <div id="rules" class="hidden"> -->
-          <div id="rules">
-          <h3 id="battleshiprulesheader">Battleship Rules</h3>
-          <ul id="battleshiprulesol">
-            <li class="rulesli">Place your battleships in friendly waters.</li>
-            <li class="rulesli">You and the enemy will take turns firing at each other's ships.</li>
-            <li class="rulesli">When a ship has been hit in each cell, it sinks.</li>
-            <li class="rulesli">The winner is the first to sink all of their enemy's ships.</li>
-          </ul>
-        </div>
+
+      <div id="rulesheader" class="sidebarheaderexpands">
+        <h3 id="battleshiprulesheader">Rules</h3>
+        <img src="../src/images/minus-square.svg" alt="expand icon" id="rulesexpandicon" class="expandicon">
       </div>
-      <!-- END RULES CONTAINER--> 
+
+      <div id="rules">
+        <ul id="battleshiprulesol">
+          <li class="rulesli">Place your ships in friendly waters.</li>
+          <li class="rulesli">You and the enemy take turns firing at each other's ships.</li>
+          <li class="rulesli">When a ship has been hit in every cell, it sinks.</li>
+          <li class="rulesli">The winner is the first to sink all of their enemy's ships.</li>
+        </ul>
+      </div>
+
+    </div>
+    <!-- END RULES CONTAINER--> 
 
      
 
@@ -160,13 +173,13 @@
     <div id="gameboardrow">
 
       <div class="gameboardcolumn">
-        <h3>Friendly Waters</h3>
+        <h2>Friendly Waters</h2>
         <div class="gameboardcontainer" id="gbcontainer1">
         </div>
       </div>
 
       <div class="gameboardcolumn">
-        <h3>Enemy Waters</h3>
+        <h2>Enemy Waters</h2>
         <div class="gameboardcontainer" id="gbcontainer2">
         </div>
       </div>
