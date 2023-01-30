@@ -19,6 +19,7 @@ const playAgainBtn = id('playagainbtn');
 const colorKeyExpandIcon = id('colorkeyexpandicon');
 const rulesExpandIcon = id('rulesexpandicon');
 
+
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 function showHide(e) {
@@ -129,6 +130,21 @@ function placeShips (name, gameboard, shipIdx = 0) {
     return;
   // NOT BASE CASE
   } else {
+    // KEYBOARD STUFF
+    // make variables of cells and prevent default
+    const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
+    gbcontainer1.setAttribute("tabindex","0");
+    gbcontainer1.addEventListener('keydown', function(ev){
+      if (ev.key === "Enter") {
+        ev.preventDefault()
+      }
+    })
+    gb1cells.forEach(element => element.addEventListener('keydown', function(ev){
+      if (ev.key === "Enter") {
+        ev.preventDefault()
+      }
+    }))
+    
     
 
     let currentShip = gameboard.getPlacedShips()[shipIdx];
@@ -206,6 +222,9 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
     // define clickHandler
     var clickHandler = function(e) {
+      //KEYBOARD STUFF
+      gb1cells.forEach(el => el.onkeyup = null);
+
     let target = e.target;
       if (target.classList.contains('cell')) {
         var cellID = target.id;
@@ -274,6 +293,23 @@ function placeShips (name, gameboard, shipIdx = 0) {
     gbcontainer1.addEventListener('click', clickHandler)
     gbcontainer1.addEventListener('mouseout', unhoverHandler);
     gbcontainer1.addEventListener('mouseover', hoverHandler);
+
+    // KEYBOARD STUFF
+    // KEYBOARD STUFF
+        // define keyup handler for human's turn
+        function handleEnter(event) {
+          event.preventDefault;
+          if (event.key === 'Enter') {
+            event.target.removeEventListener('keyup',handleEnter)
+            console.log('Enter was pressed.')
+            return event.target.click();
+          }
+        }
+
+        // add handleEnter listener
+        gb1cells.forEach(element => element.addEventListener('keyup', handleEnter))
+
+
   }  // end not base case
 } // END PLACE SHIPS FUNCTION
 
