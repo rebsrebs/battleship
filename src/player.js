@@ -382,7 +382,6 @@ const AIPlayerFactory = (name) => {
       // console.log(`tarCelNum is ${tarCelNum}`)
       let tarCel = document.getElementById(`${otherBoard.name}-${tarCelNum}`);
       tarCel.classList = 'cell cell-fire';
-      // await delay(25);
       console.log(`AI attack wrapping up, about to return otherBoard.receiveAttack(${a}, ${b})`)
         return otherBoard.receiveAttack(a,b);
       } 

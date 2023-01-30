@@ -76,18 +76,13 @@ const gameboardFactory = (name, posessive) => {
   const receiveAttack = async (x, y) => {
     console.log(`${name} is receiving attack at ${x}, ${y}`);
     // delay before reporting the result of firing.
-    // THIS IS WHERE THE PROBLEM IS
     await delay(450);
     console.log('Finished delay.')
     // make variable of DOM element of attacked spot
     let targetCellNum = cells.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
-    // console.log(`targetCellNum is ${targetCellNum}`)
     let targetCell = document.getElementById(`${name}-${targetCellNum}`);
-    // console.log(`targetCell.id is ${targetCell.id}`)
     // remove attacked spot from possible moves array
     let noLongerPossible = possible.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
-    // console.log('noLongerPossible is the index of this shot in the possible array:')
-    // console.log(noLongerPossible);
     if (noLongerPossible >= 0) {
     possible.splice(noLongerPossible,1);
     }

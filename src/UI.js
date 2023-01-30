@@ -18,13 +18,20 @@ const colorKeyExpandIcon = id('colorkeyexpandicon');
 const rulesExpandIcon = id('rulesexpandicon');
 const gameOverWrapper = id('gameoverwrapper');
 
+// const theGameObject = {
+//   gb1object: gb1,
+//   gb2object: gb2,
+//   p1object: playerOne,
+//   p2object: playerTwo,
+// }
+
 const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
-const gb2cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 // expand or hide element using aria controls
 function showHide(e) {
+  console.log('running showHide function')
   let ariaExpValue = e.target.getAttribute("aria-expanded");
   let ariaCtrlValue = e.target.getAttribute("aria-controls");
   let controlled = document.getElementById(ariaCtrlValue);
@@ -113,6 +120,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
     console.log('base case - human ships placed');
     placementwrapper.classList = 'hidden';
     gbcontainer1.classList.remove('placeshipshere');
+    rulesExpandIcon.click();
+    colorKeyExpandIcon.click();
     playGame(name, gameboard)
     return;
   // NOT BASE CASE
