@@ -1,6 +1,6 @@
 :root {
   --main-bg-color: white;
-  --main-title-color: gray;
+  --main-title-color: rgb(252, 128, 148);
   --message-area-bg-color: white;
   --button-bg-color: white;
   --button-border-color: black;
@@ -21,16 +21,17 @@
   --place-here-box-shadow: 0px 0px 30px 0px rgb(255, 68, 0);
   --fire-here-box-shadow: 0px 0px 30px 0px rgb(255, 68, 0);
   --subtle-box-shadow: -2px 2px 0px #0d012d25;
-  /* fonts */
+
+  /* TEXT */
   --sidebar-header-text: 'IBM Plex Mono';
   --sidebar-small-text: 'IBM Plex Mono';
   /* --sidebar-small-text: 'Roboto'; */
   --waters-header-text: 'IBM Plex Mono';
   --message-area-text: 'IBM Plex Mono';
   --ns-form-text: 'IBM Plex Mono';
-  --button-text: 'Roboto';
+  --button-text: 'IBM Plex Mono';
   /* better divisions */
-  --small-facts-text:'Roboto';
+  --small-facts-text:'IBM Plex Mono';
   --message-text: 'Roboto';
 }
 
@@ -38,6 +39,8 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  font-size: 18px;
+  font-family: 'IBM Plex Mono';
 }
 
 .hidden {
@@ -266,10 +269,7 @@ button.regular:active {
 }
 
 .smallfacts {
-  font-size: 18px;
-  /* font-family: 'IBM Plex Mono'; */
-  font-family: 'Roboto';
-  font-weight: 400px;
+  font-family: 'IBM Plex Mono';
 }
 
 .griditem {
@@ -305,10 +305,6 @@ button.regular:active {
 
 .griditembottomtwo {
   grid-row: 2 / 4;
-}
-
-p.griditem {
-  font-size: 20px;
 }
 
 /* WELCOME FORM */
@@ -425,6 +421,10 @@ input.nsformitem {
   grid-template-rows: repeat(10, 1fr);
   border: 1px solid black;
   margin: 20px;
+}
+
+.waterslabel {
+  color: rgb(252, 128, 148);
 }
 
 .cell {
