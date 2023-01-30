@@ -20,6 +20,11 @@
   --fire-here-box-shadow: 0px 0px 30px 0px rgb(255, 68, 0);
   --subtle-box-shadow: -2px 2px 0px #0d012d25;
   height: 100vh;
+  --sidebar-header-text: 'IBM Plex Mono';
+  --sidebar-small-text: 'IBM Plex Mono';
+  --waters-header-text: 'IBM Plex Mono';
+  --message-area-text: 'IBM Plex Mono';
+
 }
 
 *{
@@ -405,8 +410,8 @@ li.scoreli {
   cursor: crosshair !important;
 }
 
-.scoreli, .rulesli {
-  font-family: 'IBM Plex Mono', monospace;
+.scoreli, .rulesli, .keydef {
+  font-family: var(--sidebar-small-text);
 }
 
 .rulesli {
@@ -414,8 +419,9 @@ li.scoreli {
 }
 
 h3 {
-  font-family: 'IBM Plex Serif';
+  font-family: var(--waters-header-text);
   font-size: 28px;
+  margin-bottom: 10px;
   /* text-transform: uppercase; */
 }
 
@@ -432,6 +438,7 @@ h1 {
 
 .keydef {
   align-self: center;
+  font-size: 18px; 
 }
 
 #watersqkey {
