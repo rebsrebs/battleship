@@ -230,8 +230,10 @@ const playGame = (p1name, gb1) => {
         enemyGameboard = gb2;
         // delay befor saying your move admiral
         await delay(500);
-        movePrompt.textContent = `Your move, Admiral ${p1name}.`
-        gbcontainer2.classList.add('crosshair');
+        if (enemyGameboard.getSunkStatus === false) {
+          movePrompt.textContent = `Your move, Admiral ${p1name}.`
+          gbcontainer2.classList.add('crosshair');
+        }
         return gameLoop(currentPlayer, enemyGameboard);
       } // end if current player is computer
     } // end if not base case

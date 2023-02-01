@@ -19,10 +19,11 @@ const rulesExpandIcon = id('rulesexpandicon');
 const gameOverWrapper = id('gameoverwrapper');
 
 // const theGameObject = {
-//   gb1object: gb1,
-//   gb2object: gb2,
-//   p1object: playerOne,
-//   p2object: playerTwo,
+  // gb1object: null,
+  // gb2object: null,
+  // p1object: null,
+  // p2object: null,
+  // method in here to destroy
 // }
 
 const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
@@ -336,4 +337,4 @@ function playAgainHandler() {
 
 playAgainBtn.addEventListener('click', playAgainHandler);
 
-export { createBoards, placeShips, welcome, resetMessageArea, delay, crossOutShip }
+export { createBoards, placeShips, welcome, resetMessageArea, delay, crossOutShip, theGameObject }

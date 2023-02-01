@@ -77,6 +77,8 @@ const gameboardFactory = (name, posessive) => {
     console.log(`${name} is receiving attack at ${x}, ${y}`);
     // delay before reporting the result of firing.
     await delay(450);
+    // global variable isTesting
+    // if is testing, dont delay
     console.log('Finished delay.')
     // make variable of DOM element of attacked spot
     let targetCellNum = cells.indexOf((cells.find((el) => el[0] === x && el[1] === y)));
@@ -160,8 +162,9 @@ const gameboardFactory = (name, posessive) => {
   const getPossible = () => possible;
   const getPlacedShips = () => placedShips;
   const getNumShipsToPlace = () => numShipsToPlace;
+  const getSunkStatus = () => areAllSunk;
 
-  return { name, posessive, getCells, getMissed, receiveAttack, getSunk, areAllSunk, getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere }
+  return { name, posessive, getCells, getMissed, receiveAttack, getSunk, areAllSunk, getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere, getSunkStatus }
 }
 
 export { gameboardFactory };
