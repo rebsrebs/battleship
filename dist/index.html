@@ -113,11 +113,11 @@
       <!-- WELCOME FORM -->
       <form class = "shown" action="" id="welcomeform">
         <!-- ROW 1 -->
-        <label for="p1name" class="nsformitem message griditemtop griditem">Please enter your name:</label>
+        <label for="p1name" class="nsformitem message">Please enter your name:</label>
         <!-- ROW 2 -->
-        <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem griditemmiddle griditem">
+        <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem">
         <!-- ROW 3 -->
-        <button type="button" id="namebtn" class="nsformitem griditembottom griditem regular">Submit</button>
+        <button type="button" id="namebtn" class="nsformitem regular">Submit</button>
       </form>
       <!-- END WELCOME FORM WRAPPER -->
 
@@ -154,17 +154,14 @@
       <!-- MOVE WRAPPER -->
       <div id="movewrapper" class="hidden">
         <!-- ROW 1 -->
-        <!-- <div class="griditem griditemtop movediv"> -->
           <div class="movetop">
           <p id="p1move" class = "message"></p>
         </div>
         <!-- ROW 2 -->
-        <!-- <div class="griditem griditemmiddle movediv"> -->
           <div class="movemiddle">
           <p id="p2move" class = "message"></p>
         </div>
         <!-- ROW 3 -->
-        <!-- <div class = "griditem griditembottom movediv"> -->
           <div class="movebottom">
           <p id="moveprompt" class="message"></p>
         </div>
@@ -174,11 +171,13 @@
       <!-- GAME OVER WRAPPER -->
       <div id="gameoverwrapper" class="hidden">
         <!-- ROW 1 -->
-        <p id="gameoverp1" class = "movemsg message griditem griditemtop">GAME OVER</p>
+        <p id="gameoverp1" class = "movemsg message flexthird">GAME OVER</p>
         <!-- ROW 2 -->
-        <p id="gameoverp2" class = "movemsg message griditem griditemmiddle"></p>
+        <p id="gameoverp2" class = "movemsg message flexthird"></p>
         <!-- ROW 3 -->
-          <button id="playagainbtn" class="regular griditem griditembottom">Play again</button>
+        <div class="flexthird">
+          <button id="playagainbtn" class="regular">Play again</button>
+        </div>
       </div>
       <!-- END GAME OVER WRAPPER -->
 

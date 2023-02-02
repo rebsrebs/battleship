@@ -79,7 +79,7 @@ const playGame = (p1name, gb1) => {
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
 
       moveWrapper.classList = 'hidden';
-      gameOverWrapper.classList = 'shown wrappergrid';
+      gameOverWrapper.classList = 'shown';
       gameoverp2.textContent = 'The enemy won!'
       winner = 'Player 2 wins!';
       console.log(winner);

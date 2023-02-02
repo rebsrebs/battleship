@@ -116,6 +116,9 @@ body {
   padding-bottom: 15px;
 }
 
+.smallfacts {
+  font-family: 'IBM Plex Mono';
+}
 
 #rulescontainer, #scorecontainer.shown, #colorkeycontainer {
   width: 80%;
@@ -247,7 +250,7 @@ button.regular:active {
   background-color: var(--main-bg-color);
   padding-top: 40px;
 }
-
+/* ---------------HEADER AREA------------------ */
 #messagearea {
   box-sizing: content-box;
   border-radius: 5px;
@@ -268,44 +271,6 @@ button.regular:active {
   font-weight: 400;
 }
 
-.smallfacts {
-  font-family: 'IBM Plex Mono';
-}
-
-.griditem {
-  display: flex;
-  align-self: center;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  justify-self: center;
-}
-
-.wrappergrid {
-  width: 600px;
-  height: 150px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px 50px 50px;
-}
-
-.griditemtop {
-  grid-row: 1 / 2;
-}
-
-.griditemmiddle {
-  grid-row: 2 / 3;
-}
-
-.griditembottom {
-  grid-row: 3 / 4;
-}
-
-.griditembottomtwo {
-  grid-row: 2 / 4;
-}
 
 /* WELCOME FORM */
 #welcomeform {
@@ -398,6 +363,22 @@ input.nsformitem {
   justify-content: left;
 }
 /* END MOVES */
+
+/* GAME OVER */
+
+#gameoverwrapper {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  height: 100%;
+}
+
+#gameoverwrapper.shown {
+  display: flex;
+}
+
+/* ---------------END HEADER AREA------------------ */
 
 /* GAMEBOARD AREA */
 #gameboardrow {

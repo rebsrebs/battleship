@@ -34,6 +34,7 @@ const theGameObject = {
 const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
 
 
+// SIDEBAR UI
 
 // expand or hide element using aria controls
 function showHide(e) {
@@ -66,6 +67,75 @@ function crossOutShip(board, ship) {
   targ.classList.add('scoresunkship');
 }
 
+// END SIDEBAR UI
+
+
+
+// HEADER UI
+
+// WELCOME FUNCTION
+function welcome() {
+  const nameBtn = id('namebtn');
+  nameBtn.addEventListener('click', function(){
+    messagearea.classList.remove('firehere');
+    const p1name = id('p1name').value;
+    welcomeform.classList = 'hidden';
+    welcomeform.reset();
+    // placementwrapper.classList = 'shown wrappergrid';
+    placementwrapper.classList = 'shown flexing';
+    // create human's gameboard object
+    // CREATING gb1object
+    let gb1 = gameboardFactory('gb1', 'your');
+    theGameObject.gb1object = gb1;
+    gbcontainer1.classList.add('placeshipshere');
+    placeShips(p1name, theGameObject.gb1object);
+  });
+}
+
+function toggleShipAxis() {
+  if (directionDisplay.getAttribute("data-status") === 'horizontal') {
+    directionDisplay.setAttribute("data-status", "vertical");
+    directionDisplay.textContent="vertical";
+  } else {
+    directionDisplay.setAttribute("data-status", "horizontal");
+    directionDisplay.textContent="horizontal";
+  }
+}
+
+toggleBtn.addEventListener('click', toggleShipAxis);
+
+function resetMessageArea() {
+  p1move.textContent = '';
+  p2move.textContent = '';
+  movePrompt.textContent = '';
+}
+
+// in progress
+function playAgainHandler() {
+  console.log('Play again button was clicked.')
+  console.log('Before destroying, theGameObject is:')
+  console.log(theGameObject);
+  theGameObject.destroy();
+  console.log('After destroying, theGameObject is:')
+  console.log(theGameObject);
+  console.log('about to hide game over wrapper')
+  gameOverWrapper.classList = 'hidden';
+  console.log('about to show welcome wrapper');
+  welcomeform.classList = 'shown';
+  emptyBoards();
+  createBoards();
+  welcome();
+  // IN PROGRESS
+}
+
+playAgainBtn.addEventListener('click', playAgainHandler);
+
+// END HEADER UI
+
+
+
+// MAIN AREA UI
+
 // CREATE CELLS FOR TWO DOM GAMEBOARDS - called by index.js
 const createBoards = () => {
   for (let i = 0; i < 100; i++) {
@@ -88,6 +158,8 @@ const createBoards = () => {
   }
 } // END CREATE BOARDS
 
+
+// EMPTY BOARDS
 function emptyBoards() {
   while (gbcontainer1.firstChild) {
     gbcontainer1.removeChild(gbcontainer1.firstChild);
@@ -96,39 +168,8 @@ function emptyBoards() {
     gbcontainer2.removeChild(gbcontainer2.firstChild);
   }
 }
+// END EMPTY BOARDS
 
-// WELCOME FUNCTION
-// When you submit your name, hide the welcome form, show the placement wrapper,
-// create the gameboards 0bjects
-function welcome() {
-  const nameBtn = id('namebtn');
-  nameBtn.addEventListener('click', function(){
-    messagearea.classList.remove('firehere');
-    const p1name = id('p1name').value;
-    welcomeform.classList = 'hidden';
-    welcomeform.reset();
-    // placementwrapper.classList = 'shown wrappergrid';
-    placementwrapper.classList = 'shown flexing';
-    // create human's gameboard object
-    // CREATING gb1object
-    let gb1 = gameboardFactory('gb1', 'your');
-    theGameObject.gb1object = gb1;
-    gbcontainer1.classList.add('placeshipshere');
-    placeShips(p1name, theGameObject.gb1object);
-  });
-}
-
-toggleBtn.addEventListener('click', toggleShipAxis);
-
-function toggleShipAxis() {
-  if (directionDisplay.getAttribute("data-status") === 'horizontal') {
-    directionDisplay.setAttribute("data-status", "vertical");
-    directionDisplay.textContent="vertical";
-  } else {
-    directionDisplay.setAttribute("data-status", "horizontal");
-    directionDisplay.textContent="horizontal";
-  }
-}
 
 // PLACE SHIPS RECURSIVE FUNCTION
 function placeShips (name, gameboard, shipIdx = 0) {
@@ -331,34 +372,6 @@ function placeShips (name, gameboard, shipIdx = 0) {
   }  // end not base case
 } // END PLACE SHIPS FUNCTION
 
-function resetMessageArea() {
-  p1move.textContent = '';
-  p2move.textContent = '';
-  movePrompt.textContent = '';
-}
 
-// function resetDomGameboard() {
-
-// }
-
-// in progress
-function playAgainHandler() {
-  console.log('Play again button was clicked.')
-  console.log('Before destroying, theGameObject is:')
-  console.log(theGameObject);
-  theGameObject.destroy();
-  console.log('After destroying, theGameObject is:')
-  console.log(theGameObject);
-  console.log('about to hide game over wrapper')
-  gameOverWrapper.classList = 'hidden';
-  console.log('about to show welcome wrapper');
-  welcomeform.classList = 'shown';
-  emptyBoards();
-  createBoards();
-  welcome();
-  // IN PROGRESS
-}
-
-playAgainBtn.addEventListener('click', playAgainHandler);
 
 export { createBoards, placeShips, welcome, resetMessageArea, crossOutShip, theGameObject }
