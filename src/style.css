@@ -61,6 +61,8 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 h1 {
@@ -316,6 +318,12 @@ input.nsformitem {
   left: 5px;
   height: 18px;
 }
+
+.shipname {
+  font-family: 'IBM Plex Mono';
+  text-transform: uppercase;
+  color: red;
+}
 /* END SHIP PLACEMENT */
 
 /* MOVES */
@@ -331,6 +339,7 @@ input.nsformitem {
   align-items: center;
   justify-content: flex-start;
   padding-left: 20px;
+  padding-right: 20px;
 }
 
 .movetop {

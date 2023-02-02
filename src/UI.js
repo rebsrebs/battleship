@@ -206,7 +206,8 @@ function placeShips (name, gameboard, shipIdx = 0) {
     // end keyboard stuff
 
     let currentShip = gameboard.getPlacedShips()[shipIdx];
-    placeMsg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
+    // placeMsg.textContent = `Admiral ${name}, please place your ${currentShip.ship.name}.`;
+    placeMsg.innerHTML = "Admiral " + name + ", please place your <span class='shipname'> " + currentShip.ship.name + ".</span>";
 
     // define hoverHandler
     var hoverHandler = function(e) {
