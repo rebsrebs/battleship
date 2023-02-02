@@ -56,7 +56,7 @@
 }
 
 .flexthird {
-  height: 50px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -256,7 +256,7 @@ button.regular:active {
   border-radius: 5px;
   background-color: var(--message-area-bg-color);
   width: 600px;
-  height: 150px;
+  height: 180px;
   margin-bottom: 40px;
   border: 1px solid black;
 }
@@ -305,7 +305,6 @@ input.nsformitem {
 #placementwrapper {
   flex-direction: column;
   align-items: center;
-  align-content: center;
   justify-content: center;
   justify-items: center;
   height: 100%;
@@ -326,7 +325,7 @@ input.nsformitem {
 }
 
 .movetop, .movemiddle, .movebottom {
-  height: 50px;
+  height: 60px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -354,18 +353,9 @@ input.nsformitem {
   text-align: left;
   align-self: left;
 }
-
-.movediv {
-  /* later change width to be responsive */
-  width: 80%;
-  display: flex;
-  align-content: center;
-  justify-content: left;
-}
 /* END MOVES */
 
 /* GAME OVER */
-
 #gameoverwrapper {
   flex-direction: column;
   align-items: center;
@@ -377,7 +367,6 @@ input.nsformitem {
 #gameoverwrapper.shown {
   display: flex;
 }
-
 /* ---------------END HEADER AREA------------------ */
 
 /* GAMEBOARD AREA */
@@ -413,7 +402,6 @@ input.nsformitem {
   background-color: var(--cell-plain-bg-color);
 }
 
-
 .cell-hover {
   background-color: var(--cell-hover-bg-color);
 }
@@ -438,7 +426,6 @@ input.nsformitem {
   background-color: var(--cell-fire-bg-color);
   transition: transform .2s;  /*Animation */
   transform: scale(1.1);
-  /* border: 1px solid white; */
 }
 
 .cell-aim {
