@@ -145,6 +145,7 @@ const createBoards = () => {
     cell.className = (`cell cell-plain`);
     cell.id = (`gb1-${i}`);
     cell.setAttribute("tabindex","0");
+    cell.setAttribute("z-index","5");
     gbcontainer1.appendChild(cell);
   }
 
@@ -154,6 +155,7 @@ const createBoards = () => {
     // cell.setAttribute("type", "button")
     cell.className = (`cell cell-plain`)
     cell.id = (`gb2-${i}`);
+    cell.setAttribute("z-index","5");
     gbcontainer2.appendChild(cell);
   }
 } // END CREATE BOARDS
