@@ -18,13 +18,20 @@ const colorKeyExpandIcon = id('colorkeyexpandicon');
 const rulesExpandIcon = id('rulesexpandicon');
 const gameOverWrapper = id('gameoverwrapper');
 
-// const theGameObject = {
-  // gb1object: null,
-  // gb2object: null,
-  // p1object: null,
-  // p2object: null,
-  // method in here to destroy
-// }
+
+
+const theGameObject = {
+  gb1object: null,
+  gb2object: null,
+  p1object: null,
+  p2object: null,
+  destroy() {
+    this.gb1object = null;
+    this.gb2object = null;
+    this.p1object = null;
+    this.p2object = null;
+  }
+}
 
 const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
 
@@ -83,6 +90,15 @@ const createBoards = () => {
   }
 } // END CREATE BOARDS
 
+function emptyBoards() {
+  while (gbcontainer1.firstChild) {
+    gbcontainer1.removeChild(gbcontainer1.firstChild);
+  }
+  while (gbcontainer2.firstChild) {
+    gbcontainer2.removeChild(gbcontainer2.firstChild);
+  }
+}
+
 // WELCOME FUNCTION
 // When you submit your name, hide the welcome form, show the placement wrapper,
 // create the gameboards 0bjects
@@ -92,13 +108,15 @@ function welcome() {
     messagearea.classList.remove('firehere');
     const p1name = id('p1name').value;
     welcomeform.classList = 'hidden';
-    welcomeform.remove();
+    welcomeform.reset();
     // placementwrapper.classList = 'shown wrappergrid';
     placementwrapper.classList = 'shown flexing';
     // create human's gameboard object
+    // CREATING gb1object
     let gb1 = gameboardFactory('gb1', 'your');
+    theGameObject.gb1object = gb1;
     gbcontainer1.classList.add('placeshipshere');
-    placeShips(p1name, gb1);
+    placeShips(p1name, theGameObject.gb1object);
   });
 }
 
@@ -328,10 +346,18 @@ function resetMessageArea() {
 // in progress
 function playAgainHandler() {
   console.log('Play again button was clicked.')
+  console.log('Before destroying, theGameObject is:')
+  console.log(theGameObject);
+  theGameObject.destroy();
+  console.log('After destroying, theGameObject is:')
+  console.log(theGameObject);
+  console.log('about to hide game over wrapper')
   gameOverWrapper.classList = 'hidden';
-  gbcontainer1.remove();
-  gbcontainer2.remove();
+  console.log('about to show welcome wrapper');
+  welcomeform.classList = 'shown';
+  emptyBoards();
   createBoards();
+  welcome();
   // IN PROGRESS
 }
 
