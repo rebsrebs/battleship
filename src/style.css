@@ -311,13 +311,13 @@ button.regular:active {
 #welcomeform {
   padding-left: 30px;
   padding-right: 30px;
-}
-
-#welcomeform {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#welcomeform.shown{
+  display: flex;
 }
 
 .nsformitem {
