@@ -35,8 +35,7 @@ const playGame = (p1name, gb1) => {
   theGameObject.p2object.placeAIships(theGameObject.gb2object);
   scoreContainer.classList = 'shown';
   // show move message area
-  moveWrapper.classList = 'shown';
-  moveWrapper.setAttribute("display","flex");
+  moveWrapper.classList = 'shown msgwrapper';
   movePrompt.textContent = `Your move, Admiral ${p1name}.`
   var winner = '';
 
@@ -79,7 +78,7 @@ const playGame = (p1name, gb1) => {
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
 
       moveWrapper.classList = 'hidden';
-      gameOverWrapper.classList = 'shown';
+      gameOverWrapper.classList = 'shown msgwrapper';
       gameoverp2.textContent = 'The enemy won!'
       winner = 'Player 2 wins!';
       console.log(winner);
@@ -88,7 +87,7 @@ const playGame = (p1name, gb1) => {
       await delay(waitTime);
       gbcontainer2.classList.remove('crosshair');
       moveWrapper.classList = 'hidden';
-      gameOverWrapper.classList = 'shown wrappergrid';
+      gameOverWrapper.classList = 'shown msgwrapper';
       gbcontainer2.removeAttribute('tabindex');
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
       gameoverp2.textContent = `Admiral ${p1name}'s fleet defeated the enemy!`

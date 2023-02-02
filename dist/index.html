@@ -111,35 +111,32 @@
 
 
       <!-- WELCOME FORM -->
-      <form class = "shown" action="" id="welcomeform">
+      <form id="welcomeform" class = "shown msgwrapper" action="">
         <!-- ROW 1 -->
-        <div class="flexthird">
+        <div class="flexthird msgtop">
         <label for="p1name" class="nsformitem message">Please enter your name:</label>
         </div>
         <!-- ROW 2 -->
-        <div class="flexthird">
+        <div class="flexthird msgmiddle">
         <input type="text" id="p1name" name="p1name" placeholder="Name" class="nsformitem">
       </div>
         <!-- ROW 3 -->
-        <div class="flexthird">
+        <div class="flexthird msgbottom">
         <button type="button" id="namebtn" class="nsformitem regular">Submit</button>
       </div>
       </form>
       <!-- END WELCOME FORM WRAPPER -->
 
-
-      
-
       <!-- PLACEMENT WRAPPER -->
-      <div id="placementwrapper" class="hidden">
+      <div id="placementwrapper" class="hidden msgwrapper">
 
         <!-- ROW 1 -->
-        <div class="flexthird">
+        <div class="flexthird msgtop">
           <p id="placemessage" class = "message"></p>
         </div>
 
         <!-- ROW 2 -->
-        <div class="flexthird">
+        <div class="flexthird msgmiddle">
           <button class = "regular" id="togglebtn" aria-controls = "axis" >
             <img src="src/images/refresh-cw..svg" alt="toggle icon" id="toggleicon">
              Ship Axis 
@@ -147,35 +144,36 @@
         </div>
 
         <!-- ROW 3 -->
-        <div class="flexthird">
+        <div class="flexthird msgbottom">
           <p id="axis" class="smallfacts" data-status="horizontal">Horizontal</p>
         </div>
 
       </div>
       <!-- END PLACEMENT WRAPPER -->
 
-
-
-
       <!-- MOVE WRAPPER -->
-      <div id="movewrapper" class="hidden">
+      <div id="movewrapper" class="hidden msgwrapper">
+
         <!-- ROW 1 -->
-          <div class="movetop">
+        <div class="msgtop">
           <p id="p1move" class = "message"></p>
         </div>
+
         <!-- ROW 2 -->
-          <div class="movemiddle">
+        <div class="msgmiddle">
           <p id="p2move" class = "message"></p>
         </div>
+
         <!-- ROW 3 -->
-          <div class="movebottom">
+        <div class="msgbottom">
           <p id="moveprompt" class="message"></p>
         </div>
+        
       </div>
       <!-- END YOUR MOVE WRAPPER -->
 
       <!-- GAME OVER WRAPPER -->
-      <div id="gameoverwrapper" class="hidden">
+      <div id="gameoverwrapper" class="hidden msgwrapper">
         <!-- ROW 1 -->
         <p id="gameoverp1" class = "movemsg message flexthird">GAME OVER</p>
         <!-- ROW 2 -->

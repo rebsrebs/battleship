@@ -81,8 +81,7 @@ function welcome() {
     const p1name = id('p1name').value;
     welcomeform.classList = 'hidden';
     welcomeform.reset();
-    // placementwrapper.classList = 'shown wrappergrid';
-    placementwrapper.classList = 'shown flexing';
+    placementwrapper.classList = 'shown msgwrapper';
     // create human's gameboard object
     // CREATING gb1object
     let gb1 = gameboardFactory('gb1', 'your');
@@ -121,7 +120,7 @@ function playAgainHandler() {
   console.log('about to hide game over wrapper')
   gameOverWrapper.classList = 'hidden';
   console.log('about to show welcome wrapper');
-  welcomeform.classList = 'shown';
+  welcomeform.classList = 'shown msgwrapper';
   emptyBoards();
   createBoards();
   welcome();
