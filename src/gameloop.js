@@ -1,6 +1,7 @@
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
-import { resetMessageArea } from "./UI";
+import { resetMessageArea, theGameObject } from "./UI";
+import {waitTime} from "./helpers"
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -18,16 +19,23 @@ const movePrompt = id('moveprompt')
 const scoreContainer = id('scorecontainer');
 const playAgainBtn = id('playagainbtn');
 
+
+
+
 // Outer function that launches the game
 const playGame = (p1name, gb1) => {
   console.log('playGame function has started.')
-  // set up players
+  gb1 = theGameObject.gb1object;
+  // CREATE PLAYERS
   let playerOne = humanPlayerFactory(p1name);
+  theGameObject.p1object = playerOne;
   let playerTwo = AIPlayerFactory('The Enemy');
+  theGameObject.p2object = playerTwo;
   // set up AI gameboard object
   let gb2 = gameboardFactory('gb2', `the enemy's`);
+  theGameObject.gb2object = gb2;
   // place AI ships
-  playerTwo.placeAIships(gb2);
+  theGameObject.p2object.placeAIships(theGameObject.gb2object);
   scoreContainer.classList = 'shown';
   // show move message area
   moveWrapper.classList = 'shown';
@@ -60,14 +68,15 @@ const playGame = (p1name, gb1) => {
   }));
 
   // define gameplaying function
-  const gameLoop = async(currentPlayer = playerOne, enemyGameboard = gb2) => {
+  const gameLoop = async(currentPlayer = theGameObject.p1object, enemyGameboard = theGameObject.gb2object) => {
     console.log('gameLoop is running.')
 
 
 
     // BASE CASES
-    if (gb1.areAllSunk() == true) {
-      await delay(1000);
+    if (theGameObject.gb1object.areAllSunk() == true) {
+      console.log(`waitTime is ${waitTime}`);
+      await delay(waitTime);
       gbcontainer2.classList.remove('crosshair');
       gbcontainer2.removeAttribute('tabindex');
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
@@ -78,8 +87,8 @@ const playGame = (p1name, gb1) => {
       winner = 'Player 2 wins!';
       console.log(winner);
       // return;
-    } else if (gb2.areAllSunk() == true) {
-      await delay(1000);
+    } else if (theGameObject.gb2object.areAllSunk() == true) {
+      await delay(waitTime);
       gbcontainer2.classList.remove('crosshair');
       moveWrapper.classList = 'hidden';
       gameOverWrapper.classList = 'shown wrappergrid';
@@ -159,7 +168,7 @@ const playGame = (p1name, gb1) => {
             console.log('STEP 9: about to get relevant coords based on target cell id')
             var cellID = target.id;
             var locatorIdx = cellID.slice(4);
-            var coords = gb2.getCells()[locatorIdx];
+            var coords = theGameObject.gb2object.getCells()[locatorIdx];
             console.log(`STEP 10: got the coords, about to attack and the currentPlayer should be the human but is actually ${currentPlayer.name}`)
 
             // Attack!!!!!!!!!!!
@@ -186,8 +195,8 @@ const playGame = (p1name, gb1) => {
               return gameLoop(currentPlayer, enemyGameboard);
             } else {
               console.log(`about to switch currentPlayer from human to robot`)
-              currentPlayer = playerTwo;
-              enemyGameboard = gb1;
+              currentPlayer = theGameObject.p2object;
+              enemyGameboard = theGameObject.gb1object;
               console.log('the human attackhandler is about to end by calling gameLoop with the AI player as the player.')
               return gameLoop(currentPlayer, enemyGameboard);
             }
@@ -221,16 +230,17 @@ const playGame = (p1name, gb1) => {
         console.log('currentPlayer.category is robot')
         // should I remove the keyup handlers?
         // delay before saying the enemy fired
-        await delay(500);
+        await delay((waitTime/2));
         // gbcontainer2.classList.remove('firehere');
         p2move.textContent = 'The enemy fired ...';
         // the follow await makes sure you can't fire again before the enemy finishes firing.
         await currentPlayer.attack(enemyGameboard);
-        currentPlayer = playerOne;
-        enemyGameboard = gb2;
+        currentPlayer = theGameObject.p1object;
+        enemyGameboard = theGameObject.gb2object;
         // delay befor saying your move admiral
-        await delay(500);
-        if (enemyGameboard.getSunkStatus === false) {
+        await delay(waitTime/2);
+        if (enemyGameboard.getSunkStatus == false) {
+          console.log('not all enemy ships are sunk so prompt move:')
           movePrompt.textContent = `Your move, Admiral ${p1name}.`
           gbcontainer2.classList.add('crosshair');
         }
