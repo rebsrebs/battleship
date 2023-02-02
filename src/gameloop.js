@@ -1,11 +1,8 @@
 import { humanPlayerFactory, AIPlayerFactory } from "./player";
 import { gameboardFactory } from "./gameboard";
 import { resetMessageArea, theGameObject } from "./UI";
-import {waitTime} from "./helpers"
+import { id, waitTime, delay } from "./helpers"
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
-
-const id = (ID) => document.getElementById(ID);
 const moveWrapper = id('movewrapper');
 const gameOverWrapper = id('gameoverwrapper');
 const gbcontainer1 = id('gbcontainer1');

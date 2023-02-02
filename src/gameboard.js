@@ -1,8 +1,8 @@
 import { shipFactory } from "./ship";
 import { crossOutShip } from "./UI";
-import { waitTime } from "./helpers"
+import { delay, waitTime } from "./helpers"
 
-const id = (ID) => document.getElementById(ID);
+
 
 // get index from DOMgameboard ID and return location
 // function lookUpLocation(clickedCell) {
@@ -70,8 +70,6 @@ const gameboardFactory = (name, posessive) => {
     } // end for loop
     return result;
   } // end isThereAShipHere method
-
-  const delay = ms => new Promise(res => setTimeout(res, ms));
 
   // Receive Attack Method
   const receiveAttack = async (x, y) => {

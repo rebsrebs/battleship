@@ -1,7 +1,7 @@
 import { gameboardFactory } from "./gameboard";
 import { playGame } from "./gameloop";
+import { id } from "./helpers";
 
-const id = (ID) => document.getElementById(ID);
 const welcomeform = id('welcomeform');
 const placementwrapper = id('placementwrapper');
 const placeMsg = id('placemessage');
@@ -18,8 +18,6 @@ const colorKeyExpandIcon = id('colorkeyexpandicon');
 const rulesExpandIcon = id('rulesexpandicon');
 const gameOverWrapper = id('gameoverwrapper');
 
-
-
 const theGameObject = {
   gb1object: null,
   gb2object: null,
@@ -35,7 +33,7 @@ const theGameObject = {
 
 const gb1cells = Array.from(gbcontainer1.querySelectorAll(".cell"));
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
+
 
 // expand or hide element using aria controls
 function showHide(e) {
@@ -363,4 +361,4 @@ function playAgainHandler() {
 
 playAgainBtn.addEventListener('click', playAgainHandler);
 
-export { createBoards, placeShips, welcome, resetMessageArea, delay, crossOutShip, theGameObject }
+export { createBoards, placeShips, welcome, resetMessageArea, crossOutShip, theGameObject }
