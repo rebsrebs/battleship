@@ -1,6 +1,7 @@
 :root {
   --main-bg-color: white;
-  --main-title-color: rgb(252, 128, 148);
+  /* --main-title-color: rgb(252, 128, 148); */
+    --main-title-color: rgb(250, 95, 121);
   --message-area-bg-color: white;
   --button-bg-color: white;
   --button-border-color: black;
