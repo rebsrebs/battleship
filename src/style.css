@@ -22,19 +22,27 @@
   --place-here-box-shadow: 0px 0px 30px 0px rgb(255, 68, 0);
   --fire-here-box-shadow: 0px 0px 30px 0px rgb(255, 68, 0);
   --subtle-box-shadow: -2px 2px 0px #0d012d25;
-
-  /* TEXT */
-  --sidebar-header-text: 'IBM Plex Mono';
-  --sidebar-small-text: 'IBM Plex Mono';
-  /* --sidebar-small-text: 'Roboto'; */
-  --waters-header-text: 'IBM Plex Mono';
-  --message-area-text: 'IBM Plex Mono';
-  --ns-form-text: 'IBM Plex Mono';
-  --button-text: 'IBM Plex Mono';
-  /* better divisions */
-  --small-facts-text:'IBM Plex Mono';
-  --message-text: 'Roboto';
+  /* font-families */
+  --header1-font: 'Bungee';
+  --header3-font: 'IBM Plex Mono';
+  --facts-font:'IBM Plex Mono';
+  --button-font: 'IBM Plex Mono';
+  --message-font: 'Roboto';
 }
+
+
+/* Font Breakdown
+h1 Bungee
+message text Roboto italic 400 22px
+input text name Roboto normal 400 18px
+Buttons IBM Plex Mono caps 400
+shipname IBM plex Mono caps 400
+h3 sidebar IBM Plex Mono 400 24px
+li sidebar IBM Plex Mono 400 18px
+Waters labels IBM Plex Mono 400 18px
+Axis IBM Plex Mono 400 18px */
+
+
 
 *{
   margin: 0px;
@@ -65,14 +73,13 @@
 h1 {
   font-size: 60px;
   margin-bottom: 40px;
-  font-family: 'Bungee';
+  font-family: var(--header1-font);
   color: var(--main-title-color);
 }
 
 h3 {
-  font-family: var(--waters-header-text);
+  font-family: var(--header3-font);
   font-weight: 400;
-  font-style: normal;
   font-size: 24px;
   margin-bottom: 10px;
   display: flex;
@@ -102,7 +109,7 @@ body {
 }
 
 .smallfacts {
-  font-family: 'IBM Plex Mono';
+  font-family: var(--facts-font);
 }
 
 #rulescontainer, #scorecontainer.shown, #colorkeycontainer {
@@ -131,8 +138,9 @@ li {
 }
 
 .scoreli, .rulesli, .keydef {
-  font-family: var(--sidebar-small-text);
-  /* font-weight: 400px; */
+  font-family: var(--facts-font);
+  font-weight: 400px;
+  font-size: 18px; 
 }
 
 .rulesli {
@@ -172,7 +180,6 @@ li.scoreli {
 
 .keydef {
   align-self: center;
-  font-size: 18px; 
 }
 
 #watersqkey {
@@ -209,7 +216,7 @@ button.regular {
   font-size: 18px;
   box-shadow: var(--subtle-box-shadow);
   width: fit-content;
-  font-family: var(--button-text);
+  font-family: var(--button-font);
   font-weight: 400px;
   text-transform: uppercase;
   cursor: pointer;
@@ -249,7 +256,7 @@ button.regular:active {
 
 .message {
   font-size: 22px;
-  font-family: 'Roboto';
+  font-family: var(--message-font);
   font-style: italic;
   font-weight: 400;
 }
@@ -300,7 +307,7 @@ input.nsformitem {
   min-width: 80%;
   padding: 5px;
   text-align: left;
-  font-family: 'Roboto';
+  font-family: var(--message-font);
   font-weight: 400px;
   font-size: 18px;
 }
@@ -324,7 +331,7 @@ input.nsformitem {
 }
 
 .shipname {
-  font-family: 'IBM Plex Mono';
+  font-family: var(--facts-font);
   font-weight: 400;
   text-transform: uppercase;
   color: red;
@@ -380,7 +387,7 @@ input.nsformitem {
 
 .waterslabel {
   color: var(--main-title-color);
-  /* font-weight: 600; */
+  font-family: var(--facts-font);
   font-weight: 400;
 }
 
