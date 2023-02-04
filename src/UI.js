@@ -68,6 +68,11 @@ function crossOutShip(board, ship) {
   targ.classList.add('scoresunkship');
 }
 
+function resetScoreBoard() {
+  const scoreShips = Array.from(document.querySelectorAll('.scoreli'));
+  scoreShips.forEach((ship) => ship.classList.remove('scoresunkship'));
+}
+
 // END SIDEBAR UI
 
 
@@ -118,14 +123,13 @@ function playAgainHandler() {
   theGameObject.destroy();
   console.log('After destroying, theGameObject is:')
   console.log(theGameObject);
-  console.log('about to hide game over wrapper');
   gameOverOverlay.classList = 'hidden';
   moveWrapper.classList = 'hidden';
-  console.log('about to show welcome wrapper');
   welcomeform.classList = 'shown msgwrapper firehere';
-  // clear movewrapper
   p1move.textContent = '';
   p2move.textContent = '';
+  movePrompt.textContent = '';
+  resetScoreBoard();
   emptyBoards();
   createBoards();
   welcome();
