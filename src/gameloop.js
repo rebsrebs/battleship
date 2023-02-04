@@ -5,17 +5,12 @@ import { id, waitTime, delay } from "./helpers"
 
 const moveWrapper = id('movewrapper');
 const gameOverOverlay = id('gameoveroverlay');
-const gameOverWrapper = id('gameoverwrapper');
 const gbcontainer1 = id('gbcontainer1');
 const gbcontainer2 = id('gbcontainer2');
-const gameoverp1 = id('gameoverp1');
-const gameoverp2 = id('gameoverp2');
-const gameoverp3 = id('gameoverp3');
 const p1move = id('p1move');
 const p2move = id('p2move');
 const movePrompt = id('moveprompt')
 const scoreContainer = id('scorecontainer');
-const playAgainBtn = id('playagainbtn');
 
 
 
@@ -78,8 +73,6 @@ const playGame = (p1name, gb1) => {
       gbcontainer2.removeAttribute('tabindex');
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
       gameOverOverlay.classList = 'shown firehere'
-      // moveWrapper.classList = 'hidden';
-      // gameOverWrapper.classList = 'shown msgwrapper';
       movePrompt.textContent = 'The enemy won!'
       winner = 'Player 2 wins!';
       console.log(winner);
@@ -88,11 +81,9 @@ const playGame = (p1name, gb1) => {
       await delay(waitTime);
       gbcontainer2.classList.remove('crosshair');
       gameOverOverlay.classList = 'shown firehere'
-      // moveWrapper.classList = 'hidden';
-      // gameOverWrapper.classList = 'shown msgwrapper';
       gbcontainer2.removeAttribute('tabindex');
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
-      movePrompt.textContent = `Admiral ${p1name}'s fleet defeated the enemy!`
+      p2move.textContent = `Admiral ${p1name}'s fleet defeated the enemy!`
       winner = 'Player 1 wins!';
       console.log(winner);
       // return;
