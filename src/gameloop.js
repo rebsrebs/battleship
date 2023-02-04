@@ -223,24 +223,27 @@ const playGame = (p1name, gb1) => {
 
         // PLAYER 2 TURN
       } else if (currentPlayer.category === 'robot') {
-        console.log('currentPlayer.category is robot')
-        // should I remove the keyup handlers?
-        // delay before saying the enemy fired
-        await delay((waitTime/2));
-        // gbcontainer2.classList.remove('firehere');
-        p2move.textContent = 'The enemy fired ...';
-        // the follow await makes sure you can't fire again before the enemy finishes firing.
-        await currentPlayer.attack(enemyGameboard);
-        currentPlayer = theGameObject.p1object;
-        enemyGameboard = theGameObject.gb2object;
-        // delay befor saying your move admiral
-        await delay(waitTime/2);
-        if (enemyGameboard.getSunkStatus == false) {
-          console.log('not all enemy ships are sunk so prompt move:')
-          movePrompt.textContent = `Your move, Admiral ${p1name}.`
-          gbcontainer2.classList.add('crosshair');
-        }
-        return gameLoop(currentPlayer, enemyGameboard);
+          console.log('currentPlayer.category is robot')
+          // should I remove the keyup handlers?
+          // delay before saying the enemy fired
+          await delay((waitTime/2));
+          // gbcontainer2.classList.remove('firehere');
+          p2move.textContent = 'The enemy fired ...';
+          // the follow await makes sure you can't fire again before the enemy finishes firing.
+          await currentPlayer.attack(enemyGameboard);
+          // delay befor saying your move admiral or game over
+          await delay(waitTime/2);
+          // check if AI won before saying 'Your move, Admiral
+          if (enemyGameboard.areAllSunk() == false) {
+            console.log('not all enemy ships are sunk')
+            movePrompt.textContent = `Your move, Admiral ${p1name}.`
+            gbcontainer2.classList.add('crosshair');
+          }
+          // switch current player and gameboard
+          currentPlayer = theGameObject.p1object;
+          enemyGameboard = theGameObject.gb2object;
+          console.log('at the very end of AI turn about to return gameLoop')
+          return gameLoop(currentPlayer, enemyGameboard);
       } // end if current player is computer
     } // end if not base case
   } // end gameLoop

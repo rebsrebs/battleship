@@ -141,6 +141,7 @@ const gameboardFactory = (name, posessive) => {
   
   // Are All Sunk Method
   const areAllSunk = () => {
+    console.log(`running areAllSunk gameBoard ${name} method`)
     if (sunk >= 5) {
       console.log(`All ${name} ships are sunk.`)
       return true;
@@ -159,9 +160,8 @@ const gameboardFactory = (name, posessive) => {
   const getPossible = () => possible;
   const getPlacedShips = () => placedShips;
   const getNumShipsToPlace = () => numShipsToPlace;
-  const getSunkStatus = () => areAllSunk;
 
-  return { name, posessive, getCells, getMissed, receiveAttack, getSunk, areAllSunk, getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere, getSunkStatus }
+  return { name, posessive, getCells, getMissed, receiveAttack, getSunk, areAllSunk, getPossible, getPlacedShips, getNumShipsToPlace, getFiredShots, isThereAShipHere }
 }
 
 export { gameboardFactory };

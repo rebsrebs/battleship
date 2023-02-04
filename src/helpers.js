@@ -2,10 +2,10 @@ const id = (ID) => document.getElementById(ID);
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-let isTesting = true;
+let isTesting = false;
 var waitTime = Number(0);
 if (isTesting == false) {
-  waitTime = Number(1000);
+  waitTime = Number(600);
 } else {
   waitTime = Number(0);
 }

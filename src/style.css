@@ -391,7 +391,7 @@ input.nsformitem {
 }
 
 .waterslabel {
-  color: rgb(252, 128, 148);
+  color: var(--main-title-color);
 }
 
 .cell {
