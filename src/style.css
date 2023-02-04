@@ -42,6 +42,7 @@
   box-sizing: border-box;
   font-size: 18px;
   font-family: 'IBM Plex Mono';
+  font-style:normal;
 }
 
 .hidden {
@@ -68,29 +69,15 @@ h1 {
   color: var(--main-title-color);
 }
 
-h2 {
-  font-family: var(--waters-header-text);
-  font-size: 28px;
-  color: gray;
-}
-
 h3 {
   font-family: var(--waters-header-text);
+  font-weight: 400;
+  font-style: normal;
   font-size: 24px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* ibm-plex-mono-regular - latin */
-@font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: local(''),
-       url('./fonts/ibm-plex-mono-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./fonts/ibm-plex-mono-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 body {
@@ -256,7 +243,7 @@ button.regular:active {
   background-color: var(--message-area-bg-color);
   width: 600px;
   height: 180px;
-  margin-bottom: 40px;
+  margin-bottom: 45px;
   border: 1px solid black;
 }
 
@@ -338,6 +325,7 @@ input.nsformitem {
 
 .shipname {
   font-family: 'IBM Plex Mono';
+  font-weight: 400;
   text-transform: uppercase;
   color: red;
 }
@@ -392,6 +380,8 @@ input.nsformitem {
 
 .waterslabel {
   color: var(--main-title-color);
+  /* font-weight: 600; */
+  font-weight: 400;
 }
 
 .cell {
