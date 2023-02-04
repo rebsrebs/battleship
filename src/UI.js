@@ -17,6 +17,7 @@ const playAgainBtn = id('playagainbtn');
 const colorKeyExpandIcon = id('colorkeyexpandicon');
 const rulesExpandIcon = id('rulesexpandicon');
 const gameOverOverlay = id('gameoveroverlay');
+const moveWrapper = id('movewrapper');
 
 const theGameObject = {
   gb1object: null,
@@ -119,8 +120,12 @@ function playAgainHandler() {
   console.log(theGameObject);
   console.log('about to hide game over wrapper');
   gameOverOverlay.classList = 'hidden';
+  moveWrapper.classList = 'hidden';
   console.log('about to show welcome wrapper');
-  welcomeform.classList = 'shown msgwrapper';
+  welcomeform.classList = 'shown msgwrapper firehere';
+  // clear movewrapper
+  p1move.textContent = '';
+  p2move.textContent = '';
   emptyBoards();
   createBoards();
   welcome();
