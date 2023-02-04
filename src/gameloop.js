@@ -4,6 +4,7 @@ import { resetMessageArea, theGameObject } from "./UI";
 import { id, waitTime, delay } from "./helpers"
 
 const moveWrapper = id('movewrapper');
+const gameOverOverlay = id('gameoveroverlay');
 const gameOverWrapper = id('gameoverwrapper');
 const gbcontainer1 = id('gbcontainer1');
 const gbcontainer2 = id('gbcontainer2');
@@ -76,21 +77,22 @@ const playGame = (p1name, gb1) => {
       gbcontainer2.classList.remove('crosshair');
       gbcontainer2.removeAttribute('tabindex');
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
-
-      moveWrapper.classList = 'hidden';
-      gameOverWrapper.classList = 'shown msgwrapper';
-      gameoverp2.textContent = 'The enemy won!'
+      gameOverOverlay.classList = 'shown firehere'
+      // moveWrapper.classList = 'hidden';
+      // gameOverWrapper.classList = 'shown msgwrapper';
+      movePrompt.textContent = 'The enemy won!'
       winner = 'Player 2 wins!';
       console.log(winner);
       // return;
     } else if (theGameObject.gb2object.areAllSunk() == true) {
       await delay(waitTime);
       gbcontainer2.classList.remove('crosshair');
-      moveWrapper.classList = 'hidden';
-      gameOverWrapper.classList = 'shown msgwrapper';
+      gameOverOverlay.classList = 'shown firehere'
+      // moveWrapper.classList = 'hidden';
+      // gameOverWrapper.classList = 'shown msgwrapper';
       gbcontainer2.removeAttribute('tabindex');
       gb2cells.forEach(e => e.removeAttribute('tabindex'));
-      gameoverp2.textContent = `Admiral ${p1name}'s fleet defeated the enemy!`
+      movePrompt.textContent = `Admiral ${p1name}'s fleet defeated the enemy!`
       winner = 'Player 1 wins!';
       console.log(winner);
       // return;

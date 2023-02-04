@@ -16,7 +16,7 @@ const messagearea = id('messagearea');
 const playAgainBtn = id('playagainbtn');
 const colorKeyExpandIcon = id('colorkeyexpandicon');
 const rulesExpandIcon = id('rulesexpandicon');
-const gameOverWrapper = id('gameoverwrapper');
+const gameOverOverlay = id('gameoveroverlay');
 
 const theGameObject = {
   gb1object: null,
@@ -117,8 +117,8 @@ function playAgainHandler() {
   theGameObject.destroy();
   console.log('After destroying, theGameObject is:')
   console.log(theGameObject);
-  console.log('about to hide game over wrapper')
-  gameOverWrapper.classList = 'hidden';
+  console.log('about to hide game over wrapper');
+  gameOverOverlay.classList = 'hidden';
   console.log('about to show welcome wrapper');
   welcomeform.classList = 'shown msgwrapper';
   emptyBoards();

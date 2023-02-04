@@ -173,23 +173,10 @@
       </div>
       <!-- END YOUR MOVE WRAPPER -->
 
-      <!-- GAME OVER WRAPPER -->
-      <div id="gameoverwrapper" class="hidden msgwrapper">
-        <!-- ROW 1 -->
-        <p id="gameoverp1" class = "msgtop message flexthird">GAME OVER</p>
-        <!-- ROW 2 -->
-        <p id="gameoverp2" class = "msgmiddle message flexthird"></p>
-        <!-- ROW 3 -->
-        <div class="flexthird msgbottom">
-          <button id="playagainbtn" class="regular">Play again</button>
-        </div>
-      </div>
-      <!-- END GAME OVER WRAPPER -->
-
     </div>
     <!-- END MESSAGE AREA -->
 
-
+<div id="gameboardrowcontainer">
     <!-- GAMEBOARD ROW -->
     <div id="gameboardrow">
 
@@ -209,6 +196,19 @@
 
     </div>
     <!-- END GAMEBOARD ROW -->
+
+    <!-- GAME OVER OVERLAY -->
+    <div id="gameoveroverlay" class="hidden">
+      <!-- ROW 1 -->
+      <p id="gameovermsg">GAME OVER</p>
+      <!-- ROW 2 -->
+      <div>
+        <button id="playagainbtn" class="regular">Play again</button>
+      </div>
+    </div>
+    <!-- END GAME OVER OVERLAY -->
+  </div>
+  <!-- END GAMEBOARD ROW CONTAINER -->
 
 </div>
 <!-- END MAIN -->

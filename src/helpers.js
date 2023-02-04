@@ -2,7 +2,7 @@ const id = (ID) => document.getElementById(ID);
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-let isTesting = false;
+let isTesting = true;
 var waitTime = Number(0);
 if (isTesting == false) {
   waitTime = Number(600);

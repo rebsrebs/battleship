@@ -57,9 +57,9 @@ Axis IBM Plex Mono 400 18px */
   display: none;
 }
 
-.shown {
+/* .shown {
   visibility: visible;
-}
+} */
 
 .flexthird {
   height: 60px;
@@ -343,24 +343,31 @@ input.nsformitem {
   justify-content: flex-start;
 }
 
+#movewrapper.shown {
+  display: flex;
+}
+
 .movemsg {
   text-align: left;
   align-self: left;
 }
 /* END MOVES */
 
-/* GAME OVER */
-#gameoverwrapper {
-  justify-content: center;
-  justify-items: center;
-}
 
-#gameoverwrapper.shown {
-  display: flex;
-}
 /* ---------------END HEADER AREA------------------ */
 
 /* GAMEBOARD AREA */
+
+#gameboardrowcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+  position: relative;
+}
+
 #gameboardrow {
   display: flex;
   flex-direction: row;
@@ -444,3 +451,33 @@ input.nsformitem {
   box-shadow: var(--place-here-box-shadow);
 }
 /* END GAMEBOARD AREA */
+
+
+/* GAME OVER */
+
+#gameoveroverlay {
+  position: absolute;
+  /* top: 30%;
+  what is default top? */
+  background-color: white;
+  z-index: 50;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 400px;
+  height: 180px;
+  padding: 20px;
+}
+
+#gameoveroverlay.shown {
+  display: flex;
+}
+
+#gameovermsg {
+  font-family: var(--message-font);
+  font-size: 22px;
+  font-style: italic;
+  /* margin-bottom: 20px; */
+}
+
+/* END GAME OVER */
