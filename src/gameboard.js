@@ -1,7 +1,6 @@
 import { shipFactory } from "./ship";
 import { crossOutShip } from "./UI";
-import { delay, waitTime } from "./helpers"
-
+import { delay, waitTime, sunkLimit } from "./helpers"
 
 
 // get index from DOMgameboard ID and return location
@@ -142,7 +141,7 @@ const gameboardFactory = (name, posessive) => {
   // Are All Sunk Method
   const areAllSunk = () => {
     console.log(`running areAllSunk gameBoard ${name} method`)
-    if (sunk >= 5) {
+    if (sunk >= Number(sunkLimit)) {
       console.log(`All ${name} ships are sunk.`)
       return true;
     } else {
