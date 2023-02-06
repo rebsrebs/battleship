@@ -84,13 +84,20 @@ function welcome() {
   const nameBtn = id('namebtn');
   nameBtn.addEventListener('click', function(){
     messagearea.classList.remove('firehere');
-    const p1name = id('p1name').value;
+    let p1name = id('p1name').value;
+    console.log(`p1name is ${p1name}`);
     welcomeform.classList = 'hidden';
     welcomeform.reset();
     placementwrapper.classList = 'shown msgwrapper';
     // create human's gameboard object
     // CREATING gb1object
-    let gb1 = gameboardFactory('gb1', 'your');
+    if (gb1) {
+      gb1 = gameboardFactory('gb1', 'your');
+    } else {
+    var gb1 = gameboardFactory('gb1', 'your');
+    }
+    console.log('gb1 is');
+    console.log(gb1);
     theGameObject.gb1object = gb1;
     gbcontainer1.classList.add('placeshipshere');
     placeShips(p1name, theGameObject.gb1object);
@@ -117,23 +124,18 @@ function resetMessageArea() {
 
 // in progress
 function playAgainHandler() {
-  console.log('Play again button was clicked.')
-  console.log('Before destroying, theGameObject is:')
-  console.log(theGameObject);
-  theGameObject.destroy();
-  console.log('After destroying, theGameObject is:')
-  console.log(theGameObject);
-  gameOverOverlay.classList = 'hidden';
-  moveWrapper.classList = 'hidden';
-  welcomeform.classList = 'shown msgwrapper firehere';
-  p1move.textContent = '';
-  p2move.textContent = '';
-  movePrompt.textContent = '';
-  resetScoreBoard();
-  emptyBoards();
-  createBoards();
-  welcome();
-  // IN PROGRESS
+  // theGameObject.destroy();
+  // gameOverOverlay.classList = 'hidden';
+  // moveWrapper.classList = 'hidden';
+  // welcomeform.classList = 'shown msgwrapper firehere';
+  // p1move.textContent = '';
+  // p2move.textContent = '';
+  // movePrompt.textContent = '';
+  // resetScoreBoard();
+  // emptyBoards();
+  // createBoards();
+  // welcome();
+  location.reload();
 }
 
 playAgainBtn.addEventListener('click', playAgainHandler);
@@ -148,7 +150,7 @@ playAgainBtn.addEventListener('click', playAgainHandler);
 const createBoards = () => {
   for (let i = 0; i < 100; i++) {
     // var cell = document.createElement('button');
-    var cell = document.createElement('div');
+    let cell = document.createElement('div');
     // cell.setAttribute("type", "button")
     cell.className = (`cell cell-plain`);
     cell.id = (`gb1-${i}`);
@@ -159,7 +161,7 @@ const createBoards = () => {
 
   for (let i = 0; i < 100; i++) {
     // var cell = document.createElement('button');
-    var cell = document.createElement('div');
+    let cell = document.createElement('div');
     // cell.setAttribute("type", "button")
     cell.className = (`cell cell-plain`)
     cell.id = (`gb2-${i}`);
@@ -183,6 +185,8 @@ function emptyBoards() {
 
 // PLACE SHIPS RECURSIVE FUNCTION
 function placeShips (name, gameboard, shipIdx = 0) {
+  console.log('placeShips is running, gameboard.getPlacedShips():')
+  console.log(gameboard.getPlacedShips());
   // BASE CASE - if all gameboard ships have been placed
   if (shipIdx >  gameboard.getPlacedShips().length-1) {
     console.log('base case - human ships placed');
@@ -220,13 +224,13 @@ function placeShips (name, gameboard, shipIdx = 0) {
     placeMsg.innerHTML = "Admiral " + name + ", please place your <span class='shipname'> " + currentShip.ship.name + ".</span>";
 
     // define hoverHandler
-    var hoverHandler = function(e) {
+    let hoverHandler = function(e) {
       // console.log('hovered!');
       let target = e.target;
       if (target.classList.contains('cell')) {
-        var cellID = target.id;
-        var locatorIdx = cellID.slice(4);
-        var coords = gameboard.getCells()[locatorIdx];
+       let cellID = target.id;
+       let locatorIdx = cellID.slice(4);
+       let coords = gameboard.getCells()[locatorIdx];
         let shipLength = currentShip.ship.length;
         let xOrY = undefined;
         let dir = directionDisplay.getAttribute("data-status");
@@ -258,9 +262,9 @@ function placeShips (name, gameboard, shipIdx = 0) {
       // console.log('unhovered!')
       let target = e.target;
       if (target.classList.contains('cell')) {
-        var cellID = target.id;
-        var locatorIdx = cellID.slice(4);
-        var coords = gameboard.getCells()[locatorIdx];
+        let cellID = target.id;
+        let locatorIdx = cellID.slice(4);
+        let coords = gameboard.getCells()[locatorIdx];
         let shipLength = currentShip.ship.length;
         let xOrY = undefined;
         let dir = directionDisplay.getAttribute("data-status");
@@ -297,11 +301,11 @@ function placeShips (name, gameboard, shipIdx = 0) {
 
     let target = e.target;
       if (target.classList.contains('cell')) {
-        var cellID = target.id;
-        var locatorIdx = cellID.slice(4);
+        let cellID = target.id;
+        let locatorIdx = cellID.slice(4);
         // console.log(`locator index is ${locatorIdx}`)
         // coords is the array x,y representation of the cell in the grid
-        var coords = gameboard.getCells()[locatorIdx];
+        let coords = gameboard.getCells()[locatorIdx];
         let shipLength = currentShip.ship.length;
         // if dir is horizontal:
         let xOrY = undefined;
