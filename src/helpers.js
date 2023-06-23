@@ -2,7 +2,7 @@ const id = (ID) => document.getElementById(ID);
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-let isTesting = true;
+let isTesting = false;
 let waitTime = Number(0);
 let sunkLimit = Number(1);
 if (isTesting == false) {
